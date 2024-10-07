@@ -3,7 +3,7 @@ package herbalance.herbalance;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class HerBalanceController {
     @FXML
     private Label welcomeText;
 
