@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="herbalance.herbalance.WellnessGoalsController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <!-- Label for user selection of their primary wellness goals -->
+    <Label text="Select your Primary Wellness Goals:" />
+
+    <!-- Implementing checkboxes for selecting wellness goals -->
+    <CheckBox fx:id="fitnessCheckBox" text="Fitness" />
+    <CheckBox fx:id="mentalHealthCheckBox" text="Mental Health" />
+    <CheckBox fx:id="nutritionCheckBox" text="Nutrition" />
+    <CheckBox fx:id="hormonalBalanceCheckBox" text="Hormonal Balance" />
+
+    <!-- Submit button for confirming user selections -->
+    <Button fx:id="submitButton" text="Submit" onAction="#onSubmitButtonClick" />
+
+    <!-- Next button for going to Wellness Focus page -->
+    <Button fx:id="nextButton" text="Next" onAction="#onNextButtonClick" visible="false" />
+</VBox>
