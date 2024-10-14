@@ -1,6 +1,8 @@
 module herbalance.herbalance {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.logging;
+
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
