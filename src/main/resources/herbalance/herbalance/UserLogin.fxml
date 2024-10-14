@@ -26,12 +26,12 @@
                 <PasswordField fx:id="passwordTextField" layoutX="82.0" layoutY="194.0" prefHeight="25.0" prefWidth="184.0" promptText="Password" />
                 <Button fx:id="signinButton" layoutX="62.0" layoutY="265.0" mnemonicParsing="false" onAction="#Login" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: AFE9E5;" text="Sign In">
                     <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font name="Poppins ExtraBold" size="16.0" />
                     </font>
                 </Button>
-                <Label layoutX="32.0" layoutY="43.0" prefHeight="33.0" prefWidth="47.0" text="Login">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="43.0" prefHeight="33.0" prefWidth="58.0" text="Login">
                     <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="Poppins ExtraBold" size="18.0" />
                     </font>
                 </Label>
                 <Label layoutX="160.0" layoutY="170.0" text="Forgot password?" textFill="#fc91b6">
@@ -39,15 +39,15 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <Label layoutX="34.0" layoutY="338.0" text="Don't have an account?" />
-                <Label layoutX="202.0" layoutY="337.0" text="Sign Up" textFill="#fc91b6">
+                <Label layoutX="32.0" layoutY="389.0" text="Don't have an account?" />
+                <Label layoutX="202.0" layoutY="388.0" text="Sign Up" textFill="#fc91b6">
                     <font>
-                        <Font name="System Bold" size="15.0" />
+                        <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Label fx:id="loginResult" layoutX="233.0" layoutY="273.0" prefHeight="17.0" prefWidth="105.0">
+                <Label fx:id="loginResult" layoutX="119.0" layoutY="316.0" prefHeight="19.0" prefWidth="273.0">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="14.0" />
                </font></Label>
             </children>
         </Pane>

@@ -33,16 +33,20 @@ public class UserLoginController {
     @FXML
     private void Login(ActionEvent event) {
 
-                if (usernameTextField.getText().equals("user") && passwordTextField.getText().equals("password")) {
+        String username = usernameTextField.getText();
 
+        String password = passwordTextField.getText();
+
+                if (username.equals("username") && password.equals("password")) {
 
                     loginResult.setText("Login Successful!");
                 }
 
                 else {
 
-                    loginResult.setText("Login Failed!");
+                    loginResult.setText("Login Failed! Please try again!");
                 }
+
     }
 
 }
