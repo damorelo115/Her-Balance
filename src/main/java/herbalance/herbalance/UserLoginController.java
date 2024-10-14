@@ -3,9 +3,7 @@ package herbalance.herbalance;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 import javafx.scene.control.Button;
 
@@ -33,37 +31,18 @@ public class UserLoginController {
 
 
     @FXML
-    private void signinButtonPressed(ActionEvent event) {
+    private void Login(ActionEvent event) {
 
-
-        signinButton.setOnAction(new EventHandler<ActionEvent>() {
-
-
-            @Override
-            public void handle(ActionEvent e) {
-
-
-                String username = usernameTextField.getText();
-
-
-                String password = passwordTextField.getText();
-
-
-                if (usernameTextField.getText().equals(username) && passwordTextField.getText().equals(password)) {
+                if (usernameTextField.getText().equals("user") && passwordTextField.getText().equals("password")) {
 
 
                     loginResult.setText("Login Successful!");
-                } else {
+                }
 
+                else {
 
                     loginResult.setText("Login Failed!");
                 }
-
-
-            }
-
-        });
-
     }
 
 }
