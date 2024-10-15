@@ -12,7 +12,7 @@ public class WellnessGoals {
         FXMLLoader fxmlLoader = new FXMLLoader(WellnessGoals.class.getResource("WellnessGoals.fxml"));
 
         // Load the FXML file and set up the new scene
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 690, 471);
         stage.setTitle("Welcome to HerBalance");
         stage.setScene(scene);
         stage.show();
