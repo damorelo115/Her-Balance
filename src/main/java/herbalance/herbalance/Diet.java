@@ -13,7 +13,7 @@ public class Diet {
         FXMLLoader fxmlLoader = new FXMLLoader(herbalance.herbalance.Diet.class.getResource("Diet.fxml"));
 
         // Load the FXML file and set up the new scene
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 690, 471);
         stage.setTitle("Welcome to HerBalance");
         stage.setScene(scene);
         stage.show();

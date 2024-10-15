@@ -13,7 +13,7 @@ public class Stress {
         FXMLLoader fxmlLoader = new FXMLLoader(herbalance.herbalance.Stress.class.getResource("Stress.fxml"));
 
         // Load the FXML file and set up the new scene
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 690, 471);
         stage.setTitle("Welcome to HerBalance");
         stage.setScene(scene);
         stage.show();
