@@ -6,6 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class UserRegistrationController {
@@ -26,7 +29,7 @@ public class UserRegistrationController {
     private Label registrationResult;
 
     @FXML
-    private Label signinButton;
+    private Button signinButton;
 
     @FXML
     private TextField userName;
@@ -38,75 +41,80 @@ public class UserRegistrationController {
     private Label usernameLabel;
 
     @FXML
-    private void registration() {
+    private void registrationValidation() {
 
 
         if (userName.getText().isEmpty()) {
 
             usernameLabel.setText("Please enter your username");
         }
-
         else {
 
             usernameLabel.setText("Username confirmed");
         }
 
-    }
+        if (userPassword.getText().isEmpty()) {
 
-        @FXML
-        private void createpassword() {
+            passwordLabel.setText("Please enter your password");
 
-            if (userPassword.getText().isEmpty()) {
+        } else {
 
-                passwordLabel.setText("Please enter your password");
+            passwordLabel.setText("Password confirmed");
 
-            }
-            else {
-
-                usernameLabel.setText("Password confirmed");
-            }
         }
 
 
-        @FXML
-        private void passwordconfirm() {
+        if (confirmPassword.getText().isEmpty()) {
 
-            if (confirmPassword.getText().isEmpty()) {
+            confirmLabel.setText("Please confirm your password");
 
-                confirmLabel.setText("Please confirm your password");
+            confirmLabel.setTextFill(Color.rgb(210, 39, 30));
 
-                confirmLabel.setTextFill(Color.rgb(210, 39, 30));
-
-            }
-
-            else {
-
-                confirmLabel.setText("Password confirmed");
-            }
         }
 
+        else {
 
-        @FXML
-        private void onButtonClick() {
-
-            String username = userName.getText();
-
-            String password = userPassword.getText();
-
-            String confirmation = confirmPassword.getText();
-
-
-            if (!username.isEmpty() && !password.isEmpty() && !confirmation.isEmpty()) {
-
-                registrationResult.setText("Registration successful! " + " Welcome " + username);
-            }
-
-            else {
-
-                registrationResult.setText("Registration unsuccessful! Please enter your information!");
-
-            }
+            confirmLabel.setText("Password confirmed");
         }
 
     }
+
+    @FXML
+    protected void onRegisterButtonClick() {
+
+        try {
+
+            Stage stage = (Stage) registerButton.getScene().getWindow();
+            NameEntry.loadNameEntryScene(stage);
+        }
+
+        catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    protected void onSignInButtonClick() {
+
+        try {
+            Stage stage = (Stage) signinButton.getScene().getWindow();
+
+            UserLogin.loadUserLoginScene(stage);
+        }
+
+        catch (IOException e) {
+
+            throw new RuntimeException(e);
+        }
+
+    }
+
+}
+
+
+
+
+
 
