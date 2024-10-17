@@ -7,23 +7,22 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="herbalance.herbalance.StressController">
+      fx:controller="herbalance.herbalance.RecommendController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
-    <!-- Label for user selection of stress level -->
-    <Label text="Select your current stress level" />
+    <!-- Label for user selection of recommendation option -->
+    <Label text="Would you like to receive personalized recommendations and plans based on your profile?" />
 
-    <!-- Implementing checkboxes for selecting stress level -->
-    <CheckBox fx:id="lowCheckBox" text="Low" />
-    <CheckBox fx:id="moderateCheckBox" text="Moderate" />
-    <CheckBox fx:id="highCheckBox" text="High" />
+    <!-- Implementing checkboxes for selecting recommendation options -->
+    <CheckBox fx:id="yesCheckBox" text="Yes" />
+    <CheckBox fx:id="noCheckBox" text="No" />
 
 
     <!-- Submit button for confirming user selections -->
     <Button fx:id="submitButton" text="Submit" onAction="#onSubmitButtonClick" />
 
-    <!-- Next button for going to Stress Management page -->
+    <!-- Next button for going to Reminders page -->
     <Button fx:id="nextButton" text="Next" onAction="#onNextButtonClick" visible="false" />
 </VBox>

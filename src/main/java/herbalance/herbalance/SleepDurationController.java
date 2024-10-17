@@ -71,9 +71,13 @@ public class SleepDurationController {
             // Next button will be hidden if no goals are selected
             nextButton.setVisible(false);
 
+            // Disabling the submit button after submission
+            submitButton.setDisable(true);
+
         } else {
             // Next button will be visible if goals are selected
             nextButton.setVisible(true);
+
         }
         // Printing selected sleep duration
         System.out.println(selectedSleep); // Needs to be changed to save into a file / database

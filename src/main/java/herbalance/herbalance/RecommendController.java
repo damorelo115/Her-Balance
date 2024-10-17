@@ -7,19 +7,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class StressController {
+public class RecommendController {
 
+    // Checkbox for yes selection
     @FXML
-    // Checkbox for low stress
-    private CheckBox lowCheckBox;
+    private CheckBox yesCheckBox;
 
-    // Checkbox for moderate stress
+    // Checkbox for no selection
     @FXML
-    private CheckBox moderateCheckBox;
-
-    // Checkbox for high stress
-    @FXML
-    private CheckBox highCheckBox;
+    private CheckBox noCheckBox;
 
     // Submit Button
     @FXML
@@ -29,25 +25,23 @@ public class StressController {
     @FXML
     private Button nextButton;
 
+
     // Method triggered when Submit button is clicked
     @FXML
     protected void onSubmitButtonClick() {
-        // Declaring and initializing a StringBuilder to store selected goals
-        StringBuilder selectedStress = new StringBuilder();
+        // Declaring and initializing a StringBuilder to store selected stress management methods
+        StringBuilder selectedRecommend = new StringBuilder();
 
-        if (lowCheckBox.isSelected()) {
-            selectedStress.append("- Low\n");
+        if (yesCheckBox.isSelected()) {
+            selectedRecommend.append("- Yes\n");
         }
-        if (moderateCheckBox.isSelected()) {
-            selectedStress.append("- Moderate\n");
-        }
-        if (highCheckBox.isSelected()) {
-            selectedStress.append("- High\n");
+        if (noCheckBox.isSelected()) {
+            selectedRecommend.append("- No\n");
         }
 
-        // Checking if no goals are selected
-        if (selectedStress.toString().equals("Selected Stress Level:\n")) {
-            selectedStress.append("No level selected.");
+        // Checking if no recommendation response is selected
+        if (selectedRecommend.toString().equals("Selected Recommendation Response:\n")) {
+            selectedRecommend.append("No recommendation option selected.");
             // Next button will be hidden if no goals are selected
             nextButton.setVisible(false);
 
@@ -58,7 +52,7 @@ public class StressController {
             nextButton.setVisible(true);
         }
         // Printing selected stress level
-        System.out.println(selectedStress); // Needs to be changed to save into a file / database
+        System.out.println(selectedRecommend); // Needs to be changed to save into a file / database
     }
 
     // Method called when the Next button is clicked
@@ -66,11 +60,9 @@ public class StressController {
     protected void onNextButtonClick () {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
-            ManageStress.loadManageStressScene(stage);
+            Reminders.loadRemindersScene(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 }

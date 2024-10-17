@@ -6,11 +6,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ActivityLevel {
+public class Activities {
 
-    // Static method to load the Wellness Goals scene
-    public static void loadActivityLevelScene(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(herbalance.herbalance.WellnessFocus.class.getResource("ActivityLevel.fxml"));
+    // Static method to load the Activities scene
+    public static void loadActivitiesScene(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(herbalance.herbalance.Activities.class.getResource("Activities.fxml"));
 
         // Load the FXML file and set up the new scene
         Scene scene = new Scene(fxmlLoader.load(), 690, 471);
