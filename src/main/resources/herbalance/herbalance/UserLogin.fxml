@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -28,6 +29,9 @@
                     <font>
                         <Font name="Poppins ExtraBold" size="16.0" />
                     </font>
+               <effect>
+                  <DropShadow />
+               </effect>
                 </Button>
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="43.0" prefHeight="33.0" prefWidth="58.0" text="Login">
                     <font>
@@ -39,16 +43,22 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <Label layoutX="32.0" layoutY="389.0" text="Don't have an account?" />
-                <Label layoutX="202.0" layoutY="388.0" text="Sign Up" textFill="#fc91b6">
-                    <font>
-                        <Font name="System Bold" size="16.0" />
-                    </font>
-                </Label>
+                <Label layoutX="32.0" layoutY="389.0" text="Don't have an account?">
+               <font>
+                  <Font name="Poppins ExtraBold" size="14.0" />
+               </font></Label>
                 <Label fx:id="loginResult" layoutX="119.0" layoutY="316.0" prefHeight="19.0" prefWidth="273.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Label>
+            <Button fx:id="signUpButton" layoutX="221.0" layoutY="386.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" style="-fx-background-color: #fc91b6;" text="Sign Up">
+               <font>
+                  <Font name="Poppins ExtraBold" size="13.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
             </children>
         </Pane>
     </children>
