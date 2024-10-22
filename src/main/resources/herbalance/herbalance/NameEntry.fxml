@@ -1,30 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="herbalance.herbalance.NameEntryController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.NameEntryController">
+    <children>
+        <Pane layoutX="0.0" prefHeight="479.0" prefWidth="341.0">
+            <children>
+                <Label layoutX="30.0" layoutY="30.0" text="Enter your name:">
+                    <font>
+                        <Font name="Poppins ExtraBold" size="18.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="nameField" layoutX="30.0" layoutY="80.0" prefHeight="25.0" prefWidth="250.0" promptText="Enter your name:" />
+                <Label fx:id="nameLabel" layoutX="30.0" layoutY="130.0" prefHeight="25.0" prefWidth="250.0">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <Pane layoutX="341.0" prefHeight="479.0" prefWidth="404.0" style="-fx-background-color: FFFFFF;">
+            <children>
+                <Button fx:id="submitButton" layoutX="82.0" layoutY="194.0" mnemonicParsing="false" onAction="#onButtonClick" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: #fc91b6;" text="Submit">
+                    <font>
+                        <Font name="Poppins ExtraBold" size="16.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Button>
+                <Button fx:id="nextButton" layoutX="82.0" layoutY="265.0" mnemonicParsing="false" onAction="#onNextButtonClick" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: #AFE9E5;" text="Next" visible="false">
+                    <font>
+                        <Font name="Poppins ExtraBold" size="16.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Button>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
 
-    <!-- Label that displays "Enter your name" -->
-    <Label text="Enter your name"/>
-
-    <!-- TextField for user input -->
-    <TextField fx:id="nameField" promptText="Enter your name:" />
-
-    <!-- Label displaying the output message -->
-    <Label fx:id="nameLabel"/>
-
-    <!-- Button for submitting the name -->
-    <Button text="Submit" onAction="#onButtonClick"/>
-
-    <!-- Next Button, initially hidden -->
-    <Button fx:id="nextButton" text="Next" visible="false" onAction="#onNextButtonClick"/>
-
-</VBox>

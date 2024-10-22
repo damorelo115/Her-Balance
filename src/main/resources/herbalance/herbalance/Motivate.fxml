@@ -1,35 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.DropShadow?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="herbalance.herbalance.MotivateController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.MotivateController">
+    <children>
+        <Pane layoutX="0.0" prefHeight="600.0" prefWidth="341.0">
+            <children>
+                <!-- Label asking user about their motivations -->
+                <Label layoutX="30.0" layoutY="20.0" text="What motivates you to stick to your goals?">
+                    <font>
+                        <Font name="Poppins ExtraBold" size="17.0" />
+                    </font>
+                </Label>
 
-    <!-- Label asking user if they would like to receive recommendations -->
-    <Label text="Would you like to receive personalized workout or wellness plan recommendations based on your profile?" />
+                <!-- Checkboxes for selecting motivations -->
+                <CheckBox fx:id="personalCheckBox" layoutX="30.0" layoutY="80.0" text="Personal Growth" />
+                <CheckBox fx:id="mentalCheckBox" layoutX="30.0" layoutY="130.0" text="Mental Health" />
+                <CheckBox fx:id="physicalCheckBox" layoutX="30.0" layoutY="180.0" text="Improved Physical Health" />
+                <CheckBox fx:id="energyCheckBox" layoutX="30.0" layoutY="230.0" text="Increased Energy Levels" />
+                <CheckBox fx:id="stressCheckBox" layoutX="30.0" layoutY="280.0" text="Stress Relief" />
+                <CheckBox fx:id="disciplineCheckBox" layoutX="30.0" layoutY="330.0" text="Self-Discipline" />
+                <CheckBox fx:id="longHealthCheckBox" layoutX="30.0" layoutY="380.0" text="Long-Term Health" />
+                <CheckBox fx:id="confidenceCheckBox" layoutX="30.0" layoutY="430.0" text="Confidence Boost" />
+                <CheckBox fx:id="noneCheckBox" layoutX="30.0" layoutY="480.0" text="None of the Above" />
+            </children>
+        </Pane>
+        <Pane layoutX="341.0" prefHeight="600.0" prefWidth="404.0" style="-fx-background-color: FFFFFF;">
+            <children>
+                <!-- Submit button for confirming user selections -->
+                <Button fx:id="submitButton" layoutX="82.0" layoutY="230.0" mnemonicParsing="false" onAction="#onSubmitButtonClick" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: #fc91b6;" text="Submit">
+                    <font>
+                        <Font name="Poppins ExtraBold" size="16.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Button>
 
-    <!-- Implementing checkboxes for selecting motivations  -->
-    <CheckBox fx:id="personalCheckBox" text="Personal Growth" />
-    <CheckBox fx:id="mentalCheckBox" text="Mental Health" />
-    <CheckBox fx:id="physicalCheckBox" text="Improved Physical Health" />
-    <CheckBox fx:id="energyCheckBox" text="Increased Energy Levels" />
-    <CheckBox fx:id="stressCheckBox" text="Stress Relief" />
-    <CheckBox fx:id="disciplineCheckBox" text="Self-Discipline" />
-    <CheckBox fx:id="longHealthCheckBox" text="Long-Tern Health" />
-    <CheckBox fx:id="confidenceCheckBox" text="Confidence Boost" />
-    <CheckBox fx:id="noneCheckBox" text="None of the Above" />
-
-
-    <!-- Submit button for confirming user selections -->
-    <Button fx:id="submitButton" text="Submit" onAction="#onSubmitButtonClick" />
-
-    <!-- Next button for going to Reminders page -->
-    <Button fx:id="nextButton" text="Next" onAction="#onNextButtonClick" visible="false" />
-</VBox>
+                <!-- Next button for going to Reminders page -->
+                <Button fx:id="nextButton" layoutX="82.0" layoutY="300.0" mnemonicParsing="false" onAction="#onNextButtonClick" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: #AFE9E5;" text="Next" visible="false">
+                    <font>
+                        <Font name="Poppins ExtraBold" size="16.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Button>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

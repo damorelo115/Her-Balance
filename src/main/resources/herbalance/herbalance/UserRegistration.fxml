@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="471.0" prefWidth="690.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.UserRegistrationController">
+<AnchorPane prefHeight="471.0" prefWidth="690.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.UserRegistrationController">
    <children>
       <Label alignment="CENTER" layoutX="205.0" layoutY="88.0" prefHeight="35.0" prefWidth="207.0" text="Already have an account?">
          <font>
