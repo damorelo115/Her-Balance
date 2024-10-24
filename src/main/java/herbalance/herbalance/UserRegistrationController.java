@@ -85,7 +85,7 @@ public class UserRegistrationController {
         try {
 
             Stage stage = (Stage) registerButton.getScene().getWindow();
-            NameEntry.loadNameEntryScene(stage);
+            NameEntryQuestion.loadNameEntryQuestionScene(stage);
         }
 
         catch (IOException e) {
