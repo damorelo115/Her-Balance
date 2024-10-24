@@ -1,0 +1,50 @@
+.sidepane {
+    -fx-background-color:#FC91B6;
+    -fx-alignment: center;
+}
+
+.header {
+    -fx-background-color:#F5F1FF;
+}
+
+.dashlabel {
+    -fx-font-family: Poppins, sans-serif;
+    -fx-font-style: normal;
+    -fx-font-size: 15px;
+}
+
+.herbalanceheader {
+    -fx-font-family: Poppins, sans-serif;
+    -fx-font-style: normal;
+    -fx-font-size: 20px;
+}
+
+.userlabel {
+    -fx-font-family: Poppins, sans-serif;
+    -fx-font-style: normal;
+    -fx-font-size: 20px;
+}
+
+.main {
+    -fx-background-radius: 30px;
+    -fx-background-color: #8B7FF5;
+
+}
+
+.workout {
+    -fx-background-radius: 30px;
+    -fx-background-color: #F5F1FF;
+
+}
+
+.mealplan {
+    -fx-background-radius: 30px;
+    -fx-background-color: #AFE9E5;
+
+}
+
+.cyclelevel {
+    -fx-background-radius: 30px;
+    -fx-background-color: #FC91B6;
+}
+
