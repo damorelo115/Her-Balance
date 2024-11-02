@@ -15,9 +15,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.cloud.FirestoreClient;
+
+import com.google.firebase.auth.*;
+import com.google.cloud.firestore.*;
+import com.google.api.core.ApiFuture;
 
 public class UserLoginController {
-
 
     @FXML
     private Label loginResult;
@@ -38,23 +47,25 @@ public class UserLoginController {
     @FXML
     private TextField usernameTextField;
 
-
     @FXML
-    private void Login(ActionEvent event) {
+    void signInButtonClicked(ActionEvent event) throws FirebaseAuthException {
+        signInUser();
+    }
 
-        String username = usernameTextField.getText();
+    public boolean signInUser() {
 
-        String password = passwordTextField.getText();
+        try {
+            UserRecord userRecord = FirebaseAuth.getInstance().getUserByEmail(usernameTextField.getText());
 
-                if (username.equals("username") && password.equals("password")) {
+            System.out.println("Successfully signed in user with User email: " + userRecord.getEmail());
+            return true;
 
-                    loginResult.setText("Login Successful!");
-                }
+        } catch (FirebaseAuthException ex) {
+            // Logger.getLogger(FirestoreContext.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Incorrect email and password entered");
+            return false;
+        }
 
-                else {
-
-                    loginResult.setText("Login Failed! Please try again!");
-                }
     }
 
 
@@ -71,4 +82,5 @@ public class UserLoginController {
     }
 
 
-}
+    }
+

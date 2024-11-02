@@ -25,7 +25,7 @@
             <children>
                 <TextField fx:id="usernameTextField" layoutX="82.0" layoutY="126.0" prefHeight="25.0" prefWidth="184.0" promptText="Username" />
                 <PasswordField fx:id="passwordTextField" layoutX="82.0" layoutY="194.0" prefHeight="25.0" prefWidth="184.0" promptText="Password" />
-                <Button fx:id="signinButton" layoutX="62.0" layoutY="265.0" mnemonicParsing="false" onAction="#Login" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: AFE9E5;" text="Sign In">
+                <Button fx:id="signinButton" layoutX="62.0" layoutY="265.0" mnemonicParsing="false" onAction="#signInButtonClicked" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: AFE9E5;" text="Sign In">
                     <font>
                         <Font name="Poppins ExtraBold" size="16.0" />
                     </font>

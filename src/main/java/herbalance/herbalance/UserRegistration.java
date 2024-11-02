@@ -1,5 +1,6 @@
 package herbalance.herbalance;
 
+import com.google.firebase.auth.AbstractFirebaseAuth;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,6 +10,7 @@ import java.io.IOException;
 
 public class UserRegistration {
 
+    public static AbstractFirebaseAuth fauth;
     private String username;
     private String password;
 
