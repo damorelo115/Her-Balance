@@ -48,3 +48,27 @@
     -fx-background-color: #FC91B6;
 }
 
+.cyclelabel {
+
+    -fx-font-family: Poppins, sans-serif;
+    -fx-font-style: normal;
+    -fx-font-size: 15px;
+}
+
+.meallabel {
+    -fx-font-family: Poppins, sans-serif;
+    -fx-font-style: normal;
+    -fx-font-size: 15px;
+}
+
+.workouttext {
+    -fx-font-family: Poppins, sans-serif;
+    -fx-font-style: normal;
+    -fx-font-size: 15px;
+}
+
+.welcomelabel {
+    -fx-font-family: Poppins, sans-serif;
+    -fx-font-style: normal;
+    -fx-font-size: 15px;
+}

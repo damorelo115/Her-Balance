@@ -16,7 +16,7 @@
             <Font name="Poppins ExtraBold" size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="userName" layoutX="211.0" layoutY="176.0" onAction="#registrationValidation" prefHeight="25.0" prefWidth="269.0" promptText="Username" />
+      <TextField fx:id="userName" layoutX="211.0" layoutY="176.0" onAction="#registrationValidation" prefHeight="25.0" prefWidth="269.0" promptText="Email" />
       <Label layoutX="211.0" layoutY="149.0" text="Username">
          <font>
             <Font name="Poppins ExtraBold" size="14.0" />
@@ -27,7 +27,7 @@
             <Font name="Poppins ExtraBold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="registerButton" layoutX="245.0" layoutY="373.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" prefHeight="25.0" prefWidth="187.0" style="-fx-background-color: AFE9E5;" text="Register">
+      <Button fx:id="registerButton" layoutX="252.0" layoutY="315.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" prefHeight="25.0" prefWidth="187.0" style="-fx-background-color: AFE9E5;" text="Register">
          <font>
             <Font name="Poppins ExtraBold" size="13.0" />
          </font>
@@ -44,13 +44,7 @@
             </Label>
          </children>
       </Pane>
-      <Label layoutX="211.0" layoutY="304.0" text="Confirm Password">
-         <font>
-            <Font name="Poppins ExtraBold" size="14.0" />
-         </font>
-      </Label>
       <PasswordField fx:id="userPassword" layoutX="211.0" layoutY="252.0" onAction="#registrationValidation" prefHeight="25.0" prefWidth="269.0" promptText="Password" />
-      <PasswordField fx:id="confirmPassword" layoutX="211.0" layoutY="331.0" onAction="#registrationValidation" prefHeight="25.0" prefWidth="269.0" promptText="Confirm Password" />
       <Label fx:id="usernameLabel" layoutX="376.0" layoutY="146.0" prefHeight="27.0" prefWidth="245.0" />
       <Label fx:id="passwordLabel" layoutX="376.0" layoutY="222.0" prefHeight="27.0" prefWidth="245.0" />
       <Label fx:id="confirmLabel" layoutX="376.0" layoutY="301.0" prefHeight="27.0" prefWidth="245.0" />

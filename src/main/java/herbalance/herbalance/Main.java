@@ -14,8 +14,11 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
+
             UserLogin.loadUserLoginScene(stage);
-        } catch (IOException e) {
+        }
+
+        catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Failed to load the NameEntry scene", e);
         }
     }

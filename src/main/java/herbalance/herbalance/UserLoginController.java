@@ -15,9 +15,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.cloud.FirestoreClient;
+
+import com.google.firebase.auth.*;
+import com.google.cloud.firestore.*;
+import com.google.api.core.ApiFuture;
 
 public class UserLoginController {
-
 
     @FXML
     private Label loginResult;
@@ -39,36 +48,21 @@ public class UserLoginController {
     private TextField usernameTextField;
 
 
-    @FXML
-    private void Login(ActionEvent event) {
-
-        String username = usernameTextField.getText();
-
-        String password = passwordTextField.getText();
-
-                if (username.equals("username") && password.equals("password")) {
-
-                    loginResult.setText("Login Successful!");
-                }
-
-                else {
-
-                    loginResult.setText("Login Failed! Please try again!");
-                }
-    }
-
 
     @FXML
     protected void onSignUpButtonClick() throws IOException {
 
-        Stage stage = (Stage) signUpButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(UserLogin.class.getResource("UserRegistration.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 690, 471);
-        stage.setTitle("Create an Account");
-        stage.setScene(scene);
-        stage.show();
+        try {
+            Stage stage = (Stage) signUpButton.getScene().getWindow();
+
+            UserRegistration.loadUserRegistrationScene(stage);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
 
     }
 
-
 }
+
+
