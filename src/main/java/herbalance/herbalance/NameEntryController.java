@@ -46,6 +46,7 @@ public class NameEntryController {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
             BirthDate.loadBirthdateScene(stage);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
