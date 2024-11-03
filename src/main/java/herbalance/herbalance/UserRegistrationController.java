@@ -1,9 +1,5 @@
 package herbalance.herbalance;
 
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.UserRecord;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -49,44 +45,77 @@ public class UserRegistrationController {
     private Label usernameLabel;
 
     @FXML
-    void registerButtonClicked(ActionEvent event) {
-        onRegisterButtonClick ();
+    private void registrationValidation() {
+
+
+        if (userName.getText().isEmpty()) {
+
+            usernameLabel.setText("Please enter your username");
+        }
+        else {
+
+            usernameLabel.setText("Username confirmed");
+        }
+
+        if (userPassword.getText().isEmpty()) {
+
+            passwordLabel.setText("Please enter your password");
+
+        } else {
+
+            passwordLabel.setText("Password confirmed");
+
+        }
+
+
+        if (confirmPassword.getText().isEmpty()) {
+
+            confirmLabel.setText("Please confirm your password");
+
+            confirmLabel.setTextFill(Color.rgb(210, 39, 30));
+
+        }
+
+        else {
+
+            confirmLabel.setText("Password confirmed");
+        }
+
     }
 
     @FXML
-    public boolean onRegisterButtonClick() {
+    protected void onRegisterButtonClick() {
 
-        UserRecord.CreateRequest request = new UserRecord.CreateRequest()
-                .setEmail(userName.getText())
-                .setEmailVerified(false)
-                .setPassword(userPassword.getText());
-        /*
-                .setDisplayName(name);
-                .setDisabled(false);
-                .setPhoneNumber("");
-         */
-
-        UserRecord userRecord;
         try {
-            userRecord = UserRegistration.fauth.createUser(request);
-            System.out.println("Successfully created new user with Firebase Uid: " + userRecord.getUid()
-                    + " check Firebase > Authentication > Users tab");
-            return true;
 
-        } catch (FirebaseAuthException ex) {
-            // Logger.getLogger(FirestoreContext.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Error creating a new user in the firebase");
-            return false;
+            Stage stage = (Stage) registerButton.getScene().getWindow();
+            NameEntry.loadNameEntryScene(stage);
         }
+
+        catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    protected void onSignInButtonClick() {
+
+        try {
+            Stage stage = (Stage) signinButton.getScene().getWindow();
+
+            UserLogin.loadUserLoginScene(stage);
+        }
+
+        catch (IOException e) {
+
+            throw new RuntimeException(e);
+        }
+
     }
 
 }
-
-
-
-
-
-
 
 
 
