@@ -1,6 +1,8 @@
 package herbalance.herbalance;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -9,6 +11,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static javafx.application.Application.launch;
 
 
 public class UserRegistrationController {
@@ -85,7 +89,8 @@ public class UserRegistrationController {
         try {
 
             Stage stage = (Stage) registerButton.getScene().getWindow();
-            NameEntry.loadNameEntryScene(stage);
+
+            NameEntryQuestion.loadNameEntryQuestionScene(stage);
         }
 
         catch (IOException e) {
@@ -111,7 +116,22 @@ public class UserRegistrationController {
 
     }
 
-}
+    protected void onSigUpButtonClick() {
+
+        try {
+            Stage stage = (Stage) signinButton.getScene().getWindow();
+
+            UserLogin.loadUserLoginScene(stage);
+        }
+
+        catch (IOException e) {
+
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    }
 
 
 
