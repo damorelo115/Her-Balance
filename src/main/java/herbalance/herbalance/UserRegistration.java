@@ -41,20 +41,7 @@ public class UserRegistration {
 
 }
 
-    /*
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(UserLogin.class.getResource("UserRegistration.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 690, 471);
-        stage.setTitle("Create an Account");
-        stage.setScene(scene);
-        stage.show();
-    }
 
 
-    public static void main(String[] args) {
-        launch();
-    }
 
-     */
 

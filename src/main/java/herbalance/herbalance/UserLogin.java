@@ -6,8 +6,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static javafx.application.Application.launch;
-
 public class UserLogin {
 
     private String username;
@@ -38,9 +36,6 @@ public class UserLogin {
         this.password = password;
     }
 
-}
-
-/*
 
     public static void loadUserLoginScene(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(UserLogin.class.getResource("UserLogin.fxml"));
@@ -50,11 +45,7 @@ public class UserLogin {
         stage.show();
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
-
- */
+}
 
 
 
