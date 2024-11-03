@@ -10,9 +10,17 @@ import java.io.IOException;
 
 public class UserRegistration {
 
-    public static AbstractFirebaseAuth fauth;
-    private String username;
-    private String password;
+    private  String username;
+    private  String password;
+
+    public static void loadUserRegistrationScene(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(UserLogin.class.getResource("UserRegistration.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 690 , 471);
+        stage.setTitle("User Registration");
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
     public UserRegistration(String username, String password) {
         this.username = username;

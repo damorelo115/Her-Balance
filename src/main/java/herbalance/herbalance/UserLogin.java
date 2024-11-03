@@ -8,6 +8,14 @@ import java.io.IOException;
 
 public class UserLogin {
 
+    public static void loadUserLoginScene(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(UserLogin.class.getResource("UserLogin.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 690 , 471);
+        stage.setTitle("User Login");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     private String username;
     private String password;
 
@@ -36,16 +44,8 @@ public class UserLogin {
         this.password = password;
     }
 
-
-    public static void loadUserLoginScene(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(UserLogin.class.getResource("UserLogin.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 735, 479);
-        stage.setTitle("HerBalance Login");
-        stage.setScene(scene);
-        stage.show();
-    }
-
 }
+
 
 
 
