@@ -9,6 +9,10 @@ import java.io.IOException;
 
 public class Dashboard2 extends Application  {
 
+
+    public static void loadDashboardScene() {
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Dashboard2.class.getResource("Dashboard2.fxml"));
@@ -23,4 +27,3 @@ public class Dashboard2 extends Application  {
         launch();
     }
 }
-

@@ -1,35 +1,29 @@
 package herbalance.herbalance;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-
-
-// import java.io.IOException;
+import javafx.stage.Stage;
+import java.io.IOException;
 
 public class RemindersQuestionController {
 
-    // Checkbox for enabling notifications
     @FXML
     private CheckBox enableNotificationsCheckBox;
 
-    // Checkbox for disabling notifications
     @FXML
     private CheckBox disableNotificationsCheckBox;
 
-    // Submit Button
     @FXML
     private Button submitButton;
 
-    // Next Button
-  //  @FXML
-  //  private Button nextButton;
+    @FXML
+    private Button signUpButton;
 
-
-    // Method triggered when Submit button is clicked
     @FXML
     protected void onSubmitButtonClick() {
-        // Declaring and initializing a StringBuilder to store selected stress management methods
         StringBuilder selectedReminders = new StringBuilder();
 
         if (enableNotificationsCheckBox.isSelected()) {
@@ -39,30 +33,20 @@ public class RemindersQuestionController {
             selectedReminders.append("- Disable Notifications\n");
         }
 
-        // Checking if no recommendation response is selected
-        if (selectedReminders.toString().equals("Selected Notification Response:\n")) {
+        if (selectedReminders.toString().isEmpty()) {
             selectedReminders.append("No notification option selected.");
-            // Next button will be hidden if no goals are selected
-         //   nextButton.setVisible(false);
-
-            // Disabling the submit button after submission
+            signUpButton.setVisible(false);
             submitButton.setDisable(true);
-   /*     } else {
-            // Next button will be visible if goals are selected
-              nextButton.setVisible(true); */
+        } else {
+            signUpButton.setVisible(true);
         }
-        // Printing selected stress level
-        System.out.println(selectedReminders); // Needs to be changed to save into a file / database
+
+        System.out.println(selectedReminders);
     }
 
-    // Method called when the Next button is clicked
- /*   @FXML
-    protected void onNextButtonClick () {
-        try {
-            Stage stage = (Stage) nextButton.getScene().getWindow();
-            RemindersQuestion.loadDashboardScene(stage);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    } */
+    @FXML
+    protected void onSignUpButtonClick() {
+        Stage stage = (Stage)this.signUpButton.getScene().getWindow();
+        Dashboard2.loadDashboardScene();
+    }
 }
