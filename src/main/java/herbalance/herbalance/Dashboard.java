@@ -13,7 +13,7 @@ public class Dashboard extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IIOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard2.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
         Parent root = null;
         try {
             root = loader.load();
