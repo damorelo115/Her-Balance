@@ -2,6 +2,7 @@ package herbalance.herbalance;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 
@@ -48,7 +49,6 @@ public class UserLoginController {
     private TextField usernameTextField;
 
 
-
     @FXML
     protected void onSignUpButtonClick() throws IOException {
 
@@ -56,13 +56,19 @@ public class UserLoginController {
             Stage stage = (Stage) signUpButton.getScene().getWindow();
 
             UserRegistration.loadUserRegistrationScene(stage);
-        } catch (IOException e) {
+        }
+
+        catch (IOException e) {
 
             e.printStackTrace();
         }
 
     }
 
+    @FXML
+    protected void onSignInButtonClick() throws IOException {
+
+        Stage stage = (Stage) signUpButton.getScene().getWindow();
+        Dashboard.loadDashboardScene(stage);
+    }
 }
-
-

@@ -25,7 +25,8 @@ import com.google.firebase.cloud.FirestoreClient;
 
                 FirebaseApp.initializeApp(options);
 
-            } catch (IOException ex) {
+            }
+            catch (IOException ex) {
                 ex.printStackTrace();
                 System.exit(1);
             }

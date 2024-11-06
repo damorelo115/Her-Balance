@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="471.0" prefWidth="690.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.UserRegistrationController">
+<AnchorPane prefHeight="471.0" prefWidth="690.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.UserRegistrationController">
    <children>
       <Label alignment="CENTER" layoutX="205.0" layoutY="88.0" prefHeight="35.0" prefWidth="207.0" text="Already have an account?">
          <font>
@@ -17,7 +17,7 @@
          </font>
       </Label>
       <TextField fx:id="userName" layoutX="211.0" layoutY="176.0" onAction="#registrationValidation" prefHeight="25.0" prefWidth="269.0" promptText="Email" />
-      <Label layoutX="211.0" layoutY="149.0" text="Username">
+      <Label layoutX="211.0" layoutY="149.0" text="Email">
          <font>
             <Font name="Poppins ExtraBold" size="14.0" />
          </font>

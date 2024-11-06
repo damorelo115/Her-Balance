@@ -1,5 +1,7 @@
 package herbalance.herbalance;
 
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -84,23 +86,43 @@ public class UserRegistrationController {
     }
 
     @FXML
-    protected void onRegisterButtonClick() {
+    protected void onRegisterButtonClick() throws IOException {
 
+        registerUser();
+
+        //Will comment out when working - Natasia Stage stage = (Stage) registerButton.getScene().getWindow();
+
+        // Will comment out when working - Natasia NameEntryQuestion.loadNameEntryQuestionScene(stage);
+
+    }
+    public boolean registerUser() {
+        UserRecord.CreateRequest request = new UserRecord.CreateRequest()
+                .setEmail(userName.getText())
+                .setEmailVerified(false)
+                .setPassword(userPassword.getText());
+                //.setPhoneNumber("+11234567890")
+                //.setDisplayName("John Doe")
+                //.setDisabled(false);
+
+        UserRecord userRecord;
         try {
+            userRecord = Main.fauth.createUser(request);
+            // to do: make sure the user sees  success message on the window
+            // System.out.println("Successfully created new user with Firebase Uid: " + userRecord.getUid()
+             //       + " check Firebase > Authentication > Users tab");
+            return true;
 
-            Stage stage = (Stage) registerButton.getScene().getWindow();
-
-            NameEntryQuestion.loadNameEntryQuestionScene(stage);
-        }
-
-        catch (IOException e) {
-
-            e.printStackTrace();
+        } catch (FirebaseAuthException ex) {
+            // Logger.getLogger(FirestoreContext.class.getName()).log(Level.SEVERE, null, ex);
+            //System.out.println("Error creating a new user in the firebase");
+            // to do: make sure the user sees  error message on the screen
+            return false;
         }
 
     }
 
-    @FXML
+
+        @FXML
     protected void onSignInButtonClick() {
 
         try {
