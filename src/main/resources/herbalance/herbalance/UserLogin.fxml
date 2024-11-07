@@ -25,7 +25,7 @@
             <children>
                 <TextField fx:id="usernameTextField" layoutX="82.0" layoutY="126.0" prefHeight="25.0" prefWidth="184.0" promptText="Email" />
                 <PasswordField fx:id="passwordTextField" layoutX="82.0" layoutY="194.0" prefHeight="25.0" prefWidth="184.0" promptText="Password" />
-                <Button fx:id="signinButton" layoutX="62.0" layoutY="265.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: AFE9E5;" text="Sign In">
+                <Button fx:id="signinButton" layoutX="62.0" layoutY="265.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: AFE9E5;" styleClass="signinbutton" stylesheets="@../../dashboard.css" text="Sign In">
                     <font>
                         <Font name="Poppins ExtraBold" size="16.0" />
                     </font>
@@ -33,7 +33,7 @@
                   <DropShadow />
                </effect>
                 </Button>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="43.0" prefHeight="33.0" prefWidth="58.0" text="Login">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="43.0" prefHeight="33.0" prefWidth="58.0" styleClass="logintitle" stylesheets="@../../dashboard.css" text="Login">
                     <font>
                         <Font name="Poppins ExtraBold" size="18.0" />
                     </font>
@@ -51,7 +51,7 @@
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Label>
-            <Button fx:id="signUpButton" layoutX="221.0" layoutY="386.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" style="-fx-background-color: #fc91b6;" text="Sign Up">
+            <Button fx:id="signUpButton" layoutX="221.0" layoutY="386.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" style="-fx-background-color: #fc91b6;" styleClass="signupbutton" stylesheets="@../../dashboard.css" text="Sign Up">
                <font>
                   <Font name="Poppins ExtraBold" size="13.0" />
                </font>
