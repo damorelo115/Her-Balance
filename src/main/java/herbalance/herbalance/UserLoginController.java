@@ -69,6 +69,7 @@ public class UserLoginController {
     protected void onSignInButtonClick() throws IOException {
 
         Stage stage = (Stage) signUpButton.getScene().getWindow();
+
         Dashboard.loadDashboardScene(stage);
     }
 }

@@ -10,7 +10,6 @@ import com.google.firebase.FirebaseOptions;
 
 import com.google.firebase.cloud.FirestoreClient;
 
-
     public class FirestoreContext {
 
         public Firestore firebase() {
