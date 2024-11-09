@@ -1,12 +1,9 @@
 package herbalance.herbalance;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.stage.Stage;
-import java.io.IOException;
+
 
 public class RemindersQuestionController {
 
@@ -46,7 +43,6 @@ public class RemindersQuestionController {
 
     @FXML
     protected void onSignUpButtonClick() {
-        Stage stage = (Stage)this.signUpButton.getScene().getWindow();
         Dashboard2.loadDashboardScene();
     }
 }

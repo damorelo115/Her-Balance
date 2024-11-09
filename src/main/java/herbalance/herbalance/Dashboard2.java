@@ -2,15 +2,29 @@ package herbalance.herbalance;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Dashboard2 extends Application  {
-
+public class Dashboard2 extends Application {
 
     public static void loadDashboardScene() {
+        try {
+            FXMLLoader loader = new FXMLLoader(Dashboard2.class.getResource("Dashboard2.fxml"));
+            Parent root = loader.load();
+
+            Scene dashboardScene = new Scene(root);
+            Stage dashboardStage = new Stage();
+            dashboardStage.setScene(dashboardScene);
+            dashboardStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.err.println("FXML file not found or path is incorrect. Please verify the file path.");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -27,3 +41,4 @@ public class Dashboard2 extends Application  {
         launch();
     }
 }
+
