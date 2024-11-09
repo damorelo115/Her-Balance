@@ -23,6 +23,10 @@ public class BirthDateQuestionController {
     @FXML
     private Label validationLabel;
 
+    // Button for Back Button
+    @FXML
+    private Button backButton;
+
     // Button for Submit Button
     @FXML
     private Button submitButton;
@@ -65,4 +69,14 @@ public class BirthDateQuestionController {
                 e.printStackTrace();
             }
         }
+    // Method called when the Back button is clicked
+    @FXML
+    protected void onBackButtonClick() {
+        try {
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            NameEntryQuestion.loadNameEntryQuestionScene(stage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+}

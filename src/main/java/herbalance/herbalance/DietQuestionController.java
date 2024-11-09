@@ -29,6 +29,10 @@ public class DietQuestionController {
     @FXML
     private CheckBox noneCheckBox;
 
+    // Back Button
+    @FXML
+    private Button backButton;
+
     // Submit Button
     @FXML
     private Button submitButton;
@@ -80,6 +84,17 @@ public class DietQuestionController {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
             StressQuestion.loadStressQuestionScene(stage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method called when the Back button is clicked
+    @FXML
+    protected void onBackButtonClick() {
+        try {
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            SleepDurationQuestion.loadSleepDurationQuestionScene(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }

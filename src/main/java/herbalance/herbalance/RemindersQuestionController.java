@@ -3,7 +3,8 @@ package herbalance.herbalance;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-
+import javafx.stage.Stage;
+import java.io.IOException;
 
 public class RemindersQuestionController {
 
@@ -20,6 +21,10 @@ public class RemindersQuestionController {
     private Button signUpButton;
 
     @FXML
+    private Button backButton;
+
+    // Method called when the Submit button is clicked
+    @FXML
     protected void onSubmitButtonClick() {
         StringBuilder selectedReminders = new StringBuilder();
 
@@ -32,17 +37,33 @@ public class RemindersQuestionController {
 
         if (selectedReminders.toString().isEmpty()) {
             selectedReminders.append("No notification option selected.");
-            signUpButton.setVisible(false);
+            if (signUpButton != null) {
+                signUpButton.setVisible(false);
+            }
             submitButton.setDisable(true);
         } else {
-            signUpButton.setVisible(true);
+            if (signUpButton != null) {
+                signUpButton.setVisible(true);
+            }
         }
 
         System.out.println(selectedReminders);
     }
 
+    // Method called when the Sign-Up button is clicked
     @FXML
     protected void onSignUpButtonClick() {
         Dashboard2.loadDashboardScene();
+    }
+
+    // Method called when the Back button is clicked
+    @FXML
+    protected void onBackButtonClick() {
+        try {
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            RecommendQuestion.loadRecommendQuestionScene(stage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

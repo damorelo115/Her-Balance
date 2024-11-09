@@ -37,6 +37,10 @@ public class ActivitiesQuestionController {
     @FXML
     private CheckBox noneCheckBox;
 
+    // Back Button
+    @FXML
+    private Button backButton;
+
     // Submit Button
     @FXML
     private Button submitButton;
@@ -96,6 +100,17 @@ public class ActivitiesQuestionController {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
             MotivateQuestion.loadMotivateQuestionScene(stage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method called when the Back button is clicked
+    @FXML
+    protected void onBackButtonClick() {
+        try {
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            ManageStressQuestion.loadManageStressQuestionScene(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }

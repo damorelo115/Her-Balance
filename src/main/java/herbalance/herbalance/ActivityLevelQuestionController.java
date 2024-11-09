@@ -20,6 +20,10 @@ public class ActivityLevelQuestionController {
     @FXML
     private CheckBox highlyActiveCheckBox;
 
+    // Back Button
+    @FXML
+    private Button backButton;
+
     // Submit Button
     @FXML
     private Button submitButton;
@@ -65,6 +69,17 @@ public class ActivityLevelQuestionController {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
             SleepDurationQuestion.loadSleepDurationQuestionScene(stage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method called when the Back button is clicked
+    @FXML
+    protected void onBackButtonClick() {
+        try {
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            WellnessFocusQuestion.loadWellnessFocusQuestionScene(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }
