@@ -3,7 +3,7 @@ package herbalance.herbalance;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.WriteResult;
-import com.google.firebase.FirebaseException;
+
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import javafx.fxml.FXML;
@@ -31,7 +31,7 @@ public class UserRegistrationController {
     private Button signinButton;
 
     @FXML
-    private TextField userName;
+    private TextField userEmail;
 
     @FXML
     private PasswordField userPassword;
@@ -43,11 +43,11 @@ public class UserRegistrationController {
     @FXML
     protected void onRegisterButtonClick() throws IOException {
 
-        if (userName.getText().isEmpty() || userPassword.getText().isEmpty()) {
+        if (userEmail.getText().isEmpty() || userPassword.getText().isEmpty()) {
 
             showAlert(Alert.AlertType.ERROR, "Please enter your email and password!");
 
-            userName.clear();
+            userEmail.clear();
             userPassword.clear();
 
         }
@@ -60,13 +60,13 @@ public class UserRegistrationController {
 
                     showAlert(Alert.AlertType.CONFIRMATION, "Registration successful!");
 
-                    userName.clear();
+                    userEmail.clear();
 
                     userPassword.clear();
 
-                    //Stage stage = (Stage) registerButton.getScene().getWindow();
+                    Stage stage = (Stage) registerButton.getScene().getWindow();
 
-                   // NameEntryQuestion.loadNameEntryQuestionScene(stage);
+                   NameEntryQuestion.loadNameEntryQuestionScene(stage);
 
                 }
 
@@ -74,7 +74,7 @@ public class UserRegistrationController {
 
                     showAlert(Alert.AlertType.ERROR, "Registration failed!");
 
-                    userName.clear();
+                    userEmail.clear();
 
                     userPassword.clear();
                 }
@@ -86,7 +86,7 @@ public class UserRegistrationController {
 
                 showAlert(Alert.AlertType.ERROR, "Registration failed, issue with registering the user! Try again!");
 
-                userName.clear();
+                userEmail.clear();
                 userPassword.clear();
             }
             
@@ -100,7 +100,7 @@ public class UserRegistrationController {
         DocumentReference docRef = Main.fstore.collection("Users").document(UUID.randomUUID().toString());
 
         Map<String, Object> data = new HashMap<>();
-        data.put("Username", userName.getText());
+        data.put("Username", userEmail.getText());
         data.put("Password", userPassword.getText());
 
         try {
@@ -120,7 +120,7 @@ public class UserRegistrationController {
     // This method is called when adding a new authenticated user to Firebase Authentication
     public boolean registerUser() {
         UserRecord.CreateRequest request = new UserRecord.CreateRequest()
-                .setEmail(userName.getText())
+                .setEmail(userEmail.getText())
                 .setEmailVerified(false)
                 .setPassword(userPassword.getText());
 
@@ -158,6 +158,7 @@ public class UserRegistrationController {
 
     }
 
+    // showAlert method
     private void showAlert (Alert.AlertType alertType, String message) {
 
         Alert alert = new Alert(alertType);
