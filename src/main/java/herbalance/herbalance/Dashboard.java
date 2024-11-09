@@ -9,17 +9,7 @@ import javafx.stage.Stage;
 import javax.imageio.IIOException;
 import java.io.IOException;
 
-public class Dashboard {
-
-    public static void loadDashboardScene(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(NameEntryQuestion.class.getResource("Dashboard.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 690, 471);
-        stage.setTitle("Welcome to HerBalance");
-        stage.setScene(scene);
-        stage.show();
-    }
-    /*
-
+public class Dashboard extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IIOException {
@@ -39,8 +29,6 @@ public class Dashboard {
     public static void main (String[] args){
         launch(args);
     }
-
-     */
 
 }
 

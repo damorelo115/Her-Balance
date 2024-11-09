@@ -26,6 +26,16 @@
         </Pane>
         <Pane layoutX="341.0" prefHeight="350.0" prefWidth="404.0" style="-fx-background-color: FFFFFF;">
             <children>
+                <!-- Back Button with consistent spacing -->
+                <Button fx:id="backButton" layoutX="82.0" layoutY="90.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: #AFE9E5;" text="Back">
+                    <font>
+                        <Font name="Poppins ExtraBold" size="16.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Button>
+
                 <!-- Submit button for confirming user selections -->
                 <Button fx:id="submitButton" layoutX="82.0" layoutY="160.0" mnemonicParsing="false" onAction="#onSubmitButtonClick" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: #fc91b6;" text="Submit">
                     <font>

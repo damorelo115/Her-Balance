@@ -34,6 +34,10 @@ public class SleepDurationQuestionController {
 
     // Submit Button
     @FXML
+    private Button backButton;
+
+    // Submit Button
+    @FXML
     private Button submitButton;
 
     // Next Button
@@ -88,6 +92,16 @@ public class SleepDurationQuestionController {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
             DietQuestion.loadDietQuestionScene(stage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    // Method called when the Back button is clicked
+    @FXML
+    protected void onBackButtonClick() {
+        try {
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            ActivityLevelQuestion.loadActivityLevelQuestionScene(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }

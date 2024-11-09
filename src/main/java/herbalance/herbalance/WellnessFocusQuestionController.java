@@ -25,6 +25,10 @@ public class WellnessFocusQuestionController {
     @FXML
     private CheckBox reproductiveHealthCheckBox;
 
+    // Back Button
+    @FXML
+    private Button backButton;
+
     // Submit Button
     @FXML
     private Button submitButton;
@@ -73,6 +77,17 @@ public class WellnessFocusQuestionController {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
             ActivityLevelQuestion.loadActivityLevelQuestionScene(stage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method called when the Back button is clicked
+    @FXML
+    protected void onBackButtonClick() {
+        try {
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            WellnessGoalsQuestion.loadWellnessGoalsQuestionScene(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }

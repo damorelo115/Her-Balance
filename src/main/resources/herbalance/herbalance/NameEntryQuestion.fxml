@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.NameEntryQuestionController">
@@ -28,6 +27,16 @@
         </Pane>
         <Pane layoutX="341.0" prefHeight="479.0" prefWidth="404.0" style="-fx-background-color: FFFFFF;">
             <children>
+                <!-- Back Button with adjusted spacing -->
+                <Button fx:id="backButton" layoutX="82.0" layoutY="123.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: #AFE9E5;" text="Back">
+                    <font>
+                        <Font name="Poppins ExtraBold" size="16.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Button>
+                <!-- Submit Button -->
                 <Button fx:id="submitButton" layoutX="82.0" layoutY="194.0" mnemonicParsing="false" onAction="#onButtonClick" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: #fc91b6;" text="Submit">
                     <font>
                         <Font name="Poppins ExtraBold" size="16.0" />
@@ -36,6 +45,7 @@
                         <DropShadow />
                     </effect>
                 </Button>
+                <!-- Next Button -->
                 <Button fx:id="nextButton" layoutX="82.0" layoutY="265.0" mnemonicParsing="false" onAction="#onNextButtonClick" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: #AFE9E5;" text="Next" visible="false">
                     <font>
                         <Font name="Poppins ExtraBold" size="16.0" />
@@ -48,5 +58,7 @@
         </Pane>
     </children>
 </AnchorPane>
+
+
 
 

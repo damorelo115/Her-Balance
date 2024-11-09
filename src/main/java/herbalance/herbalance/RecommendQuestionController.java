@@ -17,6 +17,10 @@ public class RecommendQuestionController {
     @FXML
     private CheckBox noCheckBox;
 
+    // Back Button
+    @FXML
+    private Button backButton;
+
     // Submit Button
     @FXML
     private Button submitButton;
@@ -61,6 +65,16 @@ public class RecommendQuestionController {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
             RemindersQuestion.loadRemindersQuestionScene(stage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    // Method called when the Back button is clicked
+    @FXML
+    protected void onBackButtonClick() {
+        try {
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            MotivateQuestion.loadMotivateQuestionScene(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }

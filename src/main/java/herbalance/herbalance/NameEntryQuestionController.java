@@ -9,11 +9,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class NameEntryQuestionController {
+
     @FXML
     private Label nameLabel;
 
     @FXML
     private TextField nameField;
+
+    @FXML
+    private Button backButton;
 
     @FXML
     private Button nextButton;
@@ -40,12 +44,24 @@ public class NameEntryQuestionController {
             nextButton.setVisible(false);
         }
     }
+
     // Method called when the Next button is clicked
     @FXML
     protected void onNextButtonClick() {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
             BirthDateQuestion.loadBirthDateQuestionScene(stage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method called when the Back button is clicked
+    @FXML
+    protected void onBackButtonClick() {
+        try {
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            UserRegistration.loadUserRegistrationScene(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }
