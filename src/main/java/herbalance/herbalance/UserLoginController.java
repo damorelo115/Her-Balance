@@ -56,7 +56,9 @@ public class UserLoginController {
             Stage stage = (Stage) signUpButton.getScene().getWindow();
 
             UserRegistration.loadUserRegistrationScene(stage);
-        } catch (IOException e) {
+        }
+
+        catch (IOException e) {
 
             e.printStackTrace();
         }
