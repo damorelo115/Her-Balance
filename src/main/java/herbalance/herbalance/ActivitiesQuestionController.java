@@ -106,13 +106,15 @@ public class ActivitiesQuestionController {
     }
 
     // Method called when the Back button is clicked
-    @FXML
+   /* @FXML
     protected void onBackButtonClick() {
         try {
             Stage stage = (Stage) backButton.getScene().getWindow();
-            ManageStressQuestion.loadManageStressQuestionScene(stage);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    */
     }
-}
+

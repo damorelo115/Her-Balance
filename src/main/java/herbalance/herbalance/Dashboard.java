@@ -6,29 +6,40 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 
 public class Dashboard extends Application {
 
-    @Override
-    public void start(Stage primaryStage) throws IIOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
-        Parent root = null;
+    public static void loadDashboardScene() {
         try {
-            root = loader.load();
+            FXMLLoader loader = new FXMLLoader(Dashboard.class.getResource("Dashboard.fxml"));
+            Parent root = loader.load();
+
+            Scene dashboardScene = new Scene(root);
+            Stage dashboardStage = new Stage();
+            dashboardStage.setScene(dashboardScene);
+            dashboardStage.show();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.err.println("FXML file not found or path is incorrect. Please verify the file path.");
+            e.printStackTrace();
         }
-
-        Scene scene = new Scene(root, 600, 400);
-        primaryStage.setTitle("Dashboard App");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    public static void main (String[] args){
-        launch(args);
     }
 
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Dashboard.class.getResource("Dashboard.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 845, 595);
+        stage.setTitle("Create account");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    public static void main(String[] args) {
+        launch();
+    }
 }
 

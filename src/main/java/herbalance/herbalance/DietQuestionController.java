@@ -80,10 +80,10 @@ public class DietQuestionController {
     }
     // Method called when the Next button is clicked
     @FXML
-      protected void onNextButtonClick () {
+    protected void onNextButtonClick () {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
-            StressQuestion.loadStressQuestionScene(stage);
+            ActivitiesQuestion.loadActivitiesQuestionScene(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -94,7 +94,7 @@ public class DietQuestionController {
     protected void onBackButtonClick() {
         try {
             Stage stage = (Stage) backButton.getScene().getWindow();
-            SleepDurationQuestion.loadSleepDurationQuestionScene(stage);
+            ActivityLevelQuestion.loadActivityLevelQuestionScene(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }

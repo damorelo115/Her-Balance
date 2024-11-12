@@ -15,7 +15,7 @@
                 <!-- Label for user selection of activity level -->
                 <Label layoutX="30.0" layoutY="30.0" text="Select your typical activity level:">
                     <font>
-                        <Font name="Poppins ExtraBold" size="18.0" />
+                        <Font size="18.0" />
                     </font>
                 </Label>
 

@@ -4,6 +4,7 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.WriteResult;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import javafx.fxml.FXML;
@@ -19,13 +20,11 @@ import java.util.logging.Logger;
 
 public class UserRegistrationController {
 
-
     @FXML
     private Label passwordLabel;
 
     @FXML
     private Button registerButton;
-
 
     @FXML
     private Button signinButton;
@@ -58,15 +57,15 @@ public class UserRegistrationController {
 
                 if (addUser() == true ) {
 
-                    showAlert(Alert.AlertType.CONFIRMATION, "Registration successful!");
-
                     userEmail.clear();
 
                     userPassword.clear();
 
                     Stage stage = (Stage) registerButton.getScene().getWindow();
 
-                   NameEntryQuestion.loadNameEntryQuestionScene(stage);
+                    NameEntryQuestion.loadNameEntryQuestionScene(stage);
+
+                    showAlert(Alert.AlertType.CONFIRMATION, "Registration successful!");
 
                 }
 
@@ -79,7 +78,6 @@ public class UserRegistrationController {
                     userPassword.clear();
                 }
 
-
             }
 
             else {
@@ -87,6 +85,7 @@ public class UserRegistrationController {
                 showAlert(Alert.AlertType.ERROR, "Registration failed, issue with registering the user! Try again!");
 
                 userEmail.clear();
+
                 userPassword.clear();
             }
             
@@ -100,7 +99,7 @@ public class UserRegistrationController {
         DocumentReference docRef = Main.fstore.collection("Users").document(UUID.randomUUID().toString());
 
         Map<String, Object> data = new HashMap<>();
-        data.put("Username", userEmail.getText());
+        data.put("Email", userEmail.getText());
         data.put("Password", userPassword.getText());
 
         try {
@@ -127,7 +126,8 @@ public class UserRegistrationController {
         UserRecord userRecord;
 
         try {
-            userRecord = Main.fauth.createUser(request);
+
+            Main.fauth.createUser(request);
 
             return true;
 

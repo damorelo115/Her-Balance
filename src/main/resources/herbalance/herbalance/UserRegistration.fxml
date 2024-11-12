@@ -16,7 +16,7 @@
             <Font name="Poppins ExtraBold" size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="userName" layoutX="211.0" layoutY="176.0"  prefHeight="25.0" prefWidth="269.0" promptText="Email" />
+      <TextField fx:id="userEmail" layoutX="211.0" layoutY="176.0"  prefHeight="25.0" prefWidth="269.0" promptText="Email" />
       <Label layoutX="211.0" layoutY="149.0" text="Email">
          <font>
             <Font name="Poppins ExtraBold" size="14.0" />
