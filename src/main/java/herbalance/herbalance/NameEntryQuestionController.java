@@ -50,7 +50,7 @@ public class NameEntryQuestionController {
     protected void onNextButtonClick() {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
-            BirthDate.loadBirthdateScene(stage);
+            BirthDateQuestion.loadBirthDateQuestionScene(stage);
 
         } catch (IOException e) {
             e.printStackTrace();
