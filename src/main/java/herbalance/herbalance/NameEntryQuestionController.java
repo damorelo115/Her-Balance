@@ -8,8 +8,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class NameEntryQuestionController {
 
+public class NameEntryQuestionController {
     @FXML
     private Label nameLabel;
 
@@ -50,7 +50,8 @@ public class NameEntryQuestionController {
     protected void onNextButtonClick() {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
-            BirthDateQuestion.loadBirthDateQuestionScene(stage);
+            BirthDate.loadBirthdateScene(stage);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
