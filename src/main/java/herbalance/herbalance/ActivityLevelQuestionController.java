@@ -68,7 +68,7 @@ public class ActivityLevelQuestionController {
     protected void onNextButtonClick () {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
-            SleepDurationQuestion.loadSleepDurationQuestionScene(stage);
+            DietQuestion.loadDietQuestionScene(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }

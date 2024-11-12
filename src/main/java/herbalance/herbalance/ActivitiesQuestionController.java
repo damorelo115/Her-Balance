@@ -110,7 +110,7 @@ public class ActivitiesQuestionController {
     protected void onBackButtonClick() {
         try {
             Stage stage = (Stage) backButton.getScene().getWindow();
-            ManageStressQuestion.loadManageStressQuestionScene(stage);
+            DietQuestion.loadDietQuestionScene(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }
