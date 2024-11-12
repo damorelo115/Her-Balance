@@ -64,6 +64,7 @@ public class ActivityLevelQuestionController {
         System.out.println(selectedActivity); // Needs to be changed to save into a file / database
     }
     // Method called when the Next button is clicked
+
     @FXML
     protected void onNextButtonClick () {
         try {
@@ -84,4 +85,6 @@ public class ActivityLevelQuestionController {
             e.printStackTrace();
         }
     }
+
 }
+

@@ -1,15 +1,27 @@
 package herbalance.herbalance;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
-public class DashboardController2 {
+public class DashboardController extends Application {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+    }
 
     @FXML
     private Pane sidepane;
+
+    @FXML
+    private MFXButton logoutButton;
 
     // ImageViews as buttons
     @FXML
@@ -82,6 +94,27 @@ public class DashboardController2 {
         showAlert("Notification");
     }
 
+    @FXML
+    private void logout(ActionEvent event) {
+
+        Stage stage;
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("You are about to logout!");
+        alert.setContentText("Are you sure you want to logout?");
+
+        if (alert.showAndWait().get() == ButtonType.OK) {
+
+            stage = (Stage) logoutButton.getScene().getWindow();
+
+            System.out.println("User logged out!");
+
+            stage.close();
+        }
+
+    }
+
     // Display alert dialogs
     private void showAlert(String message) {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -90,6 +123,13 @@ public class DashboardController2 {
         alert.setContentText(message + " icon clicked!");
         alert.showAndWait();
     }
+
+    public static void main(String[] args) {
+        launch();
+    }
+
 }
+
+
 
 

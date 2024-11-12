@@ -53,7 +53,7 @@ public class RemindersQuestionController {
     // Method called when the Sign-Up button is clicked
     @FXML
     protected void onSignUpButtonClick() {
-        Dashboard2.loadDashboardScene();
+        Dashboard.loadDashboardScene();
     }
 
     // Method called when the Back button is clicked
