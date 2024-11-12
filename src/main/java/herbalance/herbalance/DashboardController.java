@@ -5,9 +5,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class DashboardController2 {
 
@@ -62,14 +59,8 @@ public class DashboardController2 {
     }
 
     private void handleBloodDropClick() {
-        try {
-            Stage stage = (Stage) bloodDropIcon.getScene().getWindow();
-            PeriodTracker.loadPeriodTrackerScene(stage);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        showAlert("Blood Drop");
     }
-
 
     private void handleSignOutClick() {
         showAlert("Sign Out");

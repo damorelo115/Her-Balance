@@ -23,11 +23,11 @@
         </Pane>
         <Pane layoutX="338.0" prefHeight="479.0" prefWidth="404.0" style="-fx-background-color: FFFFFF;">
             <children>
-                <TextField fx:id="usernameTextField" layoutX="82.0" layoutY="126.0" prefHeight="25.0" prefWidth="184.0" promptText="Username" />
-                <PasswordField fx:id="passwordTextField" layoutX="82.0" layoutY="194.0" prefHeight="25.0" prefWidth="184.0" promptText="Password" />
-                <Button fx:id="signinButton" layoutX="62.0" layoutY="265.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: AFE9E5;" text="Sign In">
+                <TextField fx:id="useremail" layoutX="82.0" layoutY="126.0" prefHeight="25.0" prefWidth="184.0" promptText="Email" />
+                <PasswordField fx:id="userpassword" layoutX="82.0" layoutY="194.0" prefHeight="25.0" prefWidth="184.0" promptText="Password" />
+                <Button fx:id="signinButton" layoutX="62.0" layoutY="265.0" mnemonicParsing="false" onAction="#onSignInButtonClick" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: AFE9E5;" text="Sign In">
                     <font>
-                        <Font name="Poppins ExtraBold" size="16.0" />
+                        <Font size="16.0" />
                     </font>
                <effect>
                   <DropShadow />
@@ -35,7 +35,7 @@
                 </Button>
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="43.0" prefHeight="33.0" prefWidth="58.0" text="Login">
                     <font>
-                        <Font name="Poppins ExtraBold" size="18.0" />
+                        <Font size="18.0" />
                     </font>
                 </Label>
                 <Label layoutX="160.0" layoutY="170.0" text="Forgot password?" textFill="#fc91b6">
@@ -45,16 +45,13 @@
                 </Label>
                 <Label layoutX="32.0" layoutY="389.0" text="Don't have an account?">
                <font>
-                  <Font name="Poppins ExtraBold" size="14.0" />
+                  <Font size="14.0" />
                </font></Label>
                 <Label fx:id="loginResult" layoutX="119.0" layoutY="316.0" prefHeight="19.0" prefWidth="273.0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Label>
             <Button fx:id="signUpButton" layoutX="221.0" layoutY="386.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" style="-fx-background-color: #fc91b6;" text="Sign Up">
-               <font>
-                  <Font name="Poppins ExtraBold" size="13.0" />
-               </font>
                <effect>
                   <DropShadow />
                </effect>

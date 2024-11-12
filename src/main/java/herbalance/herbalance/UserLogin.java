@@ -10,6 +10,7 @@ public class UserLogin {
 
     public static void loadUserLoginScene(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(UserLogin.class.getResource("UserLogin.fxml"));
+
         Scene scene = new Scene(fxmlLoader.load(), 690 , 471);
         stage.setTitle("User Login");
         stage.setScene(scene);
