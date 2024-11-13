@@ -32,9 +32,11 @@ public class NameEntryQuestionController {
 
             // Updating the label with "Hello, <name>!"
             nameLabel.setText("Hello, " + name + "!");
+            Main.theUser.setFirstName(name);
 
             // Making the Next button visible
             nextButton.setVisible(true);
+
 
         } else {
             // If the name is empty, ask the user to enter their name
@@ -50,7 +52,7 @@ public class NameEntryQuestionController {
     protected void onNextButtonClick() {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
-            BirthDate.loadBirthdateScene(stage);
+            BirthDateQuestion.loadBirthDateQuestionScene(stage);
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -6,22 +6,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class DashboardController extends Application {
-
-    @Override
-    public void start(Stage stage) throws Exception {
-    }
+public class DashboardController {
 
     @FXML
     private Pane sidepane;
 
     @FXML
-    private MFXButton logoutButton;
+    private Button logoutButton;
 
     // ImageViews as buttons
     @FXML
@@ -122,10 +119,6 @@ public class DashboardController extends Application {
         alert.setHeaderText(null);
         alert.setContentText(message + " icon clicked!");
         alert.showAndWait();
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 
 }
