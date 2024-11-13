@@ -64,7 +64,8 @@ public class BirthDateQuestionController {
         protected void onNextButtonClick () {
             try {
                 Stage stage = (Stage) nextButton.getScene().getWindow();
-                WellnessGoalsQuestion.loadWellnessGoalsQuestionScene(stage);
+               // change this later: WellnessGoalsQuestion.loadWellnessGoalsQuestionScene(stage);
+                RemindersQuestion.loadRemindersQuestionScene(stage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
