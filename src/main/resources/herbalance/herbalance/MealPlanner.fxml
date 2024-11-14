@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="559.0" prefWidth="743.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.MealPlan">
+<AnchorPane prefHeight="559.0" prefWidth="743.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.MealPlannerController">
     <VBox alignment="CENTER" layoutX="250.0" layoutY="14.0" prefHeight="57.0" prefWidth="244.0" spacing="20" style="-fx-padding: 20; -fx-font-size: 16;" xmlns:fx="http://javafx.com/fxml/1">
         <Text style="-fx-font-size: 24; -fx-font-weight: bold;" text="Meal Plan Generator" />
     </VBox>
@@ -44,10 +44,10 @@
                <Image url="@images/HerBalanceLogo.jpg" />
             </image>
          </ImageView>
-         <Button layoutX="7.0" layoutY="165.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="87.0" text="Dashboard" />
-         <Button layoutX="-1.0" layoutY="259.0" mnemonicParsing="false" text="Period Tracker" />
-         <Button layoutX="12.0" layoutY="347.0" mnemonicParsing="false" text="Workouts" />
-         <Button layoutX="13.0" layoutY="450.0" mnemonicParsing="false" text="Meal Plans" />
+         <Button fx:id="dashboardButton" layoutX="7.0" layoutY="165.0" mnemonicParsing="false" onAction="#dashboardButtonClick" prefHeight="23.0" prefWidth="87.0" text="Dashboard" />
+         <Button fx:id="periodTrackButton" layoutX="-1.0" layoutY="259.0" mnemonicParsing="false" text="Period Tracker" />
+         <Button fx:id="workoutButton" layoutX="12.0" layoutY="347.0" mnemonicParsing="false" onAction="#workoutButtonClick" text="Workouts" />
+         <Button fx:id="mealPlanButton" layoutX="13.0" layoutY="450.0" mnemonicParsing="false" onAction="#mealPlanButtonClick" text="Meal Plans" />
          <Button fx:id="logoutButton" layoutX="20.0" layoutY="555.0" mnemonicParsing="false" onAction="#logout" text="Log Out" />
       </children>
    </Pane>

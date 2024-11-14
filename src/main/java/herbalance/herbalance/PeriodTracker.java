@@ -8,19 +8,14 @@ import java.io.IOException;
 
 import static javafx.application.Application.launch;
 
-public class PeriodTracker extends Application {
+public class PeriodTracker  {
 
-public void start(Stage stage) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(PeriodTracker.class.getResource("PeriodTracker.fxml"));
-    Scene scene = new Scene(fxmlLoader.load(), 735, 479);
-    stage.setTitle("Period Tracker");
-    stage.setScene(scene);
-    stage.show();
+    public static void loadPeriodTrackerScene(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(PeriodTracker.class.getResource("PeriodTracker.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Period Tracker");
+        stage.setScene(scene);
+        stage.show();
+    }
 }
-
-public static void  main (String [] args) {
-    launch();
-}
-}
-
 

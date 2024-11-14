@@ -62,7 +62,7 @@ public class RemindersQuestionController {
     protected void onSignUpButtonClick() {
         // save theUser data to the database
 
-        if (addUserSurveyData () == true) {
+        if (addUserSurveyData()) {
             Dashboard.loadDashboardScene();
         }
         else{
