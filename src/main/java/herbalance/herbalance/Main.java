@@ -16,6 +16,7 @@ public class Main extends Application {
     public static Firestore fstore;
     public static FirebaseAuth fauth;
     private final FirestoreContext contxtFirebase = new FirestoreContext();
+    public static User theUser;
 
     @Override
     public void start(Stage stage) {
@@ -23,7 +24,7 @@ public class Main extends Application {
         try {
             fstore = contxtFirebase.firebase();
             fauth = FirebaseAuth.getInstance();
-
+            theUser= new User();
             UserLogin.loadUserLoginScene(stage);
         }
 

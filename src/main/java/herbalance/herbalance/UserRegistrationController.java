@@ -18,6 +18,8 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static herbalance.herbalance.Main.theUser;
+
 public class UserRegistrationController {
 
     @FXML
@@ -53,12 +55,14 @@ public class UserRegistrationController {
 
         else {
 
-            if (registerUser() == true ) {
+            if (registerUser()) {
 
-                if (addUser() == true ) {
+                if (addUser()) {
+
+                    theUser.setUsername(userEmail.getText());
+                    theUser.setPassword(userPassword.getText());
 
                     userEmail.clear();
-
                     userPassword.clear();
 
                     Stage stage = (Stage) registerButton.getScene().getWindow();

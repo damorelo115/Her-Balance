@@ -1,27 +1,37 @@
 package herbalance.herbalance;
 
-import io.github.palexdev.materialfx.controls.MFXButton;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class DashboardController extends Application {
+import java.io.IOException;
 
-    @Override
-    public void start(Stage stage) throws Exception {
-    }
+public class DashboardController {
 
     @FXML
     private Pane sidepane;
 
     @FXML
-    private MFXButton logoutButton;
+    private Button dashboardButton;
+
+    @FXML
+    private Button logoutButton;
+
+    @FXML
+    private Button periodTrackButton;
+
+    @FXML
+    private Button workoutButton;
+
+    @FXML
+    private Button mealPlanButton;
+
 
     // ImageViews as buttons
     @FXML
@@ -124,11 +134,76 @@ public class DashboardController extends Application {
         alert.showAndWait();
     }
 
-    public static void main(String[] args) {
-        launch();
+    @FXML
+    protected void dashboardButtonClick() {
+
+        try {
+
+            Stage stage = (Stage) dashboardButton.getScene().getWindow();
+
+            Dashboard.loadDashboardScene();
+
+            stage.close();
+
+
+        }
+
+        catch (Exception e) {
+
+            throw new RuntimeException(e);
+        }
     }
 
-}
+    @FXML
+    protected void periodButtonClick() throws IOException {
+
+        try {
+            Stage stage = (Stage) periodTrackButton.getScene().getWindow();
+
+            PeriodTracker.loadPeriodTrackerScene(stage);
+        }
+        catch (IOException e) {
+
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @FXML
+    protected void workoutButtonClick() {
+
+        try {
+
+            Stage stage = (Stage) workoutButton.getScene().getWindow();
+
+            Fitness.loadFitnessTrackerScene(stage);
+        } catch (IOException e) {
+
+            throw new RuntimeException(e);
+        }
+
+    }
+
+        @FXML
+        protected void mealPlanButtonClick() throws IOException {
+
+            try {
+
+                Stage stage = (Stage) mealPlanButton.getScene().getWindow();
+
+                MealPlanner.loadMealPlannerScene(stage);
+            }
+
+            catch (IOException e) {
+
+                throw new RuntimeException(e);
+            }
+
+        }
+
+
+    }
+
 
 
 
