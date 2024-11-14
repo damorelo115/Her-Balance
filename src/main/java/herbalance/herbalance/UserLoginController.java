@@ -53,12 +53,7 @@ public class UserLoginController {
 
             showAlert(Alert.AlertType.ERROR, "Please enter your email and password!");
 
-            useremail.clear();
-
-            userpassword.clear();
-
         }
-
         else {
 
             if (signInUser() == true) {
@@ -77,67 +72,61 @@ public class UserLoginController {
 
     public boolean signInUser() throws ExecutionException, InterruptedException {
 
-        String email = useremail.getText();
-        String password = userpassword.getText();
+        String enteredEmail = useremail.getText();
+        String enteredPassword = userpassword.getText();
 
         // asynchronously retrieve all documents
-        ApiFuture<QuerySnapshot> future = Main.fstore.collection("Users").get();
-        // future.get() blocks on response
-        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            ApiFuture<QuerySnapshot> future = Main.fstore.collection("Users").get();
+            // future.get() blocks on response
+            List<QueryDocumentSnapshot> documents;
 
-        try {
-            documents = future.get().getDocuments();
+            try {
+                documents = future.get().getDocuments();
 
-            if (!documents.isEmpty()) {
+                if (!documents.isEmpty()) {
 
-                for (QueryDocumentSnapshot document : documents) {
+                    for (QueryDocumentSnapshot document : documents) {
 
-                    email = String.valueOf(document.getData().get("email"));
+                        document.getData().get("email");
+                        document.getData().get("password");
 
-                    password = String.valueOf(document.getData().get("password"));
+                      //  if (enteredEmail.equals(document.getData().get("email"))) {
+                        if (document.exists()) {
 
-                    if (useremail.getText().equals("janedoe@gmail.com") && userpassword.getText().equals("password") ) {
+                            String documentEmail;
+                            String documentPassword;
 
-                        Stage stage = (Stage) signinButton.getScene().getWindow();
 
-                        stage.close();
+                           // if (enteredEmail.equals(documentEmail) && enteredPassword.equals(documentPassword)) {
+                                Stage stage = (Stage) signinButton.getScene().getWindow();
+                                stage.close();
+                                Dashboard.loadDashboardScene();
 
-                        Dashboard.loadDashboardScene();
+                            }
+
+                        }
+
                     }
 
-                   else {
+               // }
 
-                        showAlert(Alert.AlertType.ERROR,"User does not exist! Please try again!");
-
-                        useremail.clear();
-
-                        userpassword.clear();
-                    }
-
+                else {
+                    showAlert(Alert.AlertType.ERROR, "User not found! Try again!");
                 }
 
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
             }
-
-
-        } catch (InterruptedException | ExecutionException e) {
-
             return false;
         }
 
-        return false;
+        // showAlert method
+        private void showAlert (Alert.AlertType alertType, String message){
 
+            Alert alert = new Alert(alertType);
+            alert.setTitle(alert.getTitle());
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.show();
+        }
     }
-
-    // showAlert method
-    private void showAlert(Alert.AlertType alertType, String message) {
-
-        Alert alert = new Alert(alertType);
-        alert.setTitle(alert.getTitle());
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.show();
-    }
-
-}
-
-

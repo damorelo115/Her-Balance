@@ -55,9 +55,9 @@ public class UserRegistrationController {
 
         else {
 
-            if (registerUser() == true ) {
+            if (registerUser()) {
 
-                if (addUser() == true ) {
+                if (addUser()) {
 
                     theUser.setUsername(userEmail.getText());
                     theUser.setPassword(userPassword.getText());
