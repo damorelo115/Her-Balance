@@ -1,15 +1,37 @@
 package herbalance.herbalance;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
-public class DashboardController2 {
+import java.io.IOException;
+
+public class DashboardController {
 
     @FXML
     private Pane sidepane;
+
+    @FXML
+    private Button dashboardButton;
+
+    @FXML
+    private Button logoutButton;
+
+    @FXML
+    private Button periodTrackButton;
+
+    @FXML
+    private Button workoutButton;
+
+    @FXML
+    private Button mealPlanButton;
+
 
     // ImageViews as buttons
     @FXML
@@ -82,6 +104,27 @@ public class DashboardController2 {
         showAlert("Notification");
     }
 
+    @FXML
+    private void logout(ActionEvent event) {
+
+        Stage stage;
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("You are about to logout!");
+        alert.setContentText("Are you sure you want to logout?");
+
+        if (alert.showAndWait().get() == ButtonType.OK) {
+
+            stage = (Stage) logoutButton.getScene().getWindow();
+
+            System.out.println("User logged out!");
+
+            stage.close();
+        }
+
+    }
+
     // Display alert dialogs
     private void showAlert(String message) {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -90,6 +133,78 @@ public class DashboardController2 {
         alert.setContentText(message + " icon clicked!");
         alert.showAndWait();
     }
-}
+
+    @FXML
+    protected void dashboardButtonClick() {
+
+        try {
+
+            Stage stage = (Stage) dashboardButton.getScene().getWindow();
+
+            Dashboard.loadDashboardScene();
+
+            stage.close();
+
+
+        }
+
+        catch (Exception e) {
+
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    protected void periodButtonClick() throws IOException {
+
+        try {
+            Stage stage = (Stage) periodTrackButton.getScene().getWindow();
+
+            PeriodTracker.loadPeriodTrackerScene(stage);
+        }
+        catch (IOException e) {
+
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @FXML
+    protected void workoutButtonClick() {
+
+        try {
+
+            Stage stage = (Stage) workoutButton.getScene().getWindow();
+
+            Fitness.loadFitnessTrackerScene(stage);
+        } catch (IOException e) {
+
+            throw new RuntimeException(e);
+        }
+
+    }
+
+        @FXML
+        protected void mealPlanButtonClick() throws IOException {
+
+            try {
+
+                Stage stage = (Stage) mealPlanButton.getScene().getWindow();
+
+                MealPlanner.loadMealPlannerScene(stage);
+            }
+
+            catch (IOException e) {
+
+                throw new RuntimeException(e);
+            }
+
+        }
+
+
+    }
+
+
+
 
 

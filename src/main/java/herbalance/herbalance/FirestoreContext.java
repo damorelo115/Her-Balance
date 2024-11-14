@@ -10,7 +10,6 @@ import com.google.firebase.FirebaseOptions;
 
 import com.google.firebase.cloud.FirestoreClient;
 
-
     public class FirestoreContext {
 
         public Firestore firebase() {
@@ -25,7 +24,8 @@ import com.google.firebase.cloud.FirestoreClient;
 
                 FirebaseApp.initializeApp(options);
 
-            } catch (IOException ex) {
+            }
+            catch (IOException ex) {
                 ex.printStackTrace();
                 System.exit(1);
             }

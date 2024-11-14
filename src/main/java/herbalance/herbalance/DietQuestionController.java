@@ -80,7 +80,7 @@ public class DietQuestionController {
     }
     // Method called when the Next button is clicked
     @FXML
-      protected void onNextButtonClick () {
+    protected void onNextButtonClick () {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
             ActivitiesQuestion.loadActivitiesQuestionScene(stage);
