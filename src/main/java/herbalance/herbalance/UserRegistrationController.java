@@ -1,27 +1,26 @@
 package herbalance.herbalance;
 
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.WriteResult;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import static javafx.application.Application.launch;
-
+import static herbalance.herbalance.Main.theUser;
 
 public class UserRegistrationController {
-
-    @FXML
-    private Label confirmLabel;
-
-    @FXML
-    private PasswordField confirmPassword;
 
     @FXML
     private Label passwordLabel;
@@ -30,13 +29,10 @@ public class UserRegistrationController {
     private Button registerButton;
 
     @FXML
-    private Label registrationResult;
-
-    @FXML
     private Button signinButton;
 
     @FXML
-    private TextField userName;
+    private TextField userEmail;
 
     @FXML
     private PasswordField userPassword;
@@ -44,58 +40,108 @@ public class UserRegistrationController {
     @FXML
     private Label usernameLabel;
 
+
     @FXML
-    private void registrationValidation() {
+    protected void onRegisterButtonClick() throws IOException {
 
+        if (userEmail.getText().isEmpty() || userPassword.getText().isEmpty()) {
 
-        if (userName.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Please enter your email and password!");
 
-            usernameLabel.setText("Please enter your username");
-        }
-        else {
-
-            usernameLabel.setText("Username confirmed");
-        }
-
-        if (userPassword.getText().isEmpty()) {
-
-            passwordLabel.setText("Please enter your password");
-
-        } else {
-
-            passwordLabel.setText("Password confirmed");
-
-        }
-
-
-        if (confirmPassword.getText().isEmpty()) {
-
-            confirmLabel.setText("Please confirm your password");
-
-            confirmLabel.setTextFill(Color.rgb(210, 39, 30));
+            userEmail.clear();
+            userPassword.clear();
 
         }
 
         else {
 
-            confirmLabel.setText("Password confirmed");
+            if (registerUser()) {
+
+                if (addUser()) {
+
+                    theUser.setUsername(userEmail.getText());
+                    theUser.setPassword(userPassword.getText());
+
+                    userEmail.clear();
+                    userPassword.clear();
+
+                    Stage stage = (Stage) registerButton.getScene().getWindow();
+
+                    NameEntryQuestion.loadNameEntryQuestionScene(stage);
+
+                    showAlert(Alert.AlertType.CONFIRMATION, "Registration successful!");
+
+                }
+
+                else {
+
+                    showAlert(Alert.AlertType.ERROR, "Registration failed!");
+
+                    userEmail.clear();
+
+                    userPassword.clear();
+                }
+
+            }
+
+            else {
+
+                showAlert(Alert.AlertType.ERROR, "Registration failed, issue with registering the user! Try again!");
+
+                userEmail.clear();
+
+                userPassword.clear();
+            }
+            
+
         }
+    }
+
+    // This method is called when registering a new user. This method will add the username and password to a collection in Firestore
+    public boolean addUser() {
+
+        DocumentReference docRef = Main.fstore.collection("Users").document(UUID.randomUUID().toString());
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("Email", userEmail.getText());
+        data.put("Password", userPassword.getText());
+
+        try {
+            //asynchronously write data
+            ApiFuture<WriteResult> result = docRef.set(data);
+        }
+
+         catch (Exception ex) {
+
+            return false;
+        }
+
+        return true;
 
     }
 
-    @FXML
-    protected void onRegisterButtonClick() {
+    // This method is called when adding a new authenticated user to Firebase Authentication
+    public boolean registerUser() {
+        UserRecord.CreateRequest request = new UserRecord.CreateRequest()
+                .setEmail(userEmail.getText())
+                .setEmailVerified(false)
+                .setPassword(userPassword.getText());
+
+        UserRecord userRecord;
 
         try {
 
-            Stage stage = (Stage) registerButton.getScene().getWindow();
+            Main.fauth.createUser(request);
 
-            NameEntryQuestion.loadNameEntryQuestionScene(stage);
+            return true;
+
         }
 
-        catch (IOException e) {
+        catch (FirebaseAuthException ex) {
 
-            e.printStackTrace();
+            //Logger.getLogger(UserRegistrationController.class.getName()).log(Level.SEVERE, null, ex);
+
+            return false;
         }
 
     }
@@ -116,22 +162,19 @@ public class UserRegistrationController {
 
     }
 
-    protected void onSigUpButtonClick() {
+    // showAlert method
+    private void showAlert (Alert.AlertType alertType, String message) {
 
-        try {
-            Stage stage = (Stage) signinButton.getScene().getWindow();
-
-            UserLogin.loadUserLoginScene(stage);
-        }
-
-        catch (IOException e) {
-
-            throw new RuntimeException(e);
-        }
-
+        Alert alert = new Alert(alertType);
+        alert.setTitle(alert.getTitle());
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.show();
     }
 
-    }
+
+
+}
 
 
 

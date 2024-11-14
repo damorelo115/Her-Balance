@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.control.DatePicker?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.BirthDateQuestionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.BirthDateQuestionController">
     <children>
         <Pane layoutX="0.0" prefHeight="479.0" prefWidth="341.0">
             <children>
                 <!-- Validation label for missing birthdate -->
-                <Label fx:id="validationLabel" layoutX="30.0" layoutY="30.0" text="" visible="false" style="-fx-text-fill: red;">
+                <Label fx:id="validationLabel" layoutX="30.0" layoutY="30.0" style="-fx-text-fill: red;" text="" visible="false">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
@@ -22,7 +22,7 @@
                 <!-- Label to display message above DatePicker -->
                 <Label layoutX="30.0" layoutY="80.0" text="Enter your date of birth:">
                     <font>
-                        <Font name="Poppins ExtraBold" size="18.0" />
+                        <Font size="18.0" />
                     </font>
                 </Label>
 
@@ -72,4 +72,3 @@
         </Pane>
     </children>
 </AnchorPane>
-

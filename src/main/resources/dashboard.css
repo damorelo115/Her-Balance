@@ -72,3 +72,10 @@
     -fx-font-style: normal;
     -fx-font-size: 15px;
 }
+
+.signinbutton, .signupbutton, .logintitle {
+    -fx-font-family: Poppins, sans-serif;
+    -fx-font-style: normal;
+    -fx-font-size: 16px;
+
+}

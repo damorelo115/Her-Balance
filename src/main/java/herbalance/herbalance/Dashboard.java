@@ -8,15 +8,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Dashboard2 extends Application {
+public class Dashboard extends Application {
 
     public static void loadDashboardScene() {
         try {
-            FXMLLoader loader = new FXMLLoader(Dashboard2.class.getResource("Dashboard2.fxml"));
+            FXMLLoader loader = new FXMLLoader(Dashboard.class.getResource("Dashboard.fxml"));
             Parent root = loader.load();
 
             Scene dashboardScene = new Scene(root);
             Stage dashboardStage = new Stage();
+            dashboardStage.setTitle("Dashboard");
             dashboardStage.setScene(dashboardScene);
             dashboardStage.show();
         } catch (IOException e) {
@@ -27,11 +28,12 @@ public class Dashboard2 extends Application {
         }
     }
 
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Dashboard2.class.getResource("Dashboard2.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Dashboard.class.getResource("Dashboard.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 845, 595);
-        stage.setTitle("Create account");
+        stage.setTitle("Dashboard");
         stage.setScene(scene);
         stage.show();
     }
