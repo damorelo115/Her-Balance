@@ -76,7 +76,10 @@ public class PeriodTrackerController {
                 try {
                         Stage stage = (Stage) dashboardButton.getScene().getWindow();
 
+                        stage.close();
+
                         Dashboard.loadDashboardScene();
+
 
                 }
 
@@ -85,6 +88,7 @@ public class PeriodTrackerController {
                         throw new RuntimeException(e);
                 }
         }
+
 
         @FXML
         protected void periodButtonClick() throws IOException {
