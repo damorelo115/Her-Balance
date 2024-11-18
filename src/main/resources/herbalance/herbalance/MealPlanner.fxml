@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.mfxcore.controls.Text?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="559.0" prefWidth="743.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.MealPlannerController">
-    <VBox alignment="CENTER" layoutX="250.0" layoutY="14.0" prefHeight="57.0" prefWidth="244.0" spacing="20" style="-fx-padding: 20; -fx-font-size: 16;" xmlns:fx="http://javafx.com/fxml/1">
-        <Text style="-fx-font-size: 24; -fx-font-weight: bold;" text="Meal Plan Generator" />
-    </VBox>
-   <Pane fx:id="sidepane" prefHeight="604.0" prefWidth="96.0" styleClass="sidepane" stylesheets="@../../dashboard.css">
+<AnchorPane prefHeight="659.0" prefWidth="1115.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.MealPlannerController">
+   <Pane fx:id="sidepane" prefHeight="659.0" prefWidth="96.0" styleClass="sidepane" stylesheets="@../../dashboard.css">
       <children>
          <ImageView fx:id="dashboardIcon" fitHeight="42.0" fitWidth="44.0" layoutX="27.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -51,4 +51,32 @@
          <Button fx:id="logoutButton" layoutX="20.0" layoutY="555.0" mnemonicParsing="false" onAction="#logout" text="Log Out" />
       </children>
    </Pane>
+   <Pane layoutX="122.0" layoutY="89.0" prefHeight="340.0" prefWidth="284.0" style="-fx-background-color: #cbaacb;">
+      <children>
+         <Label layoutX="15.0" layoutY="93.0" prefHeight="17.0" prefWidth="105.0" text="Choose Breakfast:" />
+         <ComboBox fx:id="dayOptions" layoutX="120.0" layoutY="23.0" prefWidth="150.0" />
+         <Label layoutX="14.0" layoutY="162.0" prefHeight="17.0" prefWidth="96.0" text="Choose Lunch:" />
+         <Label layoutX="14.0" layoutY="223.0" prefHeight="17.0" prefWidth="96.0" text="Choose Dinner:" />
+         <ComboBox fx:id="lunchOptions" layoutX="120.0" layoutY="150.0" prefWidth="150.0" />
+         <ComboBox fx:id="dinnerOptions" layoutX="120.0" layoutY="219.0" prefWidth="150.0" />
+         <Button fx:id="weeklyPlanButton" layoutX="68.0" layoutY="277.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Add to Weekly Plan" />
+         <Label layoutX="15.0" layoutY="27.0" prefHeight="17.0" prefWidth="87.0" text="Choose Day:" />
+         <ComboBox fx:id="breakfastOptions" layoutX="122.0" layoutY="89.0" prefWidth="150.0" />
+      </children>
+   </Pane>
+   <Label layoutX="496.0" layoutY="20.0" text="Meal Planner">
+      <font>
+         <Font name="Poppins ExtraBold" size="18.0" />
+      </font>
+   </Label>
+   <TableView fx:id="weeklyPlanView" layoutX="415.0" layoutY="89.0" prefHeight="340.0" prefWidth="683.0">
+     <columns>
+         <TableColumn prefWidth="139.0" text="Monday" />
+         <TableColumn prefWidth="149.0" text="Tuesday" />
+         <TableColumn prefWidth="132.0" text="Wednesday" />
+         <TableColumn prefWidth="130.0" text="Thursday" />
+         <TableColumn prefWidth="131.0" text="Friday" />
+         <TableColumn prefWidth="75.0" text="Column X" />
+     </columns>
+   </TableView>
 </AnchorPane>

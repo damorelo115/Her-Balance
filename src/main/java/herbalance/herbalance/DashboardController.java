@@ -105,7 +105,7 @@ public class DashboardController {
     }
 
     @FXML
-    private void logout(ActionEvent event) {
+    private void logout(ActionEvent event) throws IOException {
 
         Stage stage;
 
@@ -121,6 +121,8 @@ public class DashboardController {
             System.out.println("User logged out!");
 
             stage.close();
+
+            UserLogin.loadUserLoginScene(stage);
         }
 
     }
@@ -142,9 +144,6 @@ public class DashboardController {
             Stage stage = (Stage) dashboardButton.getScene().getWindow();
 
             Dashboard.loadDashboardScene();
-
-            stage.close();
-
 
         }
 
