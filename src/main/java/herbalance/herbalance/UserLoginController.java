@@ -13,9 +13,8 @@ import com.google.cloud.firestore.*;
 import com.google.api.core.ApiFuture;
 
 public class UserLoginController {
-
     @FXML
-    private Label loginResult;
+    private Label userlabel;
 
     @FXML
     private TextField useremail;
@@ -60,10 +59,12 @@ public class UserLoginController {
 
             showAlert(Alert.AlertType.CONFIRMATION, "Sign in successful!");
 
-        }
+       }
 
     }
 
+    // This method is used to sign the user into the application. It will query Firestore to retrieve a document
+    // and compare the user's email that is entered to the email in the collection
     public boolean signInUser() throws ExecutionException, InterruptedException {
 
         String enteredEmail = useremail.getText();
@@ -86,7 +87,11 @@ public class UserLoginController {
                     documentEmail = String.valueOf(document.getData().get("Email"));
                     documentPassword = String.valueOf(document.getData().get("Password"));
 
+                    // user found
                     if (documentEmail.equals(enteredEmail) && documentPassword.equals(enteredPassword)) {
+                        Main.theUser = new User();
+                        Main.theUser.setUserEmail(enteredEmail);
+                        Main.theUser.setPassword(enteredPassword);
 
                         Stage stage = (Stage) signinButton.getScene().getWindow();
 
@@ -103,6 +108,7 @@ public class UserLoginController {
             }
 
             else {
+
                 showAlert(Alert.AlertType.INFORMATION, "User not logged in!");
             }
 
@@ -117,7 +123,7 @@ public class UserLoginController {
         return false;
     }
 
-    // showAlert method
+    // showAlert method to display alerts
     private void showAlert(Alert.AlertType alertType, String message) {
 
         Alert alert = new Alert(alertType);
@@ -127,4 +133,3 @@ public class UserLoginController {
         alert.show();
     }
 }
-

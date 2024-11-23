@@ -6,35 +6,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="559.0" prefWidth="743.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.FitnessController">
+
+<AnchorPane prefHeight="559.0" prefWidth="743.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.FitnessController">
     <VBox alignment="CENTER" layoutX="250.0" layoutY="14.0" prefHeight="57.0" prefWidth="244.0" spacing="20" style="-fx-padding: 20; -fx-font-size: 16;" xmlns:fx="http://javafx.com/fxml/1">
         <Text style="-fx-font-size: 24; -fx-font-weight: bold;" text="Fitness Tracker" />
     </VBox>
-   <Pane fx:id="sidepane" prefHeight="604.0" prefWidth="96.0" styleClass="sidepane" stylesheets="@../../dashboard.css">
+   <Pane fx:id="sidepane" prefHeight="604.0" prefWidth="116.0" styleClass="sidepane" stylesheets="@../../styles.css">
       <children>
-         <ImageView fx:id="dashboardIcon" fitHeight="42.0" fitWidth="44.0" layoutX="27.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="dashboardIcon" fitHeight="42.0" fitWidth="44.0" layoutX="38.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@images/icons8-dashboard-layout-96.png" />
             </image>
          </ImageView>
-         <ImageView fx:id="bloodDropIcon" fitHeight="42.0" fitWidth="44.0" layoutX="29.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="bloodDropIcon" fitHeight="42.0" fitWidth="44.0" layoutX="38.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@images/icons8-blood-drop-50.png" />
             </image>
          </ImageView>
-         <ImageView fx:id="signOutIcon" fitHeight="42.0" fitWidth="36.0" layoutX="30.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="signOutIcon" fitHeight="42.0" fitWidth="36.0" layoutX="41.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@images/icons8-sign-out-50.png" />
             </image>
          </ImageView>
-         <ImageView fx:id="workoutIcon" fitHeight="42.0" fitWidth="44.0" layoutX="29.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="workoutIcon" fitHeight="42.0" fitWidth="44.0" layoutX="37.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@images/icons8-workout-50.png" />
             </image>
          </ImageView>
-         <ImageView fx:id="mealPlanIcon" fitHeight="42.0" fitWidth="44.0" layoutX="30.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="mealPlanIcon" fitHeight="42.0" fitWidth="44.0" layoutX="38.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@images/icons8-healthy-food-50.png" />
             </image>
@@ -44,11 +44,11 @@
                <Image url="@images/HerBalanceLogo.jpg" />
             </image>
          </ImageView>
-         <Button fx:id="dashboardButton" layoutX="7.0" layoutY="165.0" mnemonicParsing="false" onAction="#dashboardButtonClick" prefHeight="23.0" prefWidth="87.0" text="Dashboard" />
-         <Button fx:id="periodTrackButton" layoutX="-1.0" layoutY="259.0" mnemonicParsing="false" onAction="#periodButtonClick" text="Period Tracker" />
-         <Button fx:id="workoutButton" layoutX="12.0" layoutY="347.0" mnemonicParsing="false" onAction="#workoutButtonClick" text="Workouts" />
-         <Button fx:id="mealPlanButton" layoutX="13.0" layoutY="450.0" mnemonicParsing="false" onAction="#mealPlanButtonClick" text="Meal Plans" />
-         <Button fx:id="logoutButton" layoutX="20.0" layoutY="555.0" mnemonicParsing="false" onAction="#logout" text="Log Out" />
+         <Button fx:id="dashboardButton" layoutX="15.0" layoutY="165.0" mnemonicParsing="false" onAction="#dashboardButtonClick" prefHeight="23.0" prefWidth="87.0" styleClass="dashbutton" text="Dashboard" />
+         <Button fx:id="periodTrackButton" layoutX="9.0" layoutY="260.0" mnemonicParsing="false" onAction="#periodButtonClick" styleClass="periodbutton" text="Period Tracker" />
+         <Button fx:id="workoutButton" layoutX="23.0" layoutY="349.0" mnemonicParsing="false" onAction="#workoutButtonClick" styleClass="fitnessbutton" stylesheets="@../../styles.css" text="Workouts" />
+         <Button fx:id="mealPlanButton" layoutX="19.0" layoutY="453.0" mnemonicParsing="false" onAction="#mealPlanButtonClick" styleClass="mealbutton" text="Meal Plans" />
+         <Button fx:id="logoutButton" layoutX="26.0" layoutY="554.0" mnemonicParsing="false" onAction="#logout" styleClass="logoutbutton" text="Log Out" />
       </children>
    </Pane>
 </AnchorPane>

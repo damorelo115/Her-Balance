@@ -19,22 +19,21 @@ public static void loadMealPlannerScene(Stage stage) throws IOException {
     private String breakfast;
     private String lunch;
     private String dinner;
+    private String day;
 
-    private String days;
-
-    public MealPlanner(String breakfast, String lunch, String dinner, String days) {
+    public MealPlanner(String breakfast, String lunch, String dinner, String day) {
         this.breakfast = breakfast;
         this.lunch = lunch;
         this.dinner = dinner;
-        this.days = days;
+        this.day = day;
     }
 
-    public String getDays() {
-        return days;
+    public String getDay() {
+        return day;
     }
 
-    public void setDays(String days) {
-        this.days = days;
+    public void setDay(String days) {
+        this.day = days;
     }
 
     public String getBreakfast() {
@@ -60,8 +59,6 @@ public static void loadMealPlannerScene(Stage stage) throws IOException {
     public void setDinner(String dinner) {
         this.dinner = dinner;
     }
-
-
 }
 
 

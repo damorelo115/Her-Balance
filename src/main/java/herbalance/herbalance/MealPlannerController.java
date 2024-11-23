@@ -1,5 +1,7 @@
 package herbalance.herbalance;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +17,7 @@ import java.util.ResourceBundle;
 public class MealPlannerController implements Initializable {
 
     @FXML
-    private TableView<String> weeklyPlanView;
+    private ListView<String> weeklyPlanView;
 
     @FXML
     private ComboBox<String> dayOptions;
@@ -150,6 +152,8 @@ public class MealPlannerController implements Initializable {
 
         }
 
+        ObservableList<String> weeklymealPlan = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -159,12 +163,40 @@ public class MealPlannerController implements Initializable {
         String [] dinnermeals = {"Chicken Tacos", "Oven-Baked Salmon", "Coconut Curry With Rice", "Vegetable Lasagna", "Penne Pasta with Pesto Sauce"};
 
         dayOptions.getItems().setAll(days);
-       breakfastOptions.getItems().setAll(breakfastmeals);
-       lunchOptions.getItems().setAll(lunchmeals);
-       dinnerOptions.getItems().setAll(dinnermeals);
-
+        breakfastOptions.getItems().setAll(breakfastmeals);
+        lunchOptions.getItems().setAll(lunchmeals);
+        dinnerOptions.getItems().setAll(dinnermeals);
     }
 
+        @FXML
+        private void addWeeklyPlan() {
+
+            String day = dayOptions.getValue();
+            String breakfast = breakfastOptions.getValue();
+            String lunch = lunchOptions.getValue();
+            String dinner = dinnerOptions.getValue();
+
+
+            if(day != null && breakfast != null && lunch != null && dinner != null) {
+                String weeklyPlan = day +  "\n" + "Breakfast: " + breakfast + "\n" + "Lunch: " + lunch + "\n" + "Dinner: " + dinner;
+                weeklyPlanView.getItems().add(weeklyPlan);
+                weeklyPlanView.setItems(weeklymealPlan);
+            }
+
+            else {
+                showAlert(Alert.AlertType.ERROR, "Please enter your specified meal plan!");
+            }
+        }
+
+    // showAlert method
+    private void showAlert(Alert.AlertType alertType, String message) {
+
+        Alert alert = new Alert(alertType);
+        alert.setTitle(alert.getTitle());
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.show();
+    }
 }
 
 

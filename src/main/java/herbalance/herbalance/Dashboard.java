@@ -20,6 +20,7 @@ public class Dashboard {
             dashboardStage.setTitle("Dashboard");
             dashboardStage.setScene(dashboardScene);
             dashboardStage.show();
+            
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {

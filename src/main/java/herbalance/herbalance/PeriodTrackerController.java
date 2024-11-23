@@ -80,7 +80,6 @@ public class PeriodTrackerController {
 
                         Dashboard.loadDashboardScene();
 
-
                 }
 
                 catch (Exception e) {

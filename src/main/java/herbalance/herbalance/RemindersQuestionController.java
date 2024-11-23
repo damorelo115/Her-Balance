@@ -60,39 +60,12 @@ public class RemindersQuestionController {
     // Method called when the Sign-Up button is clicked
     @FXML
     protected void onSignUpButtonClick() {
-        // save theUser data to the database
 
-        if (addUserSurveyData()) {
-            Dashboard.loadDashboardScene();
-        }
-        else{
-            showAlert(Alert.AlertType.ERROR, "Registration failed!");
-        }
-    }
-
-    // This method is called when submitting survey data.
-    // this method will save all the information about theUser to firestore
-    public boolean addUserSurveyData() {
-
-        DocumentReference docRef = Main.fstore.collection("Surveys").document(UUID.randomUUID().toString());
-
-        Map<String, Object> data = new HashMap<>();
-        data.put("Email", Main.theUser.getUsername());
-        data.put("FirstName", Main.theUser.getFirstName());
-
-        try {
-            //asynchronously write data
-            ApiFuture<WriteResult> result = docRef.set(data);
-        }
-
-        catch (Exception ex) {
-
-            return false;
-        }
-
-        return true;
+        Stage stage = (Stage) signUpButton.getScene().getWindow();
+        Dashboard.loadDashboardScene();
 
     }
+
     // Method called when the Back button is clicked
     @FXML
     protected void onBackButtonClick() {
