@@ -39,16 +39,21 @@
                <Image url="@images/icons8-healthy-food-50.png" />
             </image>
          </ImageView>
-         <ImageView fitHeight="55.0" fitWidth="62.0" layoutX="22.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="55.0" fitWidth="62.0" layoutX="31.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@images/HerBalanceLogo.jpg" />
+               <Image url="@images/HerBalanceLogo-Transparent.png" />
             </image>
          </ImageView>
          <Button fx:id="dashboardButton" layoutX="15.0" layoutY="165.0" mnemonicParsing="false" onAction="#dashboardButtonClick" prefHeight="23.0" prefWidth="87.0" styleClass="dashbutton" text="Dashboard" />
          <Button fx:id="periodTrackButton" layoutX="9.0" layoutY="260.0" mnemonicParsing="false" onAction="#periodButtonClick" styleClass="periodbutton" text="Period Tracker" />
-         <Button fx:id="workoutButton" layoutX="23.0" layoutY="349.0" mnemonicParsing="false" onAction="#workoutButtonClick" styleClass="fitnessbutton" stylesheets="@../../styles.css" text="Workouts" />
+         <Button fx:id="workoutButton" layoutX="23.0" layoutY="349.0" mnemonicParsing="false" onAction="#workoutButtonClick" styleClass="fitnessbutton" stylesheets="@../../styles.css" text="Fitness" />
          <Button fx:id="mealPlanButton" layoutX="19.0" layoutY="453.0" mnemonicParsing="false" onAction="#mealPlanButtonClick" styleClass="mealbutton" text="Meal Plans" />
          <Button fx:id="logoutButton" layoutX="26.0" layoutY="554.0" mnemonicParsing="false" onAction="#logout" styleClass="logoutbutton" text="Log Out" />
+         <ImageView fitHeight="80.0" fitWidth="79.0" layoutX="18.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@images/HerBalance%20transparent.png" />
+            </image>
+         </ImageView>
       </children>
    </Pane>
 </AnchorPane>

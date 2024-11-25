@@ -7,7 +7,6 @@ module herbalance.herbalance {
     requires google.cloud.core;
     requires com.google.api.apicommon;
 
-
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
@@ -15,6 +14,7 @@ module herbalance.herbalance {
     requires java.net.http;
     requires org.json;
     requires java.logging;
+    requires org.testng;
 
 
     opens herbalance.herbalance to javafx.fxml;

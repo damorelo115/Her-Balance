@@ -38,16 +38,16 @@
                <Image url="@images/icons8-healthy-food-50.png" />
             </image>
          </ImageView>
-         <ImageView fitHeight="55.0" fitWidth="62.0" layoutX="22.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@images/HerBalanceLogo.jpg" />
-            </image>
-         </ImageView>
          <Button fx:id="dashboardButton" layoutX="7.0" layoutY="165.0" mnemonicParsing="false" onAction="#dashboardButtonClick" prefHeight="23.0" prefWidth="87.0" styleClass="dashbutton" stylesheets="@../../styles.css" text="Dashboard" />
          <Button fx:id="periodTrackButton" layoutX="3.0" layoutY="260.0" mnemonicParsing="false" styleClass="periodbutton" text="Period Tracker" />
          <Button fx:id="workoutButton" layoutX="18.0" layoutY="348.0" mnemonicParsing="false" onAction="#workoutButtonClick" styleClass="fitnessbutton" text="Fitness" />
          <Button fx:id="mealPlanButton" layoutX="13.0" layoutY="450.0" mnemonicParsing="false" onAction="#mealPlanButtonClick" styleClass="mealbutton" text="Meal Plans" />
          <Button fx:id="logoutButton" layoutX="20.0" layoutY="555.0" mnemonicParsing="false" onAction="#logout" styleClass="logoutbutton" text="Log Out" />
+         <ImageView fitHeight="80.0" fitWidth="79.0" layoutX="14.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@images/HerBalance%20transparent.png" />
+            </image>
+         </ImageView>
       </children>
    </Pane>
    <Pane layoutX="160.0" layoutY="138.0" prefHeight="340.0" prefWidth="316.0" style="-fx-background-color: #cbaacb;">
@@ -63,7 +63,7 @@
             </font></Label>
          <ComboBox fx:id="lunchOptions" layoutX="120.0" layoutY="158.0" prefWidth="150.0" />
          <ComboBox fx:id="dinnerOptions" layoutX="123.0" layoutY="220.0" prefWidth="150.0" />
-         <Button fx:id="weeklyPlanButton" layoutX="68.0" layoutY="277.0" mnemonicParsing="false" onAction="#addWeeklyPlan" prefHeight="25.0" prefWidth="130.0" styleClass="weeklybutton" stylesheets="@../../styles.css" text="Add to Weekly Plan" />
+         <Button fx:id="weeklyPlanButton" layoutX="89.0" layoutY="280.0" mnemonicParsing="false" onAction="#addWeeklyPlan" prefHeight="25.0" prefWidth="130.0" styleClass="weeklybutton" stylesheets="@../../styles.css" text="Add to Weekly Plan" />
          <Label layoutX="15.0" layoutY="27.0" prefHeight="17.0" prefWidth="87.0" text="Choose Day:">
             <font>
                <Font name="Poppins ExtraBold" size="13.0" />

@@ -1,6 +1,5 @@
 package herbalance.herbalance;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,6 +19,7 @@ public class Dashboard {
             dashboardStage.setTitle("Dashboard");
             dashboardStage.setScene(dashboardScene);
             dashboardStage.show();
+            dashboardStage.setResizable(false);
             
         } catch (IOException e) {
             e.printStackTrace();

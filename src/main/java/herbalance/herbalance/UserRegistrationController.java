@@ -131,8 +131,6 @@ public class UserRegistrationController {
 
         catch (FirebaseAuthException ex) {
 
-            //Logger.getLogger(UserRegistrationController.class.getName()).log(Level.SEVERE, null, ex);
-
             return false;
         }
 
