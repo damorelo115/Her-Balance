@@ -13,9 +13,8 @@ import com.google.cloud.firestore.*;
 import com.google.api.core.ApiFuture;
 
 public class UserLoginController {
-
     @FXML
-    private Label loginResult;
+    private Label userlabel;
 
     @FXML
     private TextField useremail;
@@ -31,6 +30,7 @@ public class UserLoginController {
 
     @FXML
     private Button signUpButton;
+
 
     @FXML
     protected void onSignUpButtonClick() throws IOException {
@@ -54,79 +54,82 @@ public class UserLoginController {
             showAlert(Alert.AlertType.ERROR, "Please enter your email and password!");
 
         }
-        else {
 
-            if (signInUser() == true) {
+       else if (signInUser() == true) {
 
-                showAlert(Alert.AlertType.CONFIRMATION, "Sign in successful!");
+            showAlert(Alert.AlertType.CONFIRMATION, "Sign in successful!");
 
-                Stage stage = (Stage) signinButton.getScene().getWindow();
-
-                Dashboard.loadDashboardScene();
-
-            }
-
-        }
+       }
 
     }
 
+    // This method is used to sign the user into the application. It will query Firestore to retrieve a document
+    // and compare the user's email that is entered to the email in the collection
     public boolean signInUser() throws ExecutionException, InterruptedException {
 
         String enteredEmail = useremail.getText();
         String enteredPassword = userpassword.getText();
+        String documentEmail, documentPassword;
 
         // asynchronously retrieve all documents
-            ApiFuture<QuerySnapshot> future = Main.fstore.collection("Users").get();
-            // future.get() blocks on response
-            List<QueryDocumentSnapshot> documents;
+        ApiFuture<QuerySnapshot> future = Main.fstore.collection("Users").get();
 
-            try {
-                documents = future.get().getDocuments();
+        // future.get() blocks on response
+        List<QueryDocumentSnapshot> documents;
 
-                if (!documents.isEmpty()) {
+        try {
+            documents = future.get().getDocuments();
 
-                    for (QueryDocumentSnapshot document : documents) {
+            if (!documents.isEmpty()) {
 
-                        document.getData().get("email");
-                        document.getData().get("password");
+                for (QueryDocumentSnapshot document : documents) {
 
-                      //  if (enteredEmail.equals(document.getData().get("email"))) {
-                        if (document.exists()) {
+                    documentEmail = String.valueOf(document.getData().get("Email"));
+                    documentPassword = String.valueOf(document.getData().get("Password"));
 
-                            String documentEmail;
-                            String documentPassword;
+                    // user found
+                    if (documentEmail.equals(enteredEmail) && documentPassword.equals(enteredPassword)) {
+                        Main.theUser = new User();
+                        Main.theUser.setUserEmail(enteredEmail);
+                        Main.theUser.setPassword(enteredPassword);
 
+                        Stage stage = (Stage) signinButton.getScene().getWindow();
 
-                           // if (enteredEmail.equals(documentEmail) && enteredPassword.equals(documentPassword)) {
-                                Stage stage = (Stage) signinButton.getScene().getWindow();
-                                stage.close();
-                                Dashboard.loadDashboardScene();
+                        stage.close();
 
-                            }
+                        Dashboard.loadDashboardScene();
 
-                        }
+                        showAlert(Alert.AlertType.CONFIRMATION, "Sign in successful!");
 
                     }
 
-               // }
-
-                else {
-                    showAlert(Alert.AlertType.ERROR, "User not found! Try again!");
                 }
 
-            } catch (InterruptedException | ExecutionException e) {
-                throw new RuntimeException(e);
             }
-            return false;
+
+            else {
+
+                showAlert(Alert.AlertType.INFORMATION, "User not logged in!");
+            }
+
+
         }
 
-        // showAlert method
-        private void showAlert (Alert.AlertType alertType, String message){
+        catch (InterruptedException | ExecutionException e) {
 
-            Alert alert = new Alert(alertType);
-            alert.setTitle(alert.getTitle());
-            alert.setHeaderText(null);
-            alert.setContentText(message);
-            alert.show();
+            throw new RuntimeException(e);
         }
+
+        return false;
     }
+
+    // showAlert method to display alerts
+    private void showAlert(Alert.AlertType alertType, String message) {
+
+        Alert alert = new Alert(alertType);
+        alert.setTitle(alert.getTitle());
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.show();
+    }
+}

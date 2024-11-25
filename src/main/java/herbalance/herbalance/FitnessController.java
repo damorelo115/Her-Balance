@@ -74,10 +74,9 @@ public class FitnessController {
         try {
             Stage stage = (Stage) dashboardButton.getScene().getWindow();
 
-            Dashboard.loadDashboardScene();
             stage.close();
 
-
+            Dashboard.loadDashboardScene();
 
         }
 
@@ -93,9 +92,11 @@ public class FitnessController {
         try {
             Stage stage = (Stage) periodTrackButton.getScene().getWindow();
 
+            stage.close();
+
             PeriodTracker.loadPeriodTrackerScene(stage);
 
-            stage.close();
+
         }
 
         catch (IOException e) {

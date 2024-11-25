@@ -1,5 +1,4 @@
 module herbalance.herbalance {
-    requires java.logging;
 
     requires firebase.admin;
     requires com.google.auth;
@@ -8,12 +7,15 @@ module herbalance.herbalance {
     requires google.cloud.core;
     requires com.google.api.apicommon;
 
-
-
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
-    requires MaterialFX;
+    requires javafx.fxml;
+    requires java.net.http;
+    requires org.json;
+    requires java.logging;
+    requires org.testng;
+
 
     opens herbalance.herbalance to javafx.fxml;
     exports herbalance.herbalance;

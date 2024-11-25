@@ -2,57 +2,57 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="595.0" prefWidth="845.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.DashboardController">
+<AnchorPane prefHeight="596.0" prefWidth="899.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.DashboardController">
    <children>
-      <Pane fx:id="sidepane" layoutX="-7.0" layoutY="-6.0" prefHeight="602.0" prefWidth="96.0" styleClass="sidepane" stylesheets="@../../dashboard.css">
+      <Pane fx:id="sidepane" layoutX="-7.0" layoutY="-6.0" prefHeight="602.0" prefWidth="114.0" styleClass="sidepane" stylesheets="@../../styles.css">
          <children>
-            <ImageView fx:id="dashboardIcon" fitHeight="42.0" fitWidth="44.0" layoutX="27.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="dashboardIcon" fitHeight="42.0" fitWidth="44.0" layoutX="42.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/icons8-dashboard-layout-96.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="bloodDropIcon" fitHeight="42.0" fitWidth="44.0" layoutX="29.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="bloodDropIcon" fitHeight="42.0" fitWidth="44.0" layoutX="37.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/icons8-blood-drop-50.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="signOutIcon" fitHeight="42.0" fitWidth="36.0" layoutX="30.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="signOutIcon" fitHeight="42.0" fitWidth="36.0" layoutX="40.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/icons8-sign-out-50.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="workoutIcon" fitHeight="42.0" fitWidth="44.0" layoutX="29.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="workoutIcon" fitHeight="42.0" fitWidth="44.0" layoutX="37.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/icons8-workout-50.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="mealPlanIcon" fitHeight="42.0" fitWidth="44.0" layoutX="30.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mealPlanIcon" fitHeight="42.0" fitWidth="44.0" layoutX="36.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/icons8-healthy-food-50.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="62.0" layoutX="22.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <Button fx:id="dashboardButton" layoutX="14.0" layoutY="165.0" mnemonicParsing="false" onAction="#dashboardButtonClick" prefHeight="25.0" prefWidth="97.0" styleClass="dashbutton" stylesheets="@../../styles.css" text="Dashboard" />
+            <Button fx:id="periodTrackButton" layoutX="13.0" layoutY="262.0" mnemonicParsing="false" onAction="#periodButtonClick" styleClass="periodbutton" stylesheets="@../../styles.css" text="Period Tracker" />
+            <Button fx:id="workoutButton" layoutX="28.0" layoutY="346.0" mnemonicParsing="false" onAction="#workoutButtonClick" styleClass="fitnessbutton" stylesheets="@../../styles.css" text="Fitness" />
+            <Button fx:id="mealPlanButton" layoutX="19.0" layoutY="450.0" mnemonicParsing="false" onAction="#mealPlanButtonClick" styleClass="mealbutton" stylesheets="@../../styles.css" text="Meal Plans" />
+            <Button fx:id="logoutButton" layoutX="26.0" layoutY="555.0" mnemonicParsing="false" onAction="#logout" styleClass="logoutbutton" stylesheets="@../../styles.css" text="Log Out" />
+            <ImageView fitHeight="80.0" fitWidth="79.0" layoutX="19.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/HerBalanceLogo.jpg" />
+                  <Image url="@images/HerBalance%20transparent.png" />
                </image>
             </ImageView>
-            <Button fx:id="dashboardButton" layoutX="7.0" layoutY="165.0" mnemonicParsing="false" onAction="#dashboardButtonClick" prefHeight="23.0" prefWidth="87.0" text="Dashboard" />
-            <Button fx:id="periodTrackButton" layoutX="-1.0" layoutY="259.0" mnemonicParsing="false" onAction="#periodButtonClick" text="Period Tracker" />
-            <Button fx:id="workoutButton" layoutX="12.0" layoutY="347.0" mnemonicParsing="false" onAction="#workoutButtonClick" text="Workouts" />
-            <Button fx:id="mealPlanButton" layoutX="13.0" layoutY="450.0" mnemonicParsing="false" onAction="#mealPlanButtonClick" text="Meal Plans" />
-            <Button fx:id="logoutButton" layoutX="20.0" layoutY="555.0" mnemonicParsing="false" onAction="#logout" text="Log Out" />
          </children>
       </Pane>
-      <Pane layoutX="90.0" prefHeight="55.0" prefWidth="761.0" styleClass="header" stylesheets="@../../dashboard.css">
+      <Pane layoutX="107.0" prefHeight="55.0" prefWidth="811.0" styleClass="header" stylesheets="@../../styles.css">
          <children>
-            <Label fx:id="herbalanceheader" layoutX="17.0" layoutY="21.0" prefHeight="28.0" prefWidth="162.0" styleClass="herbalanceheader" stylesheets="@../../dashboard.css" text="HerBalance" />
+            <Label fx:id="herbalanceheader" layoutX="14.0" layoutY="14.0" prefHeight="28.0" prefWidth="162.0" styleClass="herbalanceheader" stylesheets="@../../styles.css" text="Dashboard" />
             <ImageView fx:id="userIcon" fitHeight="42.0" fitWidth="44.0" layoutX="633.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/icons8-user-32.png" />
@@ -65,43 +65,42 @@
             </ImageView>
          </children>
       </Pane>
-      <Label fx:id="dashlabel" layoutX="105.0" layoutY="70.0" styleClass="dashlabel" stylesheets="@../../dashboard.css" text="Dashboard">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label fx:id="userlabel" layoutX="105.0" layoutY="109.0" styleClass="userlabel" stylesheets="@../../dashboard.css" text="Hi, User!" />
-      <Pane fx:id="mainpane" layoutX="98.0" layoutY="148.0" prefHeight="436.0" prefWidth="262.0" styleClass="main" stylesheets="@../../dashboard.css">
+      <Pane fx:id="mainpane" layoutX="123.0" layoutY="148.0" prefHeight="436.0" prefWidth="232.0" styleClass="main" stylesheets="@../../styles.css">
          <children>
-            <Label layoutX="14.0" layoutY="24.0" styleClass="welcomelabel" stylesheets="@../../dashboard.css" text="Welcome Back!" />
+            <Label layoutX="14.0" layoutY="24.0" styleClass="welcomelabel" stylesheets="@../../styles.css" text="Welcome Back!" />
          </children>
          <effect>
             <DropShadow />
          </effect>
       </Pane>
-      <Pane fx:id="workout" layoutX="384.0" layoutY="372.0" prefHeight="200.0" prefWidth="452.0" styleClass="workout" stylesheets="@../../dashboard.css">
+      <Pane fx:id="workout" layoutX="387.0" layoutY="375.0" prefHeight="200.0" prefWidth="500.0" styleClass="workout" stylesheets="@../../styles.css">
          <children>
-            <Label layoutX="20.0" layoutY="22.0" styleClass="workouttext" stylesheets="@../../dashboard.css" text="Workouts" />
+            <Label layoutX="20.0" layoutY="22.0" styleClass="workouttext" stylesheets="@../../styles.css" text="Daily Affirmation" />
+            <TextArea fx:id="affirmationTextArea" layoutX="20.0" layoutY="52.0" prefHeight="126.0" prefWidth="444.0" style="-fx-background-color: #F5F1FF;" />
+            <Button fx:id="affirmationButton" layoutX="342.0" layoutY="21.0" mnemonicParsing="false" onAction="#fetchAffirmation" text="Receive Affirmation" />
          </children>
          <effect>
             <DropShadow />
          </effect>
       </Pane>
-      <Pane fx:id="cyclelevel" layoutX="384.0" layoutY="148.0" prefHeight="200.0" prefWidth="200.0" styleClass="cyclelevel" stylesheets="@../../dashboard.css">
+      <Pane fx:id="cyclelevel" layoutX="376.0" layoutY="148.0" prefHeight="200.0" prefWidth="200.0" styleClass="cyclelevel" stylesheets="@../../styles.css">
          <children>
-            <Label fx:id="cyclelabel" layoutX="14.0" layoutY="14.0" styleClass="cyclelabel" stylesheets="@../../dashboard.css" text="Cycle" />
+            <Label fx:id="cyclelabel" layoutX="14.0" layoutY="14.0" styleClass="cyclelabel" stylesheets="@../../styles.css" text="Cycle" />
          </children>
          <effect>
             <DropShadow />
          </effect>
       </Pane>
-      <Pane fx:id="mealplan" layoutX="628.0" layoutY="148.0" prefHeight="200.0" prefWidth="200.0" styleClass="mealplan" stylesheets="@../../dashboard.css">
+      <Pane fx:id="wellnesstip" layoutX="599.0" layoutY="123.0" prefHeight="225.0" prefWidth="277.0" styleClass="wellnesstip" stylesheets="@../../styles.css">
          <children>
-            <Label layoutX="21.0" layoutY="13.0" styleClass="meallabel" stylesheets="@../../dashboard.css" text="Meal Plan" />
+            <Label fx:id="cyclelabel1" layoutX="48.0" layoutY="14.0" styleClass="cyclelabel" stylesheets="@../../styles.css" text="Daily Wellness Tip" />
+            <Button fx:id="wellnessTipButton" layoutX="72.0" layoutY="186.0" mnemonicParsing="false" onAction="#fetchWellnessTip" text="Receive Wellness Tip" />
+            <TextArea fx:id="wellnessTextArea" layoutX="13.0" layoutY="52.0" prefHeight="126.0" prefWidth="242.0" />
          </children>
          <effect>
             <DropShadow />
          </effect>
       </Pane>
+      <Label fx:id="userlabel" layoutX="123.0" layoutY="80.0" prefHeight="28.0" prefWidth="208.0" styleClass="userlabel" stylesheets="@../../styles.css" text="Label" />
    </children>
 </AnchorPane>

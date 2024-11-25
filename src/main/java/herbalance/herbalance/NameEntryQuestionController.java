@@ -45,6 +45,7 @@ public class NameEntryQuestionController {
             // Next button will be hidden if no name is entered
             nextButton.setVisible(false);
         }
+
     }
 
     // Method called when the Next button is clicked
@@ -69,4 +70,5 @@ public class NameEntryQuestionController {
             e.printStackTrace();
         }
     }
+
 }
