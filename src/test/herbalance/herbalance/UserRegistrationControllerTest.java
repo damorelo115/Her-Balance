@@ -17,7 +17,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserRegistrationControllerTest {
+public class UserRegistrationControllerTest {
 
     @BeforeAll
     static void setUp() {
@@ -49,8 +49,10 @@ class UserRegistrationControllerTest {
 
         // Test with a valid email registered in Firebase
         String email = "janedoe@gmail.com";
+
         try {
             UserRecord user = FirebaseAuth.getInstance().getUserByEmail(email);
+
             assertNotNull(user, "User with this email exists.");
         }
         catch (Exception e) {
@@ -68,8 +70,6 @@ class UserRegistrationControllerTest {
         try {
 
             UserRecord user = FirebaseAuth.getInstance().getUserByEmail(email);
-
-            //assertNull(user, "User with this email does not exist.");
 
             fail("Error occurred while checking for registered email");
 

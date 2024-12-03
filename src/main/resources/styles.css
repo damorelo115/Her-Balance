@@ -32,12 +32,21 @@
 }
 
 
-.dashbutton,.periodbutton, .fitnessbutton, .mealbutton, .logoutbutton, .weeklybutton {
+.dashbutton,.periodbutton, .fitnessbutton, .mealbutton, .logoutbutton, .weeklybutton, .affirmationbutton {
     -fx-background-color: #AFE9E5;
     -fx-background-radius: 30px;
     -fx-text-fill: #000000;
     -fx-border-style: 5px solid;
     -fx-border-color: #FFFFFF;
+    -fx-border-radius: 25px;
+}
+
+.wellnessbutton {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30px;
+    -fx-text-fill: #000000;
+    -fx-border-style: 5px solid;
+    -fx-border-color: #000000;
     -fx-border-radius: 25px;
 }
 

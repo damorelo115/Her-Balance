@@ -13,8 +13,9 @@ module herbalance.herbalance {
     requires javafx.fxml;
     requires java.net.http;
     requires org.json;
-    requires java.logging;
     requires org.testng;
+    requires com.google.gson;
+    requires java.logging;
 
 
     opens herbalance.herbalance to javafx.fxml;
