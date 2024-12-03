@@ -3,6 +3,8 @@ package herbalance.herbalance;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URI;
@@ -283,14 +286,16 @@ public class DashboardController {
                     .build();
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-            System.out.println(response.body());
+            JsonObject jsonObject = JsonParser.parseString(response.body()).getAsJsonObject();
 
-            String affirmationResponse = response.body().replaceAll("[{}]", "");
+            String affirmationResponse = jsonObject.get("affirmation").getAsString();
 
-            affirmationTextArea.setText(affirmationResponse + "\n");
+            System.out.println(affirmationResponse);
+
+            affirmationTextArea.setText(affirmationResponse);
             affirmationTextArea.setEditable(false);
-            affirmationTextArea.setFont(new Font("Poppins", 14));
-            affirmationTextArea.setWrapText(true);
+            affirmationTextArea.setFont(new Font("Poppins", 18));
+
         } catch (Exception e) {
 
             throw new RuntimeException(e);
@@ -319,17 +324,23 @@ public class DashboardController {
                     .build();
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-            System.out.println(response.body());
+            JsonObject jsonObject = JsonParser.parseString(response.body()).getAsJsonObject();
 
-            String wellnessResponse = response.body().replaceAll("[{}]", "");
+            String wellnessResponse = jsonObject.get("tip").getAsString();
 
-            wellnessTextArea.setText(wellnessResponse + "\n");
+            System.out.println(wellnessResponse);
+
+            wellnessTextArea.setText(wellnessResponse);
             wellnessTextArea.setEditable(false);
-            wellnessTextArea.setFont(new Font("Poppins", 12));
-        } catch (Exception e) {
+            wellnessTextArea.setFont(new Font("Poppins", 18));
+        }
+
+        catch (Exception e) {
 
             throw new RuntimeException(e);
-        } finally {
+        }
+
+        finally {
 
             wellnessTipButton.setDisable(false);
         }
