@@ -70,7 +70,9 @@ public class UserRegistrationController {
 
                     Stage stage = (Stage) registerButton.getScene().getWindow();
 
-                    NameEntryQuestion.loadNameEntryQuestionScene(stage);
+                    //NameEntryQuestion.loadNameEntryQuestionScene(stage);
+
+                    BirthDateQuestion.loadBirthDateQuestionScene(stage);
 
                     showAlert(Alert.AlertType.CONFIRMATION, "Registration successful!");
 

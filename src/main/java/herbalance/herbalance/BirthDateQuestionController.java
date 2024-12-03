@@ -8,9 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
 public class BirthDateQuestionController {
-
 
     // Date picker for selecting the birthdate
     @FXML
@@ -23,59 +21,43 @@ public class BirthDateQuestionController {
     @FXML
     private Label validationLabel;
 
-    // Button for Back Button
-    @FXML
-    private Button backButton;
-
-    // Button for Submit Button
-    @FXML
-    private Button submitButton;
-
     // Button for Next Button
     @FXML
     private Button nextButton;
 
-    // Method triggered when the Submit button is clicked
     @FXML
-    protected void onSubmitButtonClick() {
-        if (birthDatePicker.getValue() != null) {
-            // Displaying the selected birthdate in the label
-            birthDateLabel.setText("Your birthdate: " + birthDatePicker.getValue().toString());
+    public void initialize() {
+        // Set up a listener to monitor changes to the birthDatePicker
+        birthDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                // Display the selected birthdate in the label
+                birthDateLabel.setText("Your birthdate: " + newValue.toString());
 
-            // Hiding validation message
-            validationLabel.setVisible(false);
+                // Hide validation message
+                validationLabel.setVisible(false);
 
-            // Making the Next button visible
-            nextButton.setVisible(true);
-        } else {
-            // Asking the user to select a birthdate if they did not do so
-            validationLabel.setText("Please select a birthdate.");
-            validationLabel.setVisible(true);
+                // Enable the Next button
+                nextButton.setDisable(false);
+            } else {
+                // Ask the user to select a birthdate
+                validationLabel.setText("Please select a birthdate.");
+                validationLabel.setVisible(true);
 
-            // Next button will be hidden if no name is entered
-            nextButton.setVisible(false);
-
-            // Disabling the submit button after submission
-            submitButton.setDisable(true);
-        }
-    }
-        // Method called when the Next button is clicked
-        @FXML
-        protected void onNextButtonClick () {
-            try {
-                Stage stage = (Stage) nextButton.getScene().getWindow();
-               // change this later: WellnessGoalsQuestion.loadWellnessGoalsQuestionScene(stage);
-                RemindersQuestion.loadRemindersQuestionScene(stage);
-            } catch (IOException e) {
-                e.printStackTrace();
+                // Disable the Next button
+                nextButton.setDisable(true);
             }
-        }
-    // Method called when the Back button is clicked
+        });
+
+        // Initially disable the Next button
+        nextButton.setDisable(true);
+    }
+
+    // Method called when the Next button is clicked
     @FXML
-    protected void onBackButtonClick() {
+    protected void onNextButtonClick() {
         try {
-            Stage stage = (Stage) backButton.getScene().getWindow();
-            NameEntryQuestion.loadNameEntryQuestionScene(stage);
+            Stage stage = (Stage) nextButton.getScene().getWindow();
+            WellnessGoalsQuestion.loadWellnessGoalsQuestionScene(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Fitness {
 
     public static void loadFitnessTrackerScene(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(NameEntryQuestion.class.getResource("FitnessTracker.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Fitness.class.getResource("FitnessTracker.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Fitness Tracker");
         stage.setScene(scene);
