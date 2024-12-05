@@ -62,9 +62,16 @@
 
 }
 
-.cyclelevel {
-    -fx-background-radius: 30px;
-    -fx-background-color: #FC91B6;
+.periodpane {
+    -fx-background-color: ffffff;
+}
+
+.predictcyclebutton {
+    -fx-background-color: #ffe5ec;
+    -fx-border-style: 5px solid;
+    -fx-border-color: #FFFFFF;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 20px;
 }
 
 .cyclelabel {
