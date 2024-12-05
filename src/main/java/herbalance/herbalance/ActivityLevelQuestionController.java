@@ -1,9 +1,12 @@
 package herbalance.herbalance;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class ActivityLevelQuestionController {
@@ -24,52 +27,41 @@ public class ActivityLevelQuestionController {
     @FXML
     private Button backButton;
 
-    // Submit Button
-    @FXML
-    private Button submitButton;
-
     // Next Button
     @FXML
     private Button nextButton;
 
-    // Method triggered when Submit button is clicked
     @FXML
-    protected void onSubmitButtonClick() {
-        // Declaring and initializing a StringBuilder to store selected goals
-        StringBuilder selectedActivity = new StringBuilder();
+    public void initialize() {
+        // Initially disable the Next button
+        nextButton.setDisable(true);
 
-        if (sedentaryCheckBox.isSelected()) {
-            selectedActivity.append("- Sedentary\n");
-        }
-        if (moderatelyActiveCheckBox.isSelected()) {
-            selectedActivity.append("- Moderately Active\n");
-        }
-        if (highlyActiveCheckBox.isSelected()) {
-            selectedActivity.append("- Highly Active\n");
-        }
+        // Add listeners to all checkboxes
+        ChangeListener<Boolean> checkboxListener = (ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            // Check if any checkbox is selected
+            if (isAnyCheckboxSelected()) {
+                nextButton.setDisable(false);
+            } else {
+                nextButton.setDisable(true);
+            }
+        };
 
-        // Checking if no goals are selected
-        if (selectedActivity.toString().equals("Selected Activity Levels:\n")) {
-            selectedActivity.append("No level selected.");
-            // Next button will be hidden if no goals are selected
-            nextButton.setVisible(false);
-
-            // Disabling the submit button after submission
-            submitButton.setDisable(true);
-        } else {
-            // Next button will be visible if goals are selected
-            nextButton.setVisible(true);
-        }
-        // Printing selected goals
-        System.out.println(selectedActivity); // Needs to be changed to save into a file / database
+        sedentaryCheckBox.selectedProperty().addListener(checkboxListener);
+        moderatelyActiveCheckBox.selectedProperty().addListener(checkboxListener);
+        highlyActiveCheckBox.selectedProperty().addListener(checkboxListener);
     }
-    // Method called when the Next button is clicked
 
+    // Helper method to check if any checkbox is selected
+    private boolean isAnyCheckboxSelected() {
+        return sedentaryCheckBox.isSelected() || moderatelyActiveCheckBox.isSelected() || highlyActiveCheckBox.isSelected();
+    }
+
+    // Method called when the Next button is clicked
     @FXML
-    protected void onNextButtonClick () {
+    protected void onNextButtonClick() {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
-            DietQuestion.loadDietQuestionScene(stage);
+            MotivateQuestion.loadMotivateQuestionScene(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -85,6 +77,5 @@ public class ActivityLevelQuestionController {
             e.printStackTrace();
         }
     }
-
 }
 

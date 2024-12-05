@@ -1,5 +1,7 @@
 package herbalance.herbalance;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -29,51 +31,40 @@ public class WellnessFocusQuestionController {
     @FXML
     private Button backButton;
 
-    // Submit Button
-    @FXML
-    private Button submitButton;
-
     // Next Button
     @FXML
     private Button nextButton;
 
-    // Method triggered when Submit button is clicked
     @FXML
-    protected void onSubmitButtonClick() {
-        // Declaring and initializing a StringBuilder to store selected goals
-        StringBuilder selectedAreas = new StringBuilder();
+    public void initialize() {
+        // Initially disable the Next button
+        nextButton.setDisable(true);
 
-        if (stressCheckBox.isSelected()) {
-            selectedAreas.append("- Stress\n");
-        }
-        if (physicalActivityCheckBox.isSelected()) {
-            selectedAreas.append("- Physical Activity\n");
-        }
-        if (sleepCheckBox.isSelected()) {
-            selectedAreas.append("- Sleep\n");
-        }
-        if (reproductiveHealthCheckBox.isSelected()) {
-            selectedAreas.append("- Reproductive Health\n");
-        }
+        // Add listeners to all checkboxes
+        ChangeListener<Boolean> checkboxListener = (ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            // Check if any checkbox is selected
+            if (isAnyCheckboxSelected()) {
+                nextButton.setDisable(false);
+            } else {
+                nextButton.setDisable(true);
+            }
+        };
 
-        // Checking if no goals are selected
-        if (selectedAreas.toString().equals("Selected Wellness Areas:\n")) {
-            selectedAreas.append("No areas selected.");
-            // Next button will be hidden if no goals are selected
-            nextButton.setVisible(false);
-
-            // Disabling the submit button after submission
-            submitButton.setDisable(true);
-        } else {
-            // Next button will be visible if goals are selected
-            nextButton.setVisible(true);
-        }
-        // Printing selected goals
-        System.out.println(selectedAreas); // Needs to be changed to save into a file / database
+        stressCheckBox.selectedProperty().addListener(checkboxListener);
+        physicalActivityCheckBox.selectedProperty().addListener(checkboxListener);
+        sleepCheckBox.selectedProperty().addListener(checkboxListener);
+        reproductiveHealthCheckBox.selectedProperty().addListener(checkboxListener);
     }
+
+    // Helper method to check if any checkbox is selected
+    private boolean isAnyCheckboxSelected() {
+        return stressCheckBox.isSelected() || physicalActivityCheckBox.isSelected() ||
+                sleepCheckBox.isSelected() || reproductiveHealthCheckBox.isSelected();
+    }
+
     // Method called when the Next button is clicked
     @FXML
-    protected void onNextButtonClick () {
+    protected void onNextButtonClick() {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
             ActivityLevelQuestion.loadActivityLevelQuestionScene(stage);
@@ -92,4 +83,5 @@ public class WellnessFocusQuestionController {
             e.printStackTrace();
         }
     }
-    }
+}
+

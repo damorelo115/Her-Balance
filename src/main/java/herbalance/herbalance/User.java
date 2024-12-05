@@ -4,7 +4,8 @@ public class User {
     private String userEmail;
     private String password;
     private String firstName;
-    private Boolean notifications;
+
+    private Survey survey;
 
     public String getFirstName() {
         return firstName;
@@ -26,7 +27,7 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setPassword(String password) {this.password = password;}
+
+
 }
