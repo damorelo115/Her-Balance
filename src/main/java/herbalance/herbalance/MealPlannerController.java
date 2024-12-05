@@ -2,6 +2,7 @@ package herbalance.herbalance;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -185,24 +186,28 @@ public class MealPlannerController implements Initializable {
             String lunch = lunchOptions.getValue();
             String dinner = dinnerOptions.getValue();
 
-
             if (day != null && breakfast != null && lunch != null && dinner != null) {
 
-                DocumentReference docRef = Main.fstore.collection("Users").document(UUID.randomUUID().toString());
+                DocumentReference docRef = Main.fstore.collection("Users").document(Main.theUser.getUserEmail()
+                );
 
-                Map<String, Object> weeklyMealPlan = new HashMap<>();
+                Map<String, String> mealchoices = new HashMap<>();
 
-                weeklyMealPlan.put("Day", day);
-                weeklyMealPlan.put("Breakfast", breakfast);
-                weeklyMealPlan.put("Lunch", lunch);
-                weeklyMealPlan.put("Dinner", dinner);
+                mealchoices.put("Breakfast", breakfast);
+                mealchoices.put("Lunch", lunch);
+                mealchoices.put("Dinner", dinner);
+
+                Map<String, Map<String, String>> weeklyMealPlan = new HashMap<>();
+
+                weeklyMealPlan.put(day, mealchoices);
+
 
                 showAlert(Alert.AlertType.INFORMATION, "Meal plan has been added with the following information: " + "\n" +
                         "\n" + "Day: " + day + "\n" + "Breakfast: " + breakfast +  "\n" + "Lunch: " + lunch + "\n" + "Dinner: " + dinner + "\n");
 
                 try {
                     //asynchronously write data
-                    ApiFuture<WriteResult> result = docRef.set(weeklyMealPlan);
+                   ApiFuture<WriteResult> result = docRef.set(weeklyMealPlan);
                 }
 
                 catch (Exception ex) {
@@ -213,10 +218,6 @@ public class MealPlannerController implements Initializable {
                 return true;
 
             }
-                //String weeklyPlan = day +  "\n" + "Breakfast: " + breakfast + "\n" + "Lunch: " + lunch + "\n" + "Dinner: " + dinner;
-                // weeklyPlanView.getItems().add(weeklyPlan);
-                // weeklyPlanView.setItems(weeklymealPlan);
-
 
             else {
 
