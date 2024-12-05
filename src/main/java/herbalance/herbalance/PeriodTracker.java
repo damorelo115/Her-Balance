@@ -11,30 +11,30 @@ public class PeriodTracker {
 
     public static void loadPeriodTrackerScene(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(PeriodTracker.class.getResource("PeriodTracker.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Scene scene = new Scene(fxmlLoader.load(), 690, 471);
         stage.setTitle("Period Tracker");
         stage.setScene(scene);
         stage.show();
     }
 
-    private LocalDate lastPeriodStartDate;
+    private LocalDate PreviousPeriodStartDate;
     private int cycleLength;
     private int periodLength;
 
 
-    public PeriodTracker(LocalDate lastPeriodStartDate, int cycleLength, int periodLength) {
-        this.lastPeriodStartDate = lastPeriodStartDate;
+    public PeriodTracker(LocalDate PreviousPeriodStartDate, int cycleLength, int periodLength) {
+        this.PreviousPeriodStartDate = PreviousPeriodStartDate;
         this.cycleLength = cycleLength;
         this.periodLength = periodLength;
     }
 
 
-    public LocalDate getLastPeriodStartDate() {
-        return lastPeriodStartDate;
+    public LocalDate getPreviousPeriodStartDate() {
+        return PreviousPeriodStartDate;
     }
 
-    public void setLastPeriodStartDate(LocalDate lastPeriodStartDate) {
-        this.lastPeriodStartDate = lastPeriodStartDate;
+    public void setPreviousPeriodStartDate(LocalDate PreviousPeriodStartDate) {
+        this.PreviousPeriodStartDate = PreviousPeriodStartDate;
     }
 
     public int getCycleLength() {
@@ -55,7 +55,7 @@ public class PeriodTracker {
 
 
     public LocalDate predictNextCycleStart() {
-        return lastPeriodStartDate.plusDays(cycleLength);
+        return PreviousPeriodStartDate.plusDays(cycleLength);
     }
 
 
@@ -64,15 +64,15 @@ public class PeriodTracker {
     }
 
 
-    public void updateTracker(LocalDate lastPeriodStartDate, int cycleLength, int periodLength) {
-        setLastPeriodStartDate(lastPeriodStartDate);
+    public void updateTracker(LocalDate PreviousPeriodStartDate, int cycleLength, int periodLength) {
+        setPreviousPeriodStartDate(PreviousPeriodStartDate);
         setCycleLength(cycleLength);
         setPeriodLength(periodLength);
     }
 
 
     public String getPeriodDetails() {
-        return "Last Period Start: " + lastPeriodStartDate +
+        return "Last Period Start: " + PreviousPeriodStartDate +
                 "\nCycle Length: " + cycleLength + " days" +
                 "\nPeriod Length: " + periodLength + " days" +
                 "\nNext Period Start: " + predictNextCycleStart() +

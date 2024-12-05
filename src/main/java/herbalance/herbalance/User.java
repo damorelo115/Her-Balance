@@ -1,9 +1,11 @@
 package herbalance.herbalance;
 
 public class User {
-    private String username;
+    private String userEmail;
     private String password;
     private String firstName;
+
+    private Survey survey;
 
     public String getFirstName() {
         return firstName;
@@ -13,19 +15,19 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserEmail(String useremail) {
+        this.userEmail = useremail;
     }
 
     public String getPassword() {
-        return username;
+        return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setPassword(String password) {this.password = password;}
+
+
 }
