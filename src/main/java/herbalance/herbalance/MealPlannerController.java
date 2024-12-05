@@ -1,5 +1,9 @@
 package herbalance.herbalance;
 
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.WriteResult;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,7 +16,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class MealPlannerController implements Initializable {
 
@@ -46,6 +53,9 @@ public class MealPlannerController implements Initializable {
 
     @FXML
     private Button mealPlanButton;
+
+    @FXML
+    private Button viewPlanButton;
 
     @FXML
     private ImageView mealPlanIcon;
@@ -169,23 +179,52 @@ public class MealPlannerController implements Initializable {
     }
 
         @FXML
-        private void addWeeklyPlan() {
+        private boolean addWeeklyPlan() {
 
             String day = dayOptions.getValue();
             String breakfast = breakfastOptions.getValue();
             String lunch = lunchOptions.getValue();
             String dinner = dinnerOptions.getValue();
 
+            if (day != null && breakfast != null && lunch != null && dinner != null) {
 
-            if(day != null && breakfast != null && lunch != null && dinner != null) {
-                String weeklyPlan = day +  "\n" + "Breakfast: " + breakfast + "\n" + "Lunch: " + lunch + "\n" + "Dinner: " + dinner;
-                weeklyPlanView.getItems().add(weeklyPlan);
-                weeklyPlanView.setItems(weeklymealPlan);
+                DocumentReference docRef = Main.fstore.collection("Users").document(Main.theUser.getUserEmail()
+                );
+
+                Map<String, String> mealchoices = new HashMap<>();
+
+                mealchoices.put("Breakfast", breakfast);
+                mealchoices.put("Lunch", lunch);
+                mealchoices.put("Dinner", dinner);
+
+                Map<String, Map<String, String>> weeklyMealPlan = new HashMap<>();
+
+                weeklyMealPlan.put(day, mealchoices);
+
+
+                showAlert(Alert.AlertType.INFORMATION, "Meal plan has been added with the following information: " + "\n" +
+                        "\n" + "Day: " + day + "\n" + "Breakfast: " + breakfast +  "\n" + "Lunch: " + lunch + "\n" + "Dinner: " + dinner + "\n");
+
+                try {
+                    //asynchronously write data
+                   ApiFuture<WriteResult> result = docRef.set(weeklyMealPlan);
+                }
+
+                catch (Exception ex) {
+
+                    return false;
+                }
+
+                return true;
+
             }
 
             else {
+
                 showAlert(Alert.AlertType.ERROR, "Please enter your specified meal plan!");
             }
+
+            return false;
         }
 
     // showAlert method
@@ -195,6 +234,7 @@ public class MealPlannerController implements Initializable {
         alert.setTitle(alert.getTitle());
         alert.setHeaderText(null);
         alert.setContentText(message);
+        alert.getDialogPane().setStyle("-fx-font-size: 16px;");
         alert.show();
     }
 }

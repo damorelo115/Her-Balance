@@ -59,6 +59,7 @@ public static void loadMealPlannerScene(Stage stage) throws IOException {
     public void setDinner(String dinner) {
         this.dinner = dinner;
     }
+
 }
 
 

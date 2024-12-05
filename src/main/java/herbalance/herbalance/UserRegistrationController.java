@@ -62,8 +62,8 @@ public class UserRegistrationController {
 
                 if (addUser()) {
 
-                    theUser.setUserEmail(userEmail.getText());
-                    theUser.setPassword(userPassword.getText());
+                    Main.theUser.setUserEmail(userEmail.getText());
+                    Main.theUser.setPassword(userPassword.getText());
 
                     userEmail.clear();
                     userPassword.clear();
