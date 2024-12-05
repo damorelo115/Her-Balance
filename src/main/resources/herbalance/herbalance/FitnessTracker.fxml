@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.mfxcore.controls.Text?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.text.Text?>
 <AnchorPane prefHeight="559.0" prefWidth="743.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.FitnessController">
     <VBox alignment="CENTER" layoutX="250.0" layoutY="14.0" prefHeight="57.0" prefWidth="244.0" spacing="20" style="-fx-padding: 20; -fx-font-size: 16;" xmlns:fx="http://javafx.com/fxml/1">
         <Text style="-fx-font-size: 24; -fx-font-weight: bold;" text="Fitness Tracker" />

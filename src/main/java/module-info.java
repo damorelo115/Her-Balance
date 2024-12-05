@@ -13,7 +13,7 @@ module herbalance.herbalance {
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
-    requires MaterialFX;
+    requires javafx.fxml;
 
     opens herbalance.herbalance to javafx.fxml;
     exports herbalance.herbalance;

@@ -9,6 +9,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class PeriodTrackerController {
 
@@ -40,6 +41,12 @@ public class PeriodTrackerController {
         private DatePicker previousCycleDatePicker;
 
         @FXML
+        private TextField cycleLengthField;
+
+        @FXML
+        private TextField periodLengthField;
+
+        @FXML
         private Pane sidepane;
 
         @FXML
@@ -51,6 +58,7 @@ public class PeriodTrackerController {
         @FXML
         private ImageView workoutIcon;
 
+
         @FXML
         void logout(ActionEvent event) {
                 Stage stage;
@@ -61,119 +69,84 @@ public class PeriodTrackerController {
                 alert.setContentText("Are you sure you want to logout?");
 
                 if (alert.showAndWait().get() == ButtonType.OK) {
-
                         stage = (Stage) logoutButton.getScene().getWindow();
-
                         System.out.println("User logged out!");
-
                         stage.close();
                 }
         }
 
+
         @FXML
         protected void dashboardButtonClick() {
-
                 try {
                         Stage stage = (Stage) dashboardButton.getScene().getWindow();
-
                         Dashboard.loadDashboardScene();
-
-                }
-
-                catch (Exception e) {
-
+                } catch (Exception e) {
                         throw new RuntimeException(e);
                 }
         }
+
 
         @FXML
         protected void periodButtonClick() throws IOException {
-
                 try {
                         Stage stage = (Stage) periodTrackButton.getScene().getWindow();
-
                         PeriodTracker.loadPeriodTrackerScene(stage);
-
-                }
-
-                catch (IOException e) {
-
+                } catch (IOException e) {
                         throw new RuntimeException(e);
                 }
-
-
         }
+
 
         @FXML
         protected void workoutButtonClick() throws IOException {
-
                 try {
                         Stage stage = (Stage) workoutButton.getScene().getWindow();
-
                         Fitness.loadFitnessTrackerScene(stage);
                 } catch (IOException e) {
-
                         throw new RuntimeException(e);
                 }
-
         }
 
-                @FXML
-                protected void mealPlanButtonClick() throws IOException {
 
-                        try {
-
-                                Stage stage = (Stage) mealPlanButton.getScene().getWindow();
-
-                                MealPlanner.loadMealPlannerScene(stage);
-                        }
-
-                        catch (IOException e) {
-
-                                throw new RuntimeException(e);
-                        }
-
+        @FXML
+        protected void mealPlanButtonClick() throws IOException {
+                try {
+                        Stage stage = (Stage) mealPlanButton.getScene().getWindow();
+                        MealPlanner.loadMealPlannerScene(stage);
+                } catch (IOException e) {
+                        throw new RuntimeException(e);
                 }
-
-
-
-/*
-    @FXML
-    protected void onTrackButtonClick() {
-        String lastPeriodDate = lastPeriodField.getText().trim();
-
-        if (!lastPeriodDate.isEmpty()) {
-            periodStatusLabel.setText("Last period date: " + lastPeriodDate);
-
-
-            nextButton.setVisible(true);
-        }
-
-        else {
-
-            periodStatusLabel.setText("Please enter the last period date.");
-
-
-            nextButton.setVisible(false);
-        }
-
- */
-
-
-    /*
-    @FXML
-    protected void onNextButtonClick() {
-        try {
-            Stage stage = (Stage) nextButton.getScene().getWindow();
-            PeriodDetails.loadPeriodDetailsScene(stage); // Call the static method
-        } catch (IOException e) {
-            e.printStackTrace(); // Print the stack trace for debugging
         }
 
 
-    }
+        @FXML
+        protected void predictCycle(ActionEvent event) {
+                try {
 
-     */
+                        LocalDate lastPeriodStartDate = previousCycleDatePicker.getValue();
+                        int cycleLength = Integer.parseInt(cycleLengthField.getText());
+                        int periodLength = Integer.parseInt(periodLengthField.getText());
+
+
+                        if (tracker == null) {
+                                tracker = new PeriodTracker(lastPeriodStartDate, cycleLength, periodLength);
+                        } else {
+                                tracker.updateTracker(lastPeriodStartDate, cycleLength, periodLength);
+                        }
+
+
+                        LocalDate nextStartDate = tracker.predictNextCycleStart();
+                        LocalDate nextEndDate = tracker.predictNextCycleEnd();
+
+
+                        predictionText.setText(
+                                "Next Period Start: " + nextStartDate + "\nNext Period End: " + nextEndDate
+                        );
+
+                } catch (Exception e) {
+
+                        predictionText.setText("Invalid input. Please check your entries.");
+                }
         }
-
-
+}

@@ -76,9 +76,6 @@ public class FitnessController {
 
             Dashboard.loadDashboardScene();
             stage.close();
-
-
-
         }
 
         catch (Exception e) {
