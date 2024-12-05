@@ -24,7 +24,7 @@ public class Main extends Application {
         try {
             fstore = contxtFirebase.firebase();
             fauth = FirebaseAuth.getInstance();
-            theUser= new User();
+            theUser = new User();
             UserLogin.loadUserLoginScene(stage);
         }
 

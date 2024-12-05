@@ -15,12 +15,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import static herbalance.herbalance.Main.fauth;
 import static herbalance.herbalance.Main.theUser;
 
 public class UserRegistrationController {
+
+    @FXML
+    private TextField firstnameField;
 
     @FXML
     private Label passwordLabel;
@@ -41,6 +43,7 @@ public class UserRegistrationController {
     private Label usernameLabel;
 
 
+    // Calls the onRegisterButtonClick method to register a user
     @FXML
     protected void onRegisterButtonClick() throws IOException {
 
@@ -59,7 +62,7 @@ public class UserRegistrationController {
 
                 if (addUser()) {
 
-                    theUser.setUsername(userEmail.getText());
+                    theUser.setUserEmail(userEmail.getText());
                     theUser.setPassword(userPassword.getText());
 
                     userEmail.clear();
@@ -67,32 +70,21 @@ public class UserRegistrationController {
 
                     Stage stage = (Stage) registerButton.getScene().getWindow();
 
-                    NameEntryQuestion.loadNameEntryQuestionScene(stage);
+                    //NameEntryQuestion.loadNameEntryQuestionScene(stage);
+
+                    BirthDateQuestion.loadBirthDateQuestionScene(stage);
 
                     showAlert(Alert.AlertType.CONFIRMATION, "Registration successful!");
 
-                }
-
-                else {
-
-                    showAlert(Alert.AlertType.ERROR, "Registration failed!");
-
-                    userEmail.clear();
-
-                    userPassword.clear();
                 }
 
             }
 
             else {
 
-                showAlert(Alert.AlertType.ERROR, "Registration failed, issue with registering the user! Try again!");
+                checkUserEmail(userEmail.getText());
 
-                userEmail.clear();
-
-                userPassword.clear();
             }
-            
 
         }
     }
@@ -105,13 +97,14 @@ public class UserRegistrationController {
         Map<String, Object> data = new HashMap<>();
         data.put("Email", userEmail.getText());
         data.put("Password", userPassword.getText());
+        data.put("FirstName", firstnameField.getText());
 
         try {
             //asynchronously write data
             ApiFuture<WriteResult> result = docRef.set(data);
         }
 
-         catch (Exception ex) {
+        catch (Exception ex) {
 
             return false;
         }
@@ -127,11 +120,12 @@ public class UserRegistrationController {
                 .setEmailVerified(false)
                 .setPassword(userPassword.getText());
 
+
         UserRecord userRecord;
 
         try {
 
-            Main.fauth.createUser(request);
+            fauth.createUser(request);
 
             return true;
 
@@ -139,11 +133,35 @@ public class UserRegistrationController {
 
         catch (FirebaseAuthException ex) {
 
-            //Logger.getLogger(UserRegistrationController.class.getName()).log(Level.SEVERE, null, ex);
-
             return false;
         }
 
+    }
+
+    // Checks if the user already exists when trying to register an account
+    public void checkUserEmail(String email) {
+        try {
+
+            UserRecord userRecord = FirebaseAuth.getInstance().getUserByEmail(email);
+
+            if (userRecord.getEmail().equals(userEmail.getText())) {
+
+                showAlert(Alert.AlertType.INFORMATION, "User already exists!");
+
+            }
+
+            else {
+
+                showAlert(Alert.AlertType.ERROR, "Invalid email address!");
+
+            }
+
+        }
+
+        catch (Exception e) {
+
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -162,7 +180,7 @@ public class UserRegistrationController {
 
     }
 
-    // showAlert method
+    // showAlert method to display alerts
     private void showAlert (Alert.AlertType alertType, String message) {
 
         Alert alert = new Alert(alertType);
@@ -171,13 +189,4 @@ public class UserRegistrationController {
         alert.setContentText(message);
         alert.show();
     }
-
-
-
 }
-
-
-
-
-
-

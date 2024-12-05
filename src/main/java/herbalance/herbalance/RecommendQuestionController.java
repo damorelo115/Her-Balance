@@ -2,66 +2,49 @@ package herbalance.herbalance;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class RecommendQuestionController {
 
-    // Checkbox for yes selection
+    // Radio button for yes selection
     @FXML
-    private CheckBox yesCheckBox;
+    private RadioButton yesRadioButton;
 
-    // Checkbox for no selection
+    // Radio button for no selection
     @FXML
-    private CheckBox noCheckBox;
+    private RadioButton noRadioButton;
 
     // Back Button
     @FXML
     private Button backButton;
 
-    // Submit Button
-    @FXML
-    private Button submitButton;
-
     // Next Button
     @FXML
     private Button nextButton;
 
-
-    // Method triggered when Submit button is clicked
     @FXML
-    protected void onSubmitButtonClick() {
-        // Declaring and initializing a StringBuilder to store selected stress management methods
-        StringBuilder selectedRecommend = new StringBuilder();
+    public void initialize() {
+        // Create a ToggleGroup for the radio buttons
+        ToggleGroup recommendGroup = new ToggleGroup();
+        yesRadioButton.setToggleGroup(recommendGroup);
+        noRadioButton.setToggleGroup(recommendGroup);
 
-        if (yesCheckBox.isSelected()) {
-            selectedRecommend.append("- Yes\n");
-        }
-        if (noCheckBox.isSelected()) {
-            selectedRecommend.append("- No\n");
-        }
+        // Add a listener to the ToggleGroup to enable the Next button when a selection is made
+        recommendGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            nextButton.setDisable(newValue == null); // Enable Next button only when a selection is made
+        });
 
-        // Checking if no recommendation response is selected
-        if (selectedRecommend.toString().equals("Selected Recommendation Response:\n")) {
-            selectedRecommend.append("No recommendation option selected.");
-            // Next button will be hidden if no goals are selected
-            nextButton.setVisible(false);
-
-            // Disabling the submit button after submission
-            submitButton.setDisable(true);
-        } else {
-            // Next button will be visible if goals are selected
-            nextButton.setVisible(true);
-        }
-        // Printing selected stress level
-        System.out.println(selectedRecommend); // Needs to be changed to save into a file / database
+        // Initially disable the Next button
+        nextButton.setDisable(true);
     }
 
     // Method called when the Next button is clicked
     @FXML
-    protected void onNextButtonClick () {
+    protected void onNextButtonClick() {
         try {
             Stage stage = (Stage) nextButton.getScene().getWindow();
             RemindersQuestion.loadRemindersQuestionScene(stage);
@@ -69,6 +52,7 @@ public class RecommendQuestionController {
             e.printStackTrace();
         }
     }
+
     // Method called when the Back button is clicked
     @FXML
     protected void onBackButtonClick() {

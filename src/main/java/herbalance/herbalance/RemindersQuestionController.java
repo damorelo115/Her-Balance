@@ -6,8 +6,10 @@ import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,10 +18,10 @@ import java.util.UUID;
 public class RemindersQuestionController {
 
     @FXML
-    private CheckBox enableNotificationsCheckBox;
+    private RadioButton enableNotificationsRadioButton;
 
     @FXML
-    private CheckBox disableNotificationsCheckBox;
+    private RadioButton disableNotificationsRadioButton;
 
     @FXML
     private Button submitButton;
@@ -30,15 +32,44 @@ public class RemindersQuestionController {
     @FXML
     private Button backButton;
 
+    @FXML
+    public void initialize() {
+        // Create a ToggleGroup for the radio buttons
+        ToggleGroup notificationGroup = new ToggleGroup();
+        enableNotificationsRadioButton.setToggleGroup(notificationGroup);
+        disableNotificationsRadioButton.setToggleGroup(notificationGroup);
+
+        // Add a listener to the ToggleGroup to dynamically handle button visibility
+        notificationGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                submitButton.setDisable(false);
+                if (signUpButton != null) {
+                    signUpButton.setVisible(true);
+                }
+            } else {
+                submitButton.setDisable(true);
+                if (signUpButton != null) {
+                    signUpButton.setVisible(false);
+                }
+            }
+        });
+
+        // Initially disable the Submit button and hide the Sign-Up button
+        submitButton.setDisable(true);
+        if (signUpButton != null) {
+            signUpButton.setVisible(false);
+        }
+    }
+
     // Method called when the Submit button is clicked
     @FXML
     protected void onSubmitButtonClick() {
         StringBuilder selectedReminders = new StringBuilder();
 
-        if (enableNotificationsCheckBox.isSelected()) {
+        if (enableNotificationsRadioButton.isSelected()) {
             selectedReminders.append("- Enable Notifications\n");
         }
-        if (disableNotificationsCheckBox.isSelected()) {
+        if (disableNotificationsRadioButton.isSelected()) {
             selectedReminders.append("- Disable Notifications\n");
         }
 
@@ -60,39 +91,10 @@ public class RemindersQuestionController {
     // Method called when the Sign-Up button is clicked
     @FXML
     protected void onSignUpButtonClick() {
-        // save theUser data to the database
-
-        if (addUserSurveyData()) {
-            Dashboard.loadDashboardScene();
-        }
-        else{
-            showAlert(Alert.AlertType.ERROR, "Registration failed!");
-        }
+        Stage stage = (Stage) signUpButton.getScene().getWindow();
+        Dashboard.loadDashboardScene();
     }
 
-    // This method is called when submitting survey data.
-    // this method will save all the information about theUser to firestore
-    public boolean addUserSurveyData() {
-
-        DocumentReference docRef = Main.fstore.collection("Surveys").document(UUID.randomUUID().toString());
-
-        Map<String, Object> data = new HashMap<>();
-        data.put("Email", Main.theUser.getUsername());
-        data.put("FirstName", Main.theUser.getFirstName());
-
-        try {
-            //asynchronously write data
-            ApiFuture<WriteResult> result = docRef.set(data);
-        }
-
-        catch (Exception ex) {
-
-            return false;
-        }
-
-        return true;
-
-    }
     // Method called when the Back button is clicked
     @FXML
     protected void onBackButtonClick() {
@@ -104,14 +106,12 @@ public class RemindersQuestionController {
         }
     }
 
-    private void showAlert (Alert.AlertType alertType, String message) {
-
+    private void showAlert(Alert.AlertType alertType, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(alert.getTitle());
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.show();
     }
-
-
 }
+
