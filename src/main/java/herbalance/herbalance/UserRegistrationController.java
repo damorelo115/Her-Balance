@@ -104,7 +104,7 @@ public class UserRegistrationController {
             ApiFuture<WriteResult> result = docRef.set(data);
         }
 
-         catch (Exception ex) {
+        catch (Exception ex) {
 
             return false;
         }
@@ -164,8 +164,8 @@ public class UserRegistrationController {
         }
     }
 
-        @FXML
-        protected void onSignInButtonClick() {
+    @FXML
+    protected void onSignInButtonClick() {
 
         try {
             Stage stage = (Stage) signinButton.getScene().getWindow();

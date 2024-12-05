@@ -40,7 +40,7 @@
         <Pane layoutX="341.0" prefHeight="479.0" prefWidth="404.0" style="-fx-background-color: FFFFFF;">
             <children>
                 <!-- Next button -->
-                <Button fx:id="nextButton" layoutX="82.0" layoutY="265.0" mnemonicParsing="false" onAction="#onNextButtonClick" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: #AFE9E5;" text="Next" visible="false">
+                <Button fx:id="nextButton" layoutX="82.0" layoutY="265.0" mnemonicParsing="false" onAction="#onNextButtonClick" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: #AFE9E5;" text="Next">
                     <font>
                         <Font name="Poppins ExtraBold" size="16.0" />
                     </font>

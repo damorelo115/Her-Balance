@@ -6,7 +6,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class DashboardController2 {
+public class DashboardController {
 
     @FXML
     private Pane sidepane;
