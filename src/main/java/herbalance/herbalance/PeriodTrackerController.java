@@ -129,15 +129,7 @@ public class PeriodTrackerController {
                         int periodLength = Integer.parseInt(periodLengthField.getText());
 
 
-                        if (tracker == null) {
-                                tracker = new PeriodTracker(lastPeriodStartDate, cycleLength, periodLength);
-                        } else {
-                                tracker.updateTracker(lastPeriodStartDate, cycleLength, periodLength);
-                        }
 
-
-                        LocalDate nextStartDate = tracker.predictNextCycleStart();
-                        LocalDate nextEndDate = tracker.predictNextCycleEnd();
 
 
                         predictionText.setText(
