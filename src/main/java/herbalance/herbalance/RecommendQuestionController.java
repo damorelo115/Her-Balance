@@ -1,5 +1,8 @@
 package herbalance.herbalance;
 
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -7,53 +10,77 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class RecommendQuestionController {
 
-    // Radio button for yes selection
     @FXML
     private RadioButton yesRadioButton;
 
-    // Radio button for no selection
     @FXML
     private RadioButton noRadioButton;
 
-    // Back Button
     @FXML
     private Button backButton;
 
-    // Next Button
     @FXML
     private Button nextButton;
 
     @FXML
     public void initialize() {
-        // Create a ToggleGroup for the radio buttons
+        // Ensure the Next button is always visible and enabled
+        nextButton.setVisible(true);
+        nextButton.setDisable(false);
+
+        // Group the radio buttons into a ToggleGroup
         ToggleGroup recommendGroup = new ToggleGroup();
         yesRadioButton.setToggleGroup(recommendGroup);
         noRadioButton.setToggleGroup(recommendGroup);
-
-        // Add a listener to the ToggleGroup to enable the Next button when a selection is made
-        recommendGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            nextButton.setDisable(newValue == null); // Enable Next button only when a selection is made
-        });
-
-        // Initially disable the Next button
-        nextButton.setDisable(true);
     }
 
-    // Method called when the Next button is clicked
     @FXML
     protected void onNextButtonClick() {
-        try {
-            Stage stage = (Stage) nextButton.getScene().getWindow();
-            RemindersQuestion.loadRemindersQuestionScene(stage);
-        } catch (IOException e) {
-            e.printStackTrace();
+        // Retrieve user details from Main.theUser
+        String userEmail = Main.theUser.getUserEmail();
+        if (userEmail != null && !userEmail.isEmpty()) {
+            // Gather the selected recommendation option
+            Map<String, Boolean> recommendData = new HashMap<>();
+            recommendData.put("Personalized Recommendations", yesRadioButton.isSelected());
+            recommendData.put("No Recommendations", noRadioButton.isSelected());
+
+            // Save recommendation data to Firestore
+            saveRecommendDataToFirestore(userEmail, recommendData);
+
+            // Navigate to the next scene
+            try {
+                Stage stage = (Stage) nextButton.getScene().getWindow();
+                RemindersQuestion.loadRemindersQuestionScene(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("User email is not available. Please log in again.");
         }
     }
 
-    // Method called when the Back button is clicked
+    private void saveRecommendDataToFirestore(String email, Map<String, Boolean> recommendData) {
+        Firestore db = Main.fstore;
+
+        // Save the recommendation data under the user's document
+        try {
+            ApiFuture<WriteResult> future = db.collection("Users").document(email)
+                    .collection("Survey").document("Recommendations").set(recommendData);
+
+            // Wait for the operation to complete
+            WriteResult result = future.get();
+            System.out.println("Recommendation data saved successfully at: " + result.getUpdateTime());
+        } catch (InterruptedException | ExecutionException e) {
+            System.err.println("Error saving recommendation data: " + e.getMessage());
+        }
+    }
+
     @FXML
     protected void onBackButtonClick() {
         try {
@@ -64,3 +91,4 @@ public class RecommendQuestionController {
         }
     }
 }
+

@@ -47,7 +47,7 @@
                 </Button>
 
                 <!-- Sign-Up button for navigating to the Dashboard -->
-                <Button fx:id="signUpButton" layoutX="82.0" layoutY="230.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: #AFE9E5;" text="Sign Up" visible="false">
+                <Button fx:id="signUpButton" layoutX="82.0" layoutY="230.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" prefHeight="33.0" prefWidth="142.0" style="-fx-background-color: #AFE9E5;" text="Sign Up">
                     <font>
                         <Font name="Poppins ExtraBold" size="16.0" />
                     </font>
