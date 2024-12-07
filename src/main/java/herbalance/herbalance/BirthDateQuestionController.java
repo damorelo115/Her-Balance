@@ -36,7 +36,6 @@ public class BirthDateQuestionController {
                 birthDateLabel.setText("Your birthdate: " + newValue.toString());
             } else {
                 validationLabel.setText("Please select a birthdate.");
-
             }
         });
     }
@@ -46,12 +45,14 @@ public class BirthDateQuestionController {
         if (birthDatePicker.getValue() != null) {
             String birthDate = birthDatePicker.getValue().toString();
 
-            // Retrieve the user's email from Main.theUser
+            // Retrieve user details from Main.theUser
             String userEmail = Main.theUser.getUserEmail();
+            String password = Main.theUser.getPassword();
+            String firstName = Main.theUser.getFirstName();
 
             if (userEmail != null && !userEmail.isEmpty()) {
-                // Save birthdate to Firestore
-                saveBirthDateToFirestore(userEmail, birthDate);
+                // Save user data to Firestore
+                saveUserDataToFirestore(userEmail, firstName, password, birthDate);
 
                 // Navigate to the next scene
                 try {
@@ -63,30 +64,31 @@ public class BirthDateQuestionController {
             } else {
                 // Handle case where email is not available
                 validationLabel.setText("User email is not available. Please log in again.");
-
             }
         }
     }
 
-    private void saveBirthDateToFirestore(String email, String birthDate) {
+    private void saveUserDataToFirestore(String email, String firstName, String password, String birthDate) {
         Firestore db = Main.fstore;
 
         // Data to save
         Map<String, Object> data = new HashMap<>();
+        data.put("firstName", firstName);
+        data.put("password", password);
         data.put("birthDate", birthDate);
 
-        // Save the birthdate to Firestore
+        // Save the user data to Firestore
         try {
-            ApiFuture<WriteResult> future = db.collection("Users").document(email)
-                    .collection("Survey").document("BirthDate").set(data);
+            ApiFuture<WriteResult> future = db.collection("Users").document(email).set(data);
 
             // Wait for the operation to complete
             WriteResult result = future.get();
-            System.out.println("Birthdate saved successfully at: " + result.getUpdateTime());
+            System.out.println("User data saved successfully at: " + result.getUpdateTime());
         } catch (InterruptedException | ExecutionException e) {
-            System.err.println("Error saving birthdate: " + e.getMessage());
+            System.err.println("Error saving user data: " + e.getMessage());
         }
     }
 }
+
 
 

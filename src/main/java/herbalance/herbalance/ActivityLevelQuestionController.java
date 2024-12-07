@@ -1,73 +1,84 @@
 package herbalance.herbalance;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class ActivityLevelQuestionController {
 
     @FXML
-    // Checkbox for sedentary option
     private CheckBox sedentaryCheckBox;
 
-    // Checkbox for moderately active option
     @FXML
     private CheckBox moderatelyActiveCheckBox;
 
-    // Checkbox for highly active option
     @FXML
     private CheckBox highlyActiveCheckBox;
 
-    // Back Button
     @FXML
     private Button backButton;
 
-    // Next Button
     @FXML
     private Button nextButton;
 
     @FXML
     public void initialize() {
-        // Initially disable the Next button
-        nextButton.setDisable(true);
-
-        // Add listeners to all checkboxes
-        ChangeListener<Boolean> checkboxListener = (ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-            // Check if any checkbox is selected
-            if (isAnyCheckboxSelected()) {
-                nextButton.setDisable(false);
-            } else {
-                nextButton.setDisable(true);
-            }
-        };
-
-        sedentaryCheckBox.selectedProperty().addListener(checkboxListener);
-        moderatelyActiveCheckBox.selectedProperty().addListener(checkboxListener);
-        highlyActiveCheckBox.selectedProperty().addListener(checkboxListener);
+        // Ensure the Next button is always visible and enabled
+        nextButton.setVisible(true);
+        nextButton.setDisable(false);
     }
 
-    // Helper method to check if any checkbox is selected
-    private boolean isAnyCheckboxSelected() {
-        return sedentaryCheckBox.isSelected() || moderatelyActiveCheckBox.isSelected() || highlyActiveCheckBox.isSelected();
-    }
-
-    // Method called when the Next button is clicked
     @FXML
     protected void onNextButtonClick() {
-        try {
-            Stage stage = (Stage) nextButton.getScene().getWindow();
-            MotivateQuestion.loadMotivateQuestionScene(stage);
-        } catch (IOException e) {
-            e.printStackTrace();
+        // Retrieve user details from Main.theUser
+        String userEmail = Main.theUser.getUserEmail();
+        if (userEmail != null && !userEmail.isEmpty()) {
+            // Gather selected activity levels
+            Map<String, Boolean> activityLevelData = new HashMap<>();
+            activityLevelData.put("Sedentary", sedentaryCheckBox.isSelected());
+            activityLevelData.put("Moderately Active", moderatelyActiveCheckBox.isSelected());
+            activityLevelData.put("Highly Active", highlyActiveCheckBox.isSelected());
+
+            // Save activity level data to Firestore
+            saveActivityLevelToFirestore(userEmail, activityLevelData);
+
+            // Navigate to the next scene
+            try {
+                Stage stage = (Stage) nextButton.getScene().getWindow();
+                MotivateQuestion.loadMotivateQuestionScene(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("User email is not available. Please log in again.");
         }
     }
 
-    // Method called when the Back button is clicked
+    private void saveActivityLevelToFirestore(String email, Map<String, Boolean> activityLevelData) {
+        Firestore db = Main.fstore;
+
+        // Save the activity level data under the user's document
+        try {
+            ApiFuture<WriteResult> future = db.collection("Users").document(email)
+                    .collection("Survey").document("ActivityLevel").set(activityLevelData);
+
+            // Wait for the operation to complete
+            WriteResult result = future.get();
+            System.out.println("Activity level data saved successfully at: " + result.getUpdateTime());
+        } catch (InterruptedException | ExecutionException e) {
+            System.err.println("Error saving activity level data: " + e.getMessage());
+        }
+    }
+
     @FXML
     protected void onBackButtonClick() {
         try {
