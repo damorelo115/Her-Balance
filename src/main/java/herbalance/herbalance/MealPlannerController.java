@@ -14,10 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class MealPlannerController implements Initializable {
@@ -117,9 +114,7 @@ public class MealPlannerController implements Initializable {
 
             PeriodTracker.loadPeriodTrackerScene(stage);
 
-        }
-
-        catch (IOException e) {
+        } catch (IOException e) {
 
             throw new RuntimeException(e);
         }
@@ -136,9 +131,7 @@ public class MealPlannerController implements Initializable {
             Stage stage = (Stage) workoutButton.getScene().getWindow();
 
             Fitness.loadFitnessTrackerScene(stage);
-        }
-
-        catch (IOException e) {
+        } catch (IOException e) {
 
             throw new RuntimeException(e);
         }
@@ -146,33 +139,31 @@ public class MealPlannerController implements Initializable {
     }
 
     // Loads the Meal Planner scene
-        @FXML
-        protected void mealPlanButtonClick() throws IOException {
+    @FXML
+    protected void mealPlanButtonClick() throws IOException {
 
-            try {
+        try {
 
-                Stage stage = (Stage) mealPlanButton.getScene().getWindow();
+            Stage stage = (Stage) mealPlanButton.getScene().getWindow();
 
-                MealPlanner.loadMealPlannerScene(stage);
-            }
+            MealPlanner.loadMealPlannerScene(stage);
+        } catch (IOException e) {
 
-            catch (IOException e) {
-
-                throw new RuntimeException(e);
-            }
-
+            throw new RuntimeException(e);
         }
 
-        // Initializes day options and meal choices
+    }
+
+    // Initializes day options and meal choices
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         ObservableList<String> weeklymealPlan = FXCollections.observableArrayList();
 
-        String[] days = {"Monday", "Tuesday", "Wednesday","Thursday", "Friday"};
+        String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
         String[] breakfastmeals = {"Oatmeal", "Yogurt", "Avocado Toast", "Raspberry Protein Muffins", "Egg White Frittata"};
-        String [] lunchmeals = {"Chicken Salad", "Lentil Soup", "Roasted Chickpea Wrap", "Salmon Bowl", "Turkey & Cheese Panini"};
-        String [] dinnermeals = {"Chicken Tacos", "Oven-Baked Salmon", "Coconut Curry With Rice", "Vegetable Lasagna", "Penne Pasta with Pesto Sauce"};
+        String[] lunchmeals = {"Chicken Salad", "Lentil Soup", "Roasted Chickpea Wrap", "Salmon Bowl", "Turkey & Cheese Panini"};
+        String[] dinnermeals = {"Chicken Tacos", "Oven-Baked Salmon", "Coconut Curry With Rice", "Vegetable Lasagna", "Penne Pasta with Pesto Sauce"};
 
         dayOptions.getItems().setAll(days);
         breakfastOptions.getItems().setAll(breakfastmeals);
@@ -181,145 +172,96 @@ public class MealPlannerController implements Initializable {
 
         weeklyPlanView.setWrapText(true);
         weeklyPlanView.setEditable(false);
+
     }
+
 
     // This method allow the user to choose a weekday and three meal options to add to a weekly meal plan. The chosen options
     // will be added to the document of the user in a collection
-        @FXML
-        private void addWeeklyPlan() {
+    @FXML
+    private void addWeeklyPlan() {
 
-            String day = dayOptions.getValue();
-            String breakfast = breakfastOptions.getValue();
-            String lunch = lunchOptions.getValue();
-            String dinner = dinnerOptions.getValue();
+        String day = dayOptions.getValue();
+        String breakfast = breakfastOptions.getValue();
+        String lunch = lunchOptions.getValue();
+        String dinner = dinnerOptions.getValue();
 
-            // Check if the options are not empty and add meal choices into the Meal Plan collection
-            if (day != null && breakfast != null && lunch != null && dinner != null) {
+        // Check if the options are not empty and add meal choices into the Meal Plan collection
+        if (day != null && breakfast != null && lunch != null && dinner != null) {
 
-                showAlert(Alert.AlertType.INFORMATION, "Meal plan has been added with the following information: " + "\n" +
-                        "\n" + "Day: " + day + "\n" + "Breakfast: " + breakfast +  "\n" + "Lunch: " + lunch + "\n" + "Dinner: " + dinner + "\n");
+            showAlert(Alert.AlertType.INFORMATION, "Meal plan has been added with the following information: " + "\n" +
+                    "\n" + "Day: " + day + "\n" + "Breakfast: " + breakfast + "\n" + "Lunch: " + lunch + "\n" + "Dinner: " + dinner + "\n");
 
-                DocumentReference docRef = Main.fstore.collection("Meal Plans").document(Main.theUser.getUserEmail());
+            DocumentReference docRef = Main.fstore.collection("Meal Plans").document(Main.theUser.getUserEmail());
 
-                Map<String, String> mealchoices = new HashMap<>();
+            Map<String, String> mealchoices = new HashMap<>();
 
-                mealchoices.put("Breakfast", breakfast);
-                mealchoices.put("Lunch", lunch);
-                mealchoices.put("Dinner", dinner);
+            mealchoices.put("Breakfast", breakfast);
+            mealchoices.put("Lunch", lunch);
+            mealchoices.put("Dinner", dinner);
 
-                // asynchronously update doc, create the document if missing
-                Map<String, Object> update = new HashMap<>();
-                update.put(day, mealchoices);
+            // asynchronously update doc, create the document if missing
+            Map<String, Object> update = new HashMap<>();
+            update.put(day, mealchoices);
 
-                ApiFuture<WriteResult> writeResult = Main.fstore.collection("Meal Plans").document(Main.theUser.getUserEmail()).set(update, SetOptions.merge());
+            ApiFuture<WriteResult> writeResult = Main.fstore.collection("Meal Plans").document(Main.theUser.getUserEmail()).set(update, SetOptions.merge());
+
+        } else {
+
+            showAlert(Alert.AlertType.ERROR, "Please enter your specified meal plan!");
+        }
+
+        // Day and meal choices are cleared after being picked
+        dayOptions.getSelectionModel().clearSelection();
+        breakfastOptions.getSelectionModel().clearSelection();
+        lunchOptions.getSelectionModel().clearSelection();
+        dinnerOptions.getSelectionModel().clearSelection();
+
+    }
+
+    // Users will be able to view their curated weekly meal plan
+    @FXML
+    private void viewWeeklyPlan() throws ExecutionException, InterruptedException {
+
+        //asynchronously retrieve all documents
+        DocumentReference docRef = Main.fstore.collection("Meal Plans").document(Main.theUser.getUserEmail());
+        //asynchronously retrieve all documents
+        ApiFuture<QuerySnapshot> future = Main.fstore.collection("Meal Plans").get();
+
+        List<QueryDocumentSnapshot> documents;
+        try {
+            documents = future.get().getDocuments();
+
+            if (!documents.isEmpty()) {
+
+                for (QueryDocumentSnapshot document : documents) {
+
+                    weeklyPlanView.setText(document.getData() + "\n" + "\n"  );
 
                 }
+            }
 
             else {
-
-                showAlert(Alert.AlertType.ERROR, "Please enter your specified meal plan!");
+                weeklyPlanView.setText("No meal plan found");
             }
-
-            // Day and meal choices are cleared after being picked
-            dayOptions.getSelectionModel().clearSelection();
-            breakfastOptions.getSelectionModel().clearSelection();
-            lunchOptions.getSelectionModel().clearSelection();
-            dinnerOptions.getSelectionModel().clearSelection();
-
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
         }
 
-        /*
-        // Users will be able to view their curated weekly meal plan
-        @FXML
-        private void viewWeeklyPlan() throws ExecutionException, InterruptedException {
-
-
-/  //asynchronously retrieve all documents
-            ApiFuture<QuerySnapshot> future = Main.fstore.collection("Meal Plans").whereEqualTo("Email", Main.theUser.getUserEmail()).get();
-            // future.get() blocks on response
-            List<QueryDocumentSnapshot> documents;
-            try {
-                documents = future.get().getDocuments();
-
-                if (documents.size() > 0) {
-
-                    Map<String, Object> mealchoices = document.getData();
-
-                    if (mealchoices != null) {
-
-                        for (QueryDocumentSnapshot document : documents) {
-
-                            StringBuilder mealPlanText = new StringBuilder();
-                            weeklyPlanView.setText(weeklyPlanView.getText() + document.getData().get("Meal Plan").toString());
-                        }
-                        //weeklyPlanView.setText(mealPlanText.toString());
-                    } else {
-                        weeklyPlanView.setText("No meal choices found.");
-                    }
-                } else {
-                    weeklyPlanView.setText("No meal plan found for this user.");
-
-                    // weeklyPlanView.setText(document.get(mealplan).toString());
-
-                }
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            } catch (ExecutionException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-
-
-        /*
-            //asynchronously retrieve all documents
-            ApiFuture<QuerySnapshot> future = Main.fstore.collection("Meal Plans").whereEqualTo("Email", Main.theUser.getUserEmail()).get();
-            // future.get() blocks on response
-            List<QueryDocumentSnapshot> documents;
-            try {
-                documents = future.get().getDocuments();
-                if (documents.size() > 0) {
-                    for (QueryDocumentSnapshot document : documents) {
-
-                        String mealplan = document.getString(Main.theUser.getUserEmail());
-
-                        weeklyPlanView.appendText("\n" + mealplan + "\n");
-
-                    }
-
-                    weeklyPlanView.setText(weeklyPlanView.getText() + "\n");
-
-                    System.out.println(documents.getData());
-                }
-
-                else {
-                    weeklyPlanView.setText("No meal plan found for this user!");
-                }
-
-            }
-
-            catch(InterruptedException | ExecutionException ex)
-                {
-                    ex.printStackTrace();
-                }
-
-            }
-
-         */
-
-
-    // showAlert method to display alerts to the user
-    private void showAlert(Alert.AlertType alertType, String message) {
-
-        Alert alert = new Alert(alertType);
-        alert.setTitle(alert.getTitle());
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.getDialogPane().setStyle("-fx-font-size: 16px;");
-        alert.show();
     }
-}
 
+        // showAlert method to display alerts to the user
+        private void showAlert (Alert.AlertType alertType, String message){
 
+            Alert alert = new Alert(alertType);
+            alert.setTitle(alert.getTitle());
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.getDialogPane().setStyle("-fx-font-size: 16px;");
+            alert.show();
+        }
 
+    }
 
