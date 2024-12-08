@@ -90,7 +90,7 @@ public class PeriodTrackerController {
 
         @FXML
         protected void workoutButtonClick() {
-                navigateToScene("Fitness Tracker", Fitness::loadFitnessTrackerScene);
+                navigateToScene("FitnessTracker Tracker", Fitness::loadFitnessTrackerScene);
         }
 
 

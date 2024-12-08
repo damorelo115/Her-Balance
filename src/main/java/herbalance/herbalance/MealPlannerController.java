@@ -122,7 +122,7 @@ public class MealPlannerController implements Initializable {
 
     }
 
-    // Loads the Fitness Tracker scene
+    // Loads the FitnessTracker Tracker scene
     @FXML
     protected void workoutButtonClick() throws IOException {
 

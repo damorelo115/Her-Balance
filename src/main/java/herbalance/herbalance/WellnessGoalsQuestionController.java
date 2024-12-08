@@ -70,7 +70,7 @@ public class WellnessGoalsQuestionController {
         if (userEmail != null && !userEmail.isEmpty()) {
             // Gather selected wellness goals
             Map<String, Boolean> wellnessGoalsData = new HashMap<>();
-            wellnessGoalsData.put("Fitness", fitnessCheckBox.isSelected());
+            wellnessGoalsData.put("FitnessTracker", fitnessCheckBox.isSelected());
             wellnessGoalsData.put("Mental Health", mentalHealthCheckBox.isSelected());
             wellnessGoalsData.put("Nutrition", nutritionCheckBox.isSelected());
             wellnessGoalsData.put("Hormonal Balance", hormonalBalanceCheckBox.isSelected());
