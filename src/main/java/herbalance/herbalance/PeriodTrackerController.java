@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 public class PeriodTrackerController {
 
-        private PeriodTracker tracker; // Tracker instance to store user data
+        private PeriodTracker tracker;
 
         @FXML
         private Button dashboardButton;
@@ -60,7 +60,6 @@ public class PeriodTrackerController {
         @FXML
         private ImageView workoutIcon;
 
-
         @FXML
         void logout(ActionEvent event) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -75,89 +74,67 @@ public class PeriodTrackerController {
                 }
         }
 
-
         @FXML
         protected void dashboardButtonClick() throws IOException {
-                navigateToScene("Dashboard", stage -> Dashboard.loadDashboardScene());
+                Stage stage = (Stage) dashboardButton.getScene().getWindow();
+                Dashboard.loadDashboardScene();
         }
-
 
         @FXML
         protected void periodButtonClick() {
-                navigateToScene("Period Tracker", PeriodTracker::loadPeriodTrackerScene);
+                try {
+                        Stage stage = (Stage) periodTrackButton.getScene().getWindow();
+                        PeriodTracker.loadPeriodTrackerScene(stage);
+                } catch (IOException e) {
+                        showError("Navigation Error", "Unable to load the period tracker.");
+                }
         }
-
 
         @FXML
         protected void workoutButtonClick() {
-                navigateToScene("FitnessTracker Tracker", Fitness::loadFitnessTrackerScene);
+                try {
+                        Stage stage = (Stage) workoutButton.getScene().getWindow();
+                        Fitness.loadFitnessTrackerScene(stage);
+                } catch (IOException e) {
+                        showError("Navigation Error", "Unable to load the fitness tracker.");
+                }
         }
-
 
         @FXML
         protected void mealPlanButtonClick() {
-                navigateToScene("Meal Planner", MealPlanner::loadMealPlannerScene);
+                try {
+                        Stage stage = (Stage) mealPlanButton.getScene().getWindow();
+                        MealPlanner.loadMealPlannerScene(stage);
+                } catch (IOException e) {
+                        showError("Navigation Error", "Unable to load the meal planner.");
+                }
         }
-
 
         @FXML
         protected void predictCycle(ActionEvent event) {
                 try {
-
-                        validateInputs();
-
-                        LocalDate lastPeriodStartDate = previousCycleDatePicker.getValue();
-                        int cycleLength = Integer.parseInt(cycleLengthField.getText());
-                        int periodLength = Integer.parseInt(periodLengthField.getText());
-
-
-                        if (tracker == null) {
-                                tracker = new PeriodTracker(lastPeriodStartDate, cycleLength, periodLength);
-                        } else {
-                                tracker.updateTracker(lastPeriodStartDate, cycleLength, periodLength);
+                        // Check that required fields are filled
+                        if (previousCycleDatePicker.getValue() == null) {
+                                throw new IllegalArgumentException("Please select the previous cycle date.");
                         }
 
+                        // Get user input for previous cycle date
+                        LocalDate lastPeriodStartDate = previousCycleDatePicker.getValue();
 
-                        LocalDate nextStartDate = tracker.predictNextCycleStart();
-                        LocalDate nextEndDate = tracker.predictNextCycleEnd();
+                        // Predict next cycle start date (28 days after previous cycle date)
+                        LocalDate nextCycleStartDate = lastPeriodStartDate.plusDays(28);
 
-                        predictionText.setText(
-                                "Next Period Start: " + nextStartDate + "\nNext Period End: " + nextEndDate
-                        );
-                } catch (NumberFormatException e) {
-                        predictionText.setText("Invalid input. Please enter numeric values for cycle and period lengths.");
+                        // Display the prediction
+                        predictionText.setText("Next Predicted Cycle Start Date: " + nextCycleStartDate);
+
                 } catch (IllegalArgumentException e) {
+                        // Display error for invalid inputs
                         predictionText.setText(e.getMessage());
                 } catch (Exception e) {
+                        // Handle unexpected errors
                         predictionText.setText("An unexpected error occurred. Please try again.");
                 }
         }
-
-
-        private void validateInputs() {
-                if (previousCycleDatePicker.getValue() == null) {
-                        throw new IllegalArgumentException("Please select a previous cycle start date.");
-                }
-                if (cycleLengthField.getText().isEmpty() || periodLengthField.getText().isEmpty()) {
-                        throw new IllegalArgumentException("Cycle Length and Period Length are required.");
-                }
-                int cycleLength = Integer.parseInt(cycleLengthField.getText());
-                int periodLength = Integer.parseInt(periodLengthField.getText());
-                if (cycleLength <= 0 || periodLength <= 0) {
-                        throw new IllegalArgumentException("Cycle Length and Period Length must be positive numbers.");
-                }
-        }
-
-
-        private void navigateToScene(String sceneName, SceneLoader loader) {
-                try {
-                        Stage stage = (Stage) dashboardButton.getScene().getWindow();
-                        loader.loadScene(stage);
-                } catch (IOException e) {
-                        showError("Navigation Error", "Unable to load the " + sceneName + " scene.");
-                }
-        }
-
 
         private void showError(String title, String message) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -165,10 +142,5 @@ public class PeriodTrackerController {
                 alert.setHeaderText(null);
                 alert.setContentText(message);
                 alert.showAndWait();
-        }
-
-        @FunctionalInterface
-        private interface SceneLoader {
-                void loadScene(Stage stage) throws IOException;
         }
 }

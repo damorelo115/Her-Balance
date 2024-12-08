@@ -12,8 +12,7 @@ module herbalance.herbalance {
     requires org.kordamp.bootstrapfx.core;
     requires javafx.fxml;
     requires java.net.http;
-    requires org.json;
-    requires org.testng;
+
     requires com.google.gson;
     requires java.logging;
     requires google.cloud.storage;
