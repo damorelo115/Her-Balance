@@ -13,6 +13,8 @@ import java.time.LocalDate;
 
 public class PeriodTrackerController {
 
+        private PeriodTracker tracker;
+
         @FXML
         private Button dashboardButton;
 
@@ -34,9 +36,6 @@ public class PeriodTrackerController {
         @FXML
         private Button predictCycle;
 
-        @FXML
-        private TextArea predictionBox;
-        
         @FXML
         private Text predictionText;
 
@@ -61,99 +60,87 @@ public class PeriodTrackerController {
         @FXML
         private ImageView workoutIcon;
 
-
         @FXML
         void logout(ActionEvent event) {
-                Stage stage;
-
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Logout");
                 alert.setHeaderText("You are about to logout!");
                 alert.setContentText("Are you sure you want to logout?");
 
                 if (alert.showAndWait().get() == ButtonType.OK) {
-                        stage = (Stage) logoutButton.getScene().getWindow();
+                        Stage stage = (Stage) logoutButton.getScene().getWindow();
                         System.out.println("User logged out!");
                         stage.close();
                 }
         }
 
-
         @FXML
-        protected void dashboardButtonClick() {
-                try {
-                        Stage stage = (Stage) dashboardButton.getScene().getWindow();
-                        Dashboard.loadDashboardScene();
-                } catch (Exception e) {
-                        throw new RuntimeException(e);
-                }
+        protected void dashboardButtonClick() throws IOException {
+                Stage stage = (Stage) dashboardButton.getScene().getWindow();
+                Dashboard.loadDashboardScene();
         }
 
-
         @FXML
-        protected void periodButtonClick() throws IOException {
+        protected void periodButtonClick() {
                 try {
                         Stage stage = (Stage) periodTrackButton.getScene().getWindow();
                         PeriodTracker.loadPeriodTrackerScene(stage);
                 } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        showError("Navigation Error", "Unable to load the period tracker.");
                 }
         }
 
-
         @FXML
-        protected void workoutButtonClick() throws IOException {
+        protected void workoutButtonClick() {
                 try {
                         Stage stage = (Stage) workoutButton.getScene().getWindow();
                         Fitness.loadFitnessTrackerScene(stage);
                 } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        showError("Navigation Error", "Unable to load the fitness tracker.");
                 }
         }
 
-
         @FXML
-        protected void mealPlanButtonClick() throws IOException {
+        protected void mealPlanButtonClick() {
                 try {
                         Stage stage = (Stage) mealPlanButton.getScene().getWindow();
                         MealPlanner.loadMealPlannerScene(stage);
                 } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        showError("Navigation Error", "Unable to load the meal planner.");
                 }
         }
-
 
         @FXML
         protected void predictCycle(ActionEvent event) {
                 try {
-                        if (previousCycleDatePicker.getValue() == null && cycleLengthField.getText().isEmpty()) {
-                                showAlert(Alert.AlertType.ERROR,"Previous cycle date and cycle length must be filled.");
+                        // Check that required fields are filled
+                        if (previousCycleDatePicker.getValue() == null) {
+                                throw new IllegalArgumentException("Please select the previous cycle date.");
                         }
 
+                        // Get user input for previous cycle date
                         LocalDate lastPeriodStartDate = previousCycleDatePicker.getValue();
-                        
-                        int cycleLength = 28;
 
-                        int daylength = Integer.parseInt(cycleLengthField.getText());
+                        // Predict next cycle start date (28 days after previous cycle date)
+                        LocalDate nextCycleStartDate = lastPeriodStartDate.plusDays(28);
 
-                        // Predict next cycle based on the given inputs
-                        LocalDate nextCycleStartDate = lastPeriodStartDate.plusDays(cycleLength + 28);
+                        // Display the prediction
+                        predictionText.setText("Next Predicted Cycle Start Date: " + nextCycleStartDate);
 
-                        predictionBox.setText("Next Period Start: " + nextCycleStartDate);
-
-                } 
-                
-                catch (Exception e) {
-
-                        predictionText.setText("Invalid input. Please check your entries.");
+                } catch (IllegalArgumentException e) {
+                        // Display error for invalid inputs
+                        predictionText.setText(e.getMessage());
+                } catch (Exception e) {
+                        // Handle unexpected errors
+                        predictionText.setText("An unexpected error occurred. Please try again.");
                 }
         }
-        private void showAlert(Alert.AlertType alertType, String message) {
 
-                Alert alert = new Alert(alertType);
-                alert.setTitle(alert.getTitle());
+        private void showError(String title, String message) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle(title);
                 alert.setHeaderText(null);
                 alert.setContentText(message);
-                alert.show();
+                alert.showAndWait();
         }
 }
