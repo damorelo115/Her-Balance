@@ -175,7 +175,6 @@ public class MealPlannerController implements Initializable {
 
     }
 
-
     // This method allow the user to choose a weekday and three meal options to add to a weekly meal plan. The chosen options
     // will be added to the document of the user in a collection
     @FXML
@@ -264,4 +263,3 @@ public class MealPlannerController implements Initializable {
         }
 
     }
-
