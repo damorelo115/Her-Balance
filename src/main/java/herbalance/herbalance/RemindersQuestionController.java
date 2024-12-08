@@ -32,23 +32,35 @@ public class RemindersQuestionController {
     @FXML
     private Button backButton;
 
+    private boolean isSubmitClicked = false;
+
     @FXML
     public void initialize() {
-        // Ensure Submit and Sign-Up buttons are always visible and enabled
-        submitButton.setDisable(false);
-        if (signUpButton != null) {
-            signUpButton.setVisible(true);
-        }
+        // Ensure Submit and Sign-Up buttons are initially disabled
+        submitButton.setDisable(true);
+        signUpButton.setDisable(true);
 
         // Group the radio buttons into a ToggleGroup
         ToggleGroup notificationGroup = new ToggleGroup();
         enableNotificationsRadioButton.setToggleGroup(notificationGroup);
         disableNotificationsRadioButton.setToggleGroup(notificationGroup);
+
+        // Add a listener to dynamically enable the Submit button when a radio button is selected
+        notificationGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            // Enable Submit button if a radio button is selected
+            submitButton.setDisable(newValue == null); // Disable if no selection
+        });
     }
 
     // Method called when the Submit button is clicked
     @FXML
     protected void onSubmitButtonClick() {
+        // Set the flag to indicate that Submit has been clicked
+        isSubmitClicked = true;
+
+        // Enable the Sign-Up button after Submit is clicked
+        signUpButton.setDisable(false);
+
         // Retrieve user details from Main.theUser
         String userEmail = Main.theUser.getUserEmail();
         if (userEmail != null && !userEmail.isEmpty()) {
@@ -85,7 +97,15 @@ public class RemindersQuestionController {
     // Method called when the Sign-Up button is clicked
     @FXML
     protected void onSignUpButtonClick() {
+        // Ensure that the Submit button was clicked before proceeding
+        if (!isSubmitClicked) {
+            showAlert(Alert.AlertType.WARNING, "Please submit your preferences before signing up.");
+            return;
+        }
+
+        // Proceed to the dashboard
         Stage stage = (Stage) signUpButton.getScene().getWindow();
+        stage.close();
         Dashboard.loadDashboardScene();
     }
 
@@ -102,11 +122,13 @@ public class RemindersQuestionController {
 
     private void showAlert(Alert.AlertType alertType, String message) {
         Alert alert = new Alert(alertType);
-        alert.setTitle(alert.getTitle());
+        alert.setTitle(alertType.name());
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.show();
     }
 }
+
+
 
 

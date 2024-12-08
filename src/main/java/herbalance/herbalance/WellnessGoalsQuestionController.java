@@ -35,9 +35,30 @@ public class WellnessGoalsQuestionController {
 
     @FXML
     public void initialize() {
-        // Ensure the Next button is always visible and enabled
+        // Ensure the Next button is visible and disabled by default
         nextButton.setVisible(true);
-        nextButton.setDisable(false);
+        nextButton.setDisable(true);
+
+        // Add listeners to the checkboxes
+        addCheckboxListeners();
+    }
+
+    private void addCheckboxListeners() {
+        fitnessCheckBox.setOnAction(e -> updateNextButtonState());
+        mentalHealthCheckBox.setOnAction(e -> updateNextButtonState());
+        nutritionCheckBox.setOnAction(e -> updateNextButtonState());
+        hormonalBalanceCheckBox.setOnAction(e -> updateNextButtonState());
+    }
+
+    private void updateNextButtonState() {
+        // Enable the Next button if any checkbox is selected
+        boolean isAnySelected = fitnessCheckBox.isSelected()
+                || mentalHealthCheckBox.isSelected()
+                || nutritionCheckBox.isSelected()
+                || hormonalBalanceCheckBox.isSelected();
+
+        nextButton.setDisable(!isAnySelected);
+        nextButton.setVisible(true); // Ensure visibility
     }
 
     @FXML

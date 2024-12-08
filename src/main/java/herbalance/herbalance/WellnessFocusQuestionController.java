@@ -35,9 +35,31 @@ public class WellnessFocusQuestionController {
 
     @FXML
     public void initialize() {
-        // Ensure the Next button is always visible and enabled
+        // Ensure the Next button is visible and disabled by default
         nextButton.setVisible(true);
-        nextButton.setDisable(false);
+        nextButton.setDisable(true);
+
+        // Add listeners to the checkboxes to monitor state changes
+        addCheckboxListeners();
+    }
+
+    private void addCheckboxListeners() {
+        // Add listeners to each checkbox to call updateNextButtonState on state change
+        stressCheckBox.setOnAction(e -> updateNextButtonState());
+        physicalActivityCheckBox.setOnAction(e -> updateNextButtonState());
+        sleepCheckBox.setOnAction(e -> updateNextButtonState());
+        reproductiveHealthCheckBox.setOnAction(e -> updateNextButtonState());
+    }
+
+    private void updateNextButtonState() {
+        // Enable the Next button if any checkbox is selected
+        boolean isAnySelected = stressCheckBox.isSelected()
+                || physicalActivityCheckBox.isSelected()
+                || sleepCheckBox.isSelected()
+                || reproductiveHealthCheckBox.isSelected();
+
+        nextButton.setDisable(!isAnySelected); // Disable if none are selected
+        nextButton.setVisible(true); // Ensure visibility
     }
 
     @FXML
@@ -93,6 +115,11 @@ public class WellnessFocusQuestionController {
         }
     }
 }
+
+
+
+
+
 
 
 

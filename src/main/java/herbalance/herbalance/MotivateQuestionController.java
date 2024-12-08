@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -51,9 +50,40 @@ public class MotivateQuestionController {
 
     @FXML
     public void initialize() {
-        // Ensure the Next button is always visible and enabled
+        // Ensure the Next button is visible and disabled by default
         nextButton.setVisible(true);
-        nextButton.setDisable(false);
+        nextButton.setDisable(true);
+
+        // Add listeners to the checkboxes to monitor state changes
+        addCheckboxListeners();
+    }
+
+    private void addCheckboxListeners() {
+        personalCheckBox.setOnAction(e -> updateNextButtonState());
+        mentalCheckBox.setOnAction(e -> updateNextButtonState());
+        physicalCheckBox.setOnAction(e -> updateNextButtonState());
+        energyCheckBox.setOnAction(e -> updateNextButtonState());
+        stressCheckBox.setOnAction(e -> updateNextButtonState());
+        disciplineCheckBox.setOnAction(e -> updateNextButtonState());
+        longHealthCheckBox.setOnAction(e -> updateNextButtonState());
+        confidenceCheckBox.setOnAction(e -> updateNextButtonState());
+        noneCheckBox.setOnAction(e -> updateNextButtonState());
+    }
+
+    private void updateNextButtonState() {
+        // Enable the Next button if at least one checkbox is selected
+        boolean isAnySelected = personalCheckBox.isSelected()
+                || mentalCheckBox.isSelected()
+                || physicalCheckBox.isSelected()
+                || energyCheckBox.isSelected()
+                || stressCheckBox.isSelected()
+                || disciplineCheckBox.isSelected()
+                || longHealthCheckBox.isSelected()
+                || confidenceCheckBox.isSelected()
+                || noneCheckBox.isSelected();
+
+        nextButton.setDisable(!isAnySelected); // Disable if none are selected
+        nextButton.setVisible(true); // Ensure visibility
     }
 
     @FXML
@@ -107,6 +137,7 @@ public class MotivateQuestionController {
     @FXML
     protected void onBackButtonClick() {
         try {
+            // Navigate back to the Activity Level Question scene
             Stage stage = (Stage) backButton.getScene().getWindow();
             ActivityLevelQuestion.loadActivityLevelQuestionScene(stage);
         } catch (IOException e) {
@@ -114,6 +145,8 @@ public class MotivateQuestionController {
         }
     }
 }
+
+
 
 
 
