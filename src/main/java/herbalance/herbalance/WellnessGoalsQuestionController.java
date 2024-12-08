@@ -33,6 +33,7 @@ public class WellnessGoalsQuestionController {
     @FXML
     private Button nextButton;
 
+
     @FXML
     public void initialize() {
         // Ensure the Next button is visible and disabled by default
@@ -63,6 +64,7 @@ public class WellnessGoalsQuestionController {
 
     @FXML
     protected void onNextButtonClick() {
+
         // Retrieve user details from Main.theUser
         String userEmail = Main.theUser.getUserEmail();
         if (userEmail != null && !userEmail.isEmpty()) {
@@ -83,7 +85,7 @@ public class WellnessGoalsQuestionController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
+    } else {
             System.err.println("User email is not available. Please log in again.");
         }
     }
@@ -98,11 +100,12 @@ public class WellnessGoalsQuestionController {
 
             // Wait for the operation to complete
             WriteResult result = future.get();
-            System.out.println("Wellness goals data saved successfully at: " + result.getUpdateTime());
+            System.out.println("Wellness goals data updated successfully at: " + result.getUpdateTime());
         } catch (InterruptedException | ExecutionException e) {
-            System.err.println("Error saving wellness goals data: " + e.getMessage());
+            System.err.println("Error updating wellness goals data: " + e.getMessage());
         }
     }
+
 
     @FXML
     protected void onBackButtonClick() {
@@ -114,5 +117,6 @@ public class WellnessGoalsQuestionController {
         }
     }
 }
+
 
 

@@ -90,12 +90,16 @@ public class BirthDateQuestionController {
 
         // Save the user data to Firestore
         try {
-            ApiFuture<WriteResult> future = db.collection("Users").document(email).set(data);
+            ApiFuture<WriteResult> future = db.collection("Users").document(email)
+                    .collection("Survey").document("BirthDate").set(data);
+                    db.collection("Users").document(email).set(data);
 
             // Wait for the operation to complete
             WriteResult result = future.get();
+            System.out.println("Birthdate saved successfully at: " + result.getUpdateTime());
             System.out.println("User data saved successfully at: " + result.getUpdateTime());
         } catch (InterruptedException | ExecutionException e) {
+            System.err.println("Error saving birthdate: " + e.getMessage());
             System.err.println("Error saving user data: " + e.getMessage());
         }
     }
