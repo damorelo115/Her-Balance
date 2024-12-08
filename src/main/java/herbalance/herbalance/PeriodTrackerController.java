@@ -35,6 +35,9 @@ public class PeriodTrackerController {
         private Button predictCycle;
 
         @FXML
+        private TextArea predictionBox;
+        
+        @FXML
         private Text predictionText;
 
         @FXML
@@ -123,22 +126,34 @@ public class PeriodTrackerController {
         @FXML
         protected void predictCycle(ActionEvent event) {
                 try {
+                        if (previousCycleDatePicker.getValue() == null && cycleLengthField.getText().isEmpty()) {
+                                showAlert(Alert.AlertType.ERROR,"Previous cycle date and cycle length must be filled.");
+                        }
 
                         LocalDate lastPeriodStartDate = previousCycleDatePicker.getValue();
-                        int cycleLength = Integer.parseInt(cycleLengthField.getText());
-                        int periodLength = Integer.parseInt(periodLengthField.getText());
+                        
+                        int cycleLength = 28;
 
+                        int daylength = Integer.parseInt(cycleLengthField.getText());
 
+                        // Predict next cycle based on the given inputs
+                        LocalDate nextCycleStartDate = lastPeriodStartDate.plusDays(cycleLength + 28);
 
+                        predictionBox.setText("Next Period Start: " + nextCycleStartDate);
 
-
-                        predictionText.setText(
-                                "Next Period Start: " + nextStartDate + "\nNext Period End: " + nextEndDate
-                        );
-
-                } catch (Exception e) {
+                } 
+                
+                catch (Exception e) {
 
                         predictionText.setText("Invalid input. Please check your entries.");
                 }
+        }
+        private void showAlert(Alert.AlertType alertType, String message) {
+
+                Alert alert = new Alert(alertType);
+                alert.setTitle(alert.getTitle());
+                alert.setHeaderText(null);
+                alert.setContentText(message);
+                alert.show();
         }
 }
