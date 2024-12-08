@@ -34,59 +34,76 @@ public class BirthDateQuestionController {
         birthDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 birthDateLabel.setText("Your birthdate: " + newValue.toString());
-            } else {
-                validationLabel.setText("Please select a birthdate.");
-
+                validationLabel.setText(""); // Clear validation message when a date is selected
             }
+        });
+
+        // Disable the Next button initially
+        nextButton.setDisable(true);
+
+        // Enable the Next button only when a valid date is selected
+        birthDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            nextButton.setDisable(newValue == null); // Disable if no date is selected
         });
     }
 
     @FXML
     protected void onNextButtonClick() {
-        if (birthDatePicker.getValue() != null) {
-            String birthDate = birthDatePicker.getValue().toString();
+        // Validate the DatePicker selection
+        if (birthDatePicker.getValue() == null) {
+            validationLabel.setText("Please select a birthdate.");
+            return; // Stop further execution if validation fails
+        }
 
-            // Retrieve the user's email from Main.theUser
-            String userEmail = Main.theUser.getUserEmail();
+        String birthDate = birthDatePicker.getValue().toString();
 
-            if (userEmail != null && !userEmail.isEmpty()) {
-                // Save birthdate to Firestore
-                saveBirthDateToFirestore(userEmail, birthDate);
+        // Retrieve user details from Main.theUser
+        String userEmail = Main.theUser.getUserEmail();
+        String password = Main.theUser.getPassword();
+        String firstName = Main.theUser.getFirstName();
 
-                // Navigate to the next scene
-                try {
-                    Stage stage = (Stage) nextButton.getScene().getWindow();
-                    WellnessGoalsQuestion.loadWellnessGoalsQuestionScene(stage);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                // Handle case where email is not available
-                validationLabel.setText("User email is not available. Please log in again.");
+        if (userEmail != null && !userEmail.isEmpty()) {
+            // Save user data to Firestore
+            saveUserDataToFirestore(userEmail, firstName, password, birthDate);
 
+            // Navigate to the next scene
+            try {
+                Stage stage = (Stage) nextButton.getScene().getWindow();
+                WellnessGoalsQuestion.loadWellnessGoalsQuestionScene(stage);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        } else {
+            // Handle case where email is not available
+            validationLabel.setText("User email is not available. Please log in again.");
         }
     }
 
-    private void saveBirthDateToFirestore(String email, String birthDate) {
+    private void saveUserDataToFirestore(String email, String firstName, String password, String birthDate) {
         Firestore db = Main.fstore;
 
         // Data to save
         Map<String, Object> data = new HashMap<>();
+        data.put("firstName", firstName);
+        data.put("password", password);
         data.put("birthDate", birthDate);
 
-        // Save the birthdate to Firestore
+        // Save the user data to Firestore
         try {
             ApiFuture<WriteResult> future = db.collection("Users").document(email)
                     .collection("Survey").document("BirthDate").set(data);
+                    db.collection("Users").document(email).set(data);
 
             // Wait for the operation to complete
             WriteResult result = future.get();
             System.out.println("Birthdate saved successfully at: " + result.getUpdateTime());
+            System.out.println("User data saved successfully at: " + result.getUpdateTime());
         } catch (InterruptedException | ExecutionException e) {
             System.err.println("Error saving birthdate: " + e.getMessage());
+            System.err.println("Error saving user data: " + e.getMessage());
         }
     }
 }
+
 
 

@@ -11,7 +11,7 @@ public class PeriodTracker {
 
     public static void loadPeriodTrackerScene(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(PeriodTracker.class.getResource("PeriodTracker.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 690, 471);
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Period Tracker");
         stage.setScene(scene);
         stage.show();

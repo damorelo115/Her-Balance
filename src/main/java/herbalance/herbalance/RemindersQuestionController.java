@@ -1,7 +1,7 @@
 package herbalance.herbalance;
 
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 public class RemindersQuestionController {
 
@@ -32,66 +32,80 @@ public class RemindersQuestionController {
     @FXML
     private Button backButton;
 
+    private boolean isSubmitClicked = false;
+
     @FXML
     public void initialize() {
-        // Create a ToggleGroup for the radio buttons
+        // Ensure Submit and Sign-Up buttons are initially disabled
+        submitButton.setDisable(true);
+        signUpButton.setDisable(true);
+
+        // Group the radio buttons into a ToggleGroup
         ToggleGroup notificationGroup = new ToggleGroup();
         enableNotificationsRadioButton.setToggleGroup(notificationGroup);
         disableNotificationsRadioButton.setToggleGroup(notificationGroup);
 
-        // Add a listener to the ToggleGroup to dynamically handle button visibility
+        // Add a listener to dynamically enable the Submit button when a radio button is selected
         notificationGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                submitButton.setDisable(false);
-                if (signUpButton != null) {
-                    signUpButton.setVisible(true);
-                }
-            } else {
-                submitButton.setDisable(true);
-                if (signUpButton != null) {
-                    signUpButton.setVisible(false);
-                }
-            }
+            // Enable Submit button if a radio button is selected
+            submitButton.setDisable(newValue == null); // Disable if no selection
         });
-
-        // Initially disable the Submit button and hide the Sign-Up button
-        submitButton.setDisable(true);
-        if (signUpButton != null) {
-            signUpButton.setVisible(false);
-        }
     }
 
     // Method called when the Submit button is clicked
     @FXML
     protected void onSubmitButtonClick() {
-        StringBuilder selectedReminders = new StringBuilder();
+        // Set the flag to indicate that Submit has been clicked
+        isSubmitClicked = true;
 
-        if (enableNotificationsRadioButton.isSelected()) {
-            selectedReminders.append("- Enable Notifications\n");
-        }
-        if (disableNotificationsRadioButton.isSelected()) {
-            selectedReminders.append("- Disable Notifications\n");
-        }
+        // Enable the Sign-Up button after Submit is clicked
+        signUpButton.setDisable(false);
 
-        if (selectedReminders.toString().isEmpty()) {
-            selectedReminders.append("No notification option selected.");
-            if (signUpButton != null) {
-                signUpButton.setVisible(false);
-            }
-            submitButton.setDisable(true);
+        // Retrieve user details from Main.theUser
+        String userEmail = Main.theUser.getUserEmail();
+        if (userEmail != null && !userEmail.isEmpty()) {
+            // Gather the selected reminder option
+            Map<String, Boolean> reminderData = new HashMap<>();
+            reminderData.put("Enable Notifications", enableNotificationsRadioButton.isSelected());
+            reminderData.put("Disable Notifications", disableNotificationsRadioButton.isSelected());
+
+            // Save reminder data to Firestore
+            saveReminderDataToFirestore(userEmail, reminderData);
+
+            System.out.println("Reminder data submitted.");
         } else {
-            if (signUpButton != null) {
-                signUpButton.setVisible(true);
-            }
+            showAlert(Alert.AlertType.ERROR, "User email is not available. Please log in again.");
         }
+    }
 
-        System.out.println(selectedReminders);
+    private void saveReminderDataToFirestore(String email, Map<String, Boolean> reminderData) {
+        Firestore db = Main.fstore;
+
+        // Save the reminder data under the user's document
+        try {
+            ApiFuture<WriteResult> future = db.collection("Users").document(email)
+                    .collection("Survey").document("Reminders").set(reminderData);
+
+            // Wait for the operation to complete
+            WriteResult result = future.get();
+            System.out.println("Reminder data saved successfully at: " + result.getUpdateTime());
+        } catch (InterruptedException | ExecutionException e) {
+            System.err.println("Error saving reminder data: " + e.getMessage());
+        }
     }
 
     // Method called when the Sign-Up button is clicked
     @FXML
     protected void onSignUpButtonClick() {
+        // Ensure that the Submit button was clicked before proceeding
+        if (!isSubmitClicked) {
+            showAlert(Alert.AlertType.WARNING, "Please submit your preferences before signing up.");
+            return;
+        }
+
+        // Proceed to the dashboard
         Stage stage = (Stage) signUpButton.getScene().getWindow();
+        stage.close();
         Dashboard.loadDashboardScene();
     }
 
@@ -108,10 +122,13 @@ public class RemindersQuestionController {
 
     private void showAlert(Alert.AlertType alertType, String message) {
         Alert alert = new Alert(alertType);
-        alert.setTitle(alert.getTitle());
+        alert.setTitle(alertType.name());
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.show();
     }
 }
+
+
+
 
