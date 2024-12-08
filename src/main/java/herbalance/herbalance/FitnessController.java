@@ -84,7 +84,7 @@ public class FitnessController implements Initializable {
     protected void dashboardButtonClick() {
         Stage stage = (Stage) dashboardButton.getScene().getWindow();
         stage.close();
-        Dashboard.loadDashboardScene();
+        Dashboard.loadDashboardScene(stage);
     }
 
     // Loads the Period Tracker scene

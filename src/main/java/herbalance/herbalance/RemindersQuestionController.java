@@ -106,7 +106,7 @@ public class RemindersQuestionController {
         // Proceed to the dashboard
         Stage stage = (Stage) signUpButton.getScene().getWindow();
         stage.close();
-        Dashboard.loadDashboardScene();
+        Dashboard.loadDashboardScene(stage);
     }
 
     // Method called when the Back button is clicked

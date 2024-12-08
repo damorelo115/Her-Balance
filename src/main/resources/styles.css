@@ -36,7 +36,6 @@
     -fx-background-color: #AFE9E5;
     -fx-background-radius: 30px;
     -fx-text-fill: #000000;
-    -fx-border-style: 5px solid;
     -fx-border-color: #FFFFFF;
     -fx-border-radius: 25px;
 }
@@ -45,7 +44,6 @@
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 30px;
     -fx-text-fill: #000000;
-    -fx-border-style: 5px solid;
     -fx-border-color: #000000;
     -fx-border-radius: 25px;
 }
@@ -68,7 +66,7 @@
 
 .predictcyclebutton {
     -fx-background-color: #ffe5ec;
-    -fx-border-style: 5px solid;
+    -fx-border-style: dash-style;
     -fx-border-color: #FFFFFF;
     -fx-border-radius: 25px;
     -fx-background-radius: 20px;
@@ -105,3 +103,41 @@
     -fx-font-size: 16px;
 
 }
+
+
+.root {
+    -fx-background-color: #F5F5F5;
+}
+
+
+.left-pane {
+    -fx-background-color: #F5F5F5;
+}
+
+
+.right-pane {
+    -fx-background-color: #FFFFFF;
+}
+
+
+.upload-button {
+    -fx-background-color: #AFE9E5;
+    -fx-text-fill: #333333;
+    -fx-font-family: "Poppins ExtraBold";
+    -fx-font-size: 16px;
+    -fx-pref-height: 56px;
+    -fx-pref-width: 240px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 5, 0, 0, 2);
+}
+
+
+.back-button {
+    -fx-background-color: #EFEFEF;
+    -fx-text-fill: #333333;
+    -fx-font-family: "Poppins Regular";
+    -fx-font-size: 14px;
+    -fx-pref-height: 33px;
+    -fx-pref-width: 142px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 5, 0, 0, 2);
+}
+

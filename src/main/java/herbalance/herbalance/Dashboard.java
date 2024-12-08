@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Dashboard {
 
-    public static void loadDashboardScene() {
+    public static void loadDashboardScene(Stage stage) {
         try {
             FXMLLoader loader = new FXMLLoader(Dashboard.class.getResource("Dashboard.fxml"));
             Parent root = loader.load();

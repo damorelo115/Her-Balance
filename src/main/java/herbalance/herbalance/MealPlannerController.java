@@ -100,7 +100,7 @@ public class MealPlannerController implements Initializable {
 
         stage.close();
 
-        Dashboard.loadDashboardScene();
+        Dashboard.loadDashboardScene(stage);
 
 
     }

@@ -22,7 +22,7 @@ public class PeriodTracker {
     private int periodLength;
 
 
-    public PeriodTracker(LocalDate PreviousPeriodStartDate, int cycleLength, int periodLength) {
+    public PeriodTracker(LocalDate PreviousPeriodStartDate, int cycleLength) {
         this.PreviousPeriodStartDate = PreviousPeriodStartDate;
         this.cycleLength = cycleLength;
         this.periodLength = periodLength;
@@ -64,7 +64,7 @@ public class PeriodTracker {
     }
 
 
-    public void updateTracker(LocalDate PreviousPeriodStartDate, int cycleLength, int periodLength) {
+    public void updateTracker(LocalDate PreviousPeriodStartDate, int cycleLength) {
         setPreviousPeriodStartDate(PreviousPeriodStartDate);
         setCycleLength(cycleLength);
         setPeriodLength(periodLength);

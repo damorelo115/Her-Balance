@@ -16,6 +16,7 @@ module herbalance.herbalance {
     requires org.testng;
     requires com.google.gson;
     requires java.logging;
+    requires google.cloud.storage;
 
 
     opens herbalance.herbalance to javafx.fxml;

@@ -95,7 +95,7 @@ public class UserLoginController {
 
                         stage.close();
 
-                        Dashboard.loadDashboardScene();
+                        Dashboard.loadDashboardScene(stage);
 
                         showAlert(Alert.AlertType.CONFIRMATION, "Sign in successful!");
 
