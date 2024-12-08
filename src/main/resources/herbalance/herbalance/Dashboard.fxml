@@ -65,29 +65,31 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="mainpane" layoutX="123.0" layoutY="148.0" prefHeight="436.0" prefWidth="232.0" styleClass="main" stylesheets="@../../styles.css">
+      <Pane fx:id="mainpane" layoutX="123.0" layoutY="148.0" prefHeight="409.0" prefWidth="291.0" styleClass="main" stylesheets="@../../styles.css">
          <effect>
             <DropShadow />
          </effect>
          <children>
-            <Label fx:id="cyclelabel2" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="48.0" styleClass="cyclelabel" stylesheets="@../../styles.css" text="Cycle" />
+            <Label fx:id="quotelabel" layoutX="42.0" layoutY="31.0" prefHeight="28.0" prefWidth="221.0" styleClass="quotelabel" stylesheets="@../../styles.css" text="Daily Inspirational Quote " />
+            <TextArea fx:id="dailyQuoteArea" layoutX="14.0" layoutY="72.0" prefHeight="223.0" prefWidth="263.0" />
+            <Button fx:id="quoteButton" layoutX="61.0" layoutY="327.0" mnemonicParsing="false" onAction="#fetchpositiveQuote" styleClass="wellnessbutton" text="Receive Inspirational Quote" />
          </children>
       </Pane>
-      <Pane fx:id="workout" layoutX="387.0" layoutY="375.0" prefHeight="200.0" prefWidth="486.0" styleClass="workout" stylesheets="@../../styles.css">
+      <Pane fx:id="workout" layoutX="454.0" layoutY="375.0" prefHeight="200.0" prefWidth="419.0" styleClass="workout" stylesheets="@../../styles.css">
          <children>
             <Label layoutX="20.0" layoutY="22.0" styleClass="workouttext" stylesheets="@../../styles.css" text="Daily Affirmation" />
-            <TextArea fx:id="affirmationTextArea" layoutX="20.0" layoutY="52.0" prefHeight="126.0" prefWidth="444.0" style="-fx-background-color: #F5F1FF;" wrapText="true" />
-            <Button fx:id="affirmationButton" layoutX="281.0" layoutY="19.0" mnemonicParsing="false" onAction="#fetchAffirmation" prefHeight="28.0" prefWidth="134.0" styleClass="affirmationbutton" stylesheets="@../../styles.css" text="Receive Affirmation" />
+            <TextArea fx:id="affirmationTextArea" layoutX="23.0" layoutY="54.0" prefHeight="126.0" prefWidth="374.0" style="-fx-background-color: #F5F1FF;" wrapText="true" />
+            <Button fx:id="affirmationButton" layoutX="251.0" layoutY="20.0" mnemonicParsing="false" onAction="#fetchAffirmation" prefHeight="28.0" prefWidth="136.0" styleClass="affirmationbutton" stylesheets="@../../styles.css" text="Receive Affirmation" />
          </children>
          <effect>
             <DropShadow />
          </effect>
       </Pane>
-      <Pane fx:id="wellnesstip" layoutX="390.0" layoutY="148.0" prefHeight="200.0" prefWidth="486.0" styleClass="wellnesstip" stylesheets="@../../styles.css">
+      <Pane fx:id="wellnesstip" layoutX="451.0" layoutY="148.0" prefHeight="200.0" prefWidth="425.0" styleClass="wellnesstip" stylesheets="@../../styles.css">
          <children>
-            <Label fx:id="cyclelabel1" layoutX="14.0" layoutY="14.0" styleClass="cyclelabel" stylesheets="@../../styles.css" text="Daily Wellness Tip" />
-            <Button fx:id="wellnessTipButton" layoutX="289.0" layoutY="13.0" mnemonicParsing="false" onAction="#fetchWellnessTip" styleClass="wellnessbutton" text="Receive Wellness Tip" />
-            <TextArea fx:id="wellnessTextArea" layoutX="13.0" layoutY="52.0" prefHeight="126.0" prefWidth="444.0" wrapText="true" />
+            <Label layoutX="14.0" layoutY="14.0" styleClass="wellnesslabel" stylesheets="@../../styles.css" text="Daily Wellness Tip" />
+            <Button fx:id="wellnessTipButton" layoutX="256.0" layoutY="12.0" mnemonicParsing="false" onAction="#fetchWellnessTip" styleClass="wellnessbutton" text="Receive Wellness Tip" />
+            <TextArea fx:id="wellnessTextArea" layoutX="22.0" layoutY="52.0" prefHeight="126.0" prefWidth="381.0" wrapText="true" />
          </children>
          <effect>
             <DropShadow />

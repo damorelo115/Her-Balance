@@ -3,6 +3,8 @@ package herbalance.herbalance;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 
 import java.io.IOException;
 import java.net.URI;
@@ -47,10 +50,16 @@ public class DashboardController {
     private Button affirmationButton;
 
     @FXML
+    private Button quoteButton;
+
+    @FXML
     private TextArea affirmationTextArea;
 
     @FXML
     private TextArea wellnessTextArea;
+
+    @FXML
+    private TextArea dailyQuoteArea;
 
     @FXML
     private Label userlabel;
@@ -238,11 +247,13 @@ public class DashboardController {
 
                 System.out.println(response.body());
 
-                String affirmationResponse = response.body().replaceAll("[{}]", "");
+                JsonObject jsonObject = JsonParser.parseString(response.body()).getAsJsonObject();
+
+                String affirmationResponse = jsonObject.get("affirmation").getAsString();
 
                 affirmationTextArea.setText(affirmationResponse + "\n");
                 affirmationTextArea.setEditable(false);
-                affirmationTextArea.setFont(new Font("Poppins", 14));
+                affirmationTextArea.setFont(new Font("Poppins", 18));
                 affirmationTextArea.setWrapText(true);
             } catch (Exception e) {
 
@@ -273,19 +284,62 @@ public class DashboardController {
 
                 System.out.println(response.body());
 
-                String wellnessResponse = response.body().replaceAll("[{}]", "");
+                JsonObject jsonObject = JsonParser.parseString(response.body()).getAsJsonObject();
+
+                String wellnessResponse = jsonObject.get("tip").getAsString();
 
                 wellnessTextArea.setText(wellnessResponse + "\n");
                 wellnessTextArea.setEditable(false);
-                wellnessTextArea.setFont(new Font("Poppins", 12));
-            } catch (Exception e) {
+                wellnessTextArea.setFont(new Font("Poppins", 18));
+            }
+
+            catch (Exception e) {
 
                 throw new RuntimeException(e);
-            } finally {
+            }
+            finally {
 
                 wellnessTipButton.setDisable(false);
             }
 
         }
+
+    // Method that uses an API to fetch a positive quote that the user can read
+    @FXML
+    private void fetchpositiveQuote (ActionEvent event) throws IOException, InterruptedException {
+
+        try {
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://positivity-tips.p.rapidapi.com/api/positivity/quote"))
+                    .header("x-rapidapi-key", "607d095e27msh7f1200d0b409a4ap1d4380jsnddd3430a3d0c")
+                    .header("x-rapidapi-host", "positivity-tips.p.rapidapi.com")
+                    .method("GET", HttpRequest.BodyPublishers.noBody())
+                    .build();
+            HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+
+            System.out.println(response.body());
+
+            JsonObject jsonObject = JsonParser.parseString(response.body()).getAsJsonObject();
+
+            String quoteAuthor = jsonObject.get("author").getAsString();
+            String quoteResponse = jsonObject.get("quote").getAsString();
+
+            dailyQuoteArea.setText(quoteAuthor + "\n" + quoteResponse + "\n");
+            dailyQuoteArea.setWrapText(true);
+            dailyQuoteArea.setEditable(false);
+            dailyQuoteArea.setFont(new Font("Poppins", 18));
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        finally {
+            quoteButton.setDisable(false);
+        }
+
+    }
 
     }
