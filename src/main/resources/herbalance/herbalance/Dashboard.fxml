@@ -99,7 +99,7 @@
             <DropShadow />
          </effect>
       </Pane>
-      <Label fx:id="userlabel" layoutX="129.0" layoutY="95.0" prefHeight="28.0" prefWidth="208.0" styleClass="userlabel" text="Label" />
+      <Label fx:id="userlabel" layoutX="129.0" layoutY="95.0" prefHeight="28.0" prefWidth="208.0" styleClass="userlabel" stylesheets="@../../styles.css" text="Label" />
       <Button fx:id="editProfilePhotoButton" layoutX="780.0" layoutY="93.0" onAction="#handleEditProfilePhoto" prefHeight="31.0" prefWidth="117.0" styleClass="dashbutton" text="Edit Profile Photo" />
    </children>
 </AnchorPane>
