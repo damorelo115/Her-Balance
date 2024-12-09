@@ -64,13 +64,12 @@ public class UserRegistrationController {
 
                     Main.theUser.setUserEmail(userEmail.getText());
                     Main.theUser.setPassword(userPassword.getText());
+                    Main.theUser.setFirstName(firstnameField.getText());
 
                     userEmail.clear();
                     userPassword.clear();
 
                     Stage stage = (Stage) registerButton.getScene().getWindow();
-
-                    //NameEntryQuestion.loadNameEntryQuestionScene(stage);
 
                     BirthDateQuestion.loadBirthDateQuestionScene(stage);
 

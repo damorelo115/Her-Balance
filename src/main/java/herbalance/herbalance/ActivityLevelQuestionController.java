@@ -32,9 +32,28 @@ public class ActivityLevelQuestionController {
 
     @FXML
     public void initialize() {
-        // Ensure the Next button is always visible and enabled
+        // Ensure the Next button is visible and disabled by default
         nextButton.setVisible(true);
-        nextButton.setDisable(false);
+        nextButton.setDisable(true);
+
+        // Add listeners to the checkboxes to monitor state changes
+        addCheckboxListeners();
+    }
+
+    private void addCheckboxListeners() {
+        sedentaryCheckBox.setOnAction(e -> updateNextButtonState());
+        moderatelyActiveCheckBox.setOnAction(e -> updateNextButtonState());
+        highlyActiveCheckBox.setOnAction(e -> updateNextButtonState());
+    }
+
+    private void updateNextButtonState() {
+        // Enable the Next button if any checkbox is selected
+        boolean isAnySelected = sedentaryCheckBox.isSelected()
+                || moderatelyActiveCheckBox.isSelected()
+                || highlyActiveCheckBox.isSelected();
+
+        nextButton.setDisable(!isAnySelected); // Disable if none are selected
+        nextButton.setVisible(true); // Ensure visibility
     }
 
     @FXML
@@ -82,6 +101,7 @@ public class ActivityLevelQuestionController {
     @FXML
     protected void onBackButtonClick() {
         try {
+            // Navigate back to the Wellness Focus Question scene
             Stage stage = (Stage) backButton.getScene().getWindow();
             WellnessFocusQuestion.loadWellnessFocusQuestionScene(stage);
         } catch (IOException e) {
@@ -89,4 +109,8 @@ public class ActivityLevelQuestionController {
         }
     }
 }
+
+
+
+
 

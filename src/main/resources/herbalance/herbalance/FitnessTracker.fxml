@@ -1,59 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="559.0" prefWidth="743.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.FitnessController">
-    <VBox alignment="CENTER" layoutX="250.0" layoutY="14.0" prefHeight="57.0" prefWidth="244.0" spacing="20" style="-fx-padding: 20; -fx-font-size: 16;" xmlns:fx="http://javafx.com/fxml/1">
-        <Text style="-fx-font-size: 24; -fx-font-weight: bold;" text="Fitness Tracker" />
-    </VBox>
-   <Pane fx:id="sidepane" prefHeight="604.0" prefWidth="116.0" styleClass="sidepane" stylesheets="@../../styles.css">
+<AnchorPane prefHeight="581.0" prefWidth="1037.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="herbalance.herbalance.FitnessController">
+   <Pane fx:id="sidepane" prefHeight="659.0" prefWidth="106.0" styleClass="sidepane" stylesheets="@../../styles.css">
       <children>
-         <ImageView fx:id="dashboardIcon" fitHeight="42.0" fitWidth="44.0" layoutX="38.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="dashboardIcon" fitHeight="42.0" fitWidth="44.0" layoutX="27.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@images/icons8-dashboard-layout-96.png" />
             </image>
          </ImageView>
-         <ImageView fx:id="bloodDropIcon" fitHeight="42.0" fitWidth="44.0" layoutX="38.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="bloodDropIcon" fitHeight="42.0" fitWidth="44.0" layoutX="29.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@images/icons8-blood-drop-50.png" />
             </image>
          </ImageView>
-         <ImageView fx:id="signOutIcon" fitHeight="42.0" fitWidth="36.0" layoutX="41.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="signOutIcon" fitHeight="42.0" fitWidth="36.0" layoutX="36.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@images/icons8-sign-out-50.png" />
             </image>
          </ImageView>
-         <ImageView fx:id="workoutIcon" fitHeight="42.0" fitWidth="44.0" layoutX="37.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="workoutIcon" fitHeight="42.0" fitWidth="44.0" layoutX="29.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@images/icons8-workout-50.png" />
             </image>
          </ImageView>
-         <ImageView fx:id="mealPlanIcon" fitHeight="42.0" fitWidth="44.0" layoutX="38.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="mealPlanIcon" fitHeight="42.0" fitWidth="44.0" layoutX="30.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@images/icons8-healthy-food-50.png" />
             </image>
          </ImageView>
-         <ImageView fitHeight="55.0" fitWidth="62.0" layoutX="31.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@images/HerBalanceLogo-Transparent.png" />
-            </image>
-         </ImageView>
-         <Button fx:id="dashboardButton" layoutX="15.0" layoutY="165.0" mnemonicParsing="false" onAction="#dashboardButtonClick" prefHeight="23.0" prefWidth="87.0" styleClass="dashbutton" text="Dashboard" />
-         <Button fx:id="periodTrackButton" layoutX="9.0" layoutY="260.0" mnemonicParsing="false" onAction="#periodButtonClick" styleClass="periodbutton" text="Period Tracker" />
-         <Button fx:id="workoutButton" layoutX="23.0" layoutY="349.0" mnemonicParsing="false" onAction="#workoutButtonClick" styleClass="fitnessbutton" stylesheets="@../../styles.css" text="Fitness" />
-         <Button fx:id="mealPlanButton" layoutX="19.0" layoutY="453.0" mnemonicParsing="false" onAction="#mealPlanButtonClick" styleClass="mealbutton" text="Meal Plans" />
-         <Button fx:id="logoutButton" layoutX="26.0" layoutY="554.0" mnemonicParsing="false" onAction="#logout" styleClass="logoutbutton" text="Log Out" />
-         <ImageView fitHeight="80.0" fitWidth="79.0" layoutX="18.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+         <Button fx:id="dashboardButton" layoutX="7.0" layoutY="165.0" mnemonicParsing="false" onAction="#dashboardButtonClick" prefHeight="23.0" prefWidth="87.0" styleClass="dashbutton" stylesheets="@../../styles.css" text="Dashboard" />
+         <Button fx:id="periodTrackButton" layoutX="3.0" layoutY="260.0" mnemonicParsing="false" onAction="#periodButtonClick" styleClass="periodbutton" text="Period Tracker" />
+         <Button fx:id="workoutButton" layoutX="18.0" layoutY="348.0" mnemonicParsing="false" onAction="#workoutButtonClick" styleClass="fitnessbutton" text="Fitness" />
+         <Button fx:id="mealPlanButton" layoutX="13.0" layoutY="450.0" mnemonicParsing="false" onAction="#mealPlanButtonClick" styleClass="mealbutton" text="Meal Plans" />
+         <Button fx:id="logoutButton" layoutX="20.0" layoutY="555.0" mnemonicParsing="false" onAction="#logout" styleClass="logoutbutton" text="Log Out" />
+         <ImageView fitHeight="80.0" fitWidth="79.0" layoutX="14.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@images/HerBalance%20transparent.png" />
             </image>
          </ImageView>
       </children>
    </Pane>
+   <Pane layoutX="160.0" layoutY="138.0" prefHeight="340.0" prefWidth="371.0" style="-fx-background-color: #cbaacb;">
+      <children>
+         <ComboBox fx:id="dayOptions" layoutX="120.0" layoutY="23.0" prefHeight="25.0" prefWidth="193.0" />
+         <Label layoutX="14.0" layoutY="92.0" prefHeight="19.0" prefWidth="150.0" text="Choose Cardio Exercise:">
+            <font>
+               <Font name="Poppins ExtraBold" size="13.0" />
+            </font>
+         </Label>
+         <ComboBox fx:id="cardioOptions" layoutX="163.0" layoutY="89.0" prefHeight="23.0" prefWidth="166.0" />
+         <Label layoutX="14.0" layoutY="162.0" prefHeight="19.0" prefWidth="150.0" text="Choose Strength Exercise:">
+            <font>
+               <Font name="Poppins ExtraBold" size="13.0" />
+            </font>
+         </Label>
+         <ComboBox fx:id="strengthOptions" layoutX="176.0" layoutY="158.0" prefHeight="26.0" prefWidth="146.0" />
+         <Label layoutX="14.0" layoutY="223.0" prefHeight="19.0" prefWidth="150.0" text="Choose Flexibility Exercise:">
+            <font>
+               <Font name="Poppins ExtraBold" size="13.0" />
+            </font>
+         </Label>
+         <ComboBox fx:id="flexibilityOptions" layoutX="175.0" layoutY="220.0" prefHeight="23.0" prefWidth="150.0" />
+         <Button fx:id="weeklyPlanButton" layoutX="113.0" layoutY="280.0" mnemonicParsing="false" onAction="#addWeeklyPlan" prefHeight="25.0" prefWidth="130.0" styleClass="weeklybutton" stylesheets="@../../styles.css" text="Add to Weekly Plan" />
+         <Label layoutX="15.0" layoutY="27.0" prefHeight="17.0" prefWidth="87.0" text="Choose Day:">
+            <font>
+               <Font name="Poppins ExtraBold" size="13.0" />
+            </font>
+         </Label>
+      </children>
+   </Pane>
+   <Label layoutX="496.0" layoutY="20.0" text="Fitness Planner">
+      <font>
+         <Font name="Poppins ExtraBold" size="18.0" />
+      </font>
+   </Label>
+   <Pane layoutX="600.0" layoutY="100.0" prefHeight="378.0" prefWidth="371.0">
+      <children>
+         <TextArea fx:id="weeklyPlanView" prefHeight="378.0" prefWidth="371.0" />
+      </children>
+   </Pane>
+   <Label layoutX="214.0" layoutY="100.0" text="Fitness Plan Selection">
+      <font>
+         <Font name="Poppins ExtraBold" size="16.0" />
+      </font>
+   </Label>
+   <Label layoutX="733.0" layoutY="69.0" text="Weekly Plan ">
+      <font>
+         <Font name="Poppins ExtraBold" size="16.0" />
+      </font>
+   </Label>
+   <Button fx:id="viewPlanButton" layoutX="733.0" layoutY="492.0" mnemonicParsing="false" onAction="#viewWeeklyPlan" prefHeight="36.0" prefWidth="130.0" styleClass="weeklybutton" stylesheets="@../../styles.css" text="View Weekly Plan" />
 </AnchorPane>

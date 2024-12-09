@@ -30,14 +30,21 @@ public class RecommendQuestionController {
 
     @FXML
     public void initialize() {
-        // Ensure the Next button is always visible and enabled
+        // Ensure the Next button is visible and disabled by default
         nextButton.setVisible(true);
-        nextButton.setDisable(false);
+        nextButton.setDisable(true);
 
         // Group the radio buttons into a ToggleGroup
         ToggleGroup recommendGroup = new ToggleGroup();
         yesRadioButton.setToggleGroup(recommendGroup);
         noRadioButton.setToggleGroup(recommendGroup);
+
+        // Add a listener to the ToggleGroup to monitor selection changes
+        recommendGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            // Enable the Next button if any radio button is selected
+            nextButton.setDisable(newValue == null); // Disable if no selection
+            nextButton.setVisible(true); // Ensure visibility
+        });
     }
 
     @FXML
@@ -84,6 +91,7 @@ public class RecommendQuestionController {
     @FXML
     protected void onBackButtonClick() {
         try {
+            // Navigate back to the Motivate Question scene
             Stage stage = (Stage) backButton.getScene().getWindow();
             MotivateQuestion.loadMotivateQuestionScene(stage);
         } catch (IOException e) {
@@ -91,4 +99,5 @@ public class RecommendQuestionController {
         }
     }
 }
+
 

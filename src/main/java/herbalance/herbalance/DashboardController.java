@@ -1,10 +1,12 @@
 package herbalance.herbalance;
 
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.*;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -14,9 +16,20 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 
+import javafx.stage.FileChooser;
+
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.file.Files;
+import java.util.HashMap;
+import java.util.Map;
+
+
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -51,6 +64,9 @@ public class DashboardController {
 
     @FXML
     private Button quoteButton;
+
+    @FXML
+    private Button editProfilePhotoButton;
 
     @FXML
     private TextArea affirmationTextArea;
@@ -100,7 +116,7 @@ public class DashboardController {
     }
 
     // This method searches Firestore for the user's first name based on the email used to log in
-    private void fetchFirstName() throws ExecutionException, InterruptedException {
+    private void fetchFirstName() {
 
         // asynchronously retrieve all documents
         ApiFuture<QuerySnapshot> future = Main.fstore.collection("Users")
@@ -135,6 +151,98 @@ public class DashboardController {
 
     }
 
+
+    @FXML
+    private void handleProfilePhoto() {
+        // Open a file chooser to allow the user to select a profile photo
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.png"));
+        File file = fileChooser.showOpenDialog(userIcon.getScene().getWindow());
+
+        if (file != null) {
+            try {
+                // Load the image
+                Image originalImage = new Image(file.toURI().toString());
+
+                // Resize the image to fit 100x100
+                ImageView imageView = new ImageView(originalImage);
+                imageView.setFitWidth(100);
+                imageView.setFitHeight(100);
+                imageView.setPreserveRatio(true);
+
+                // Convert the file to a Blob and save it directly in Firestore
+                savePhotoToFirestore(String.valueOf(file));
+
+                // Update the userIcon with the selected photo
+                Image profileImage = new Image(file.toURI().toString(), 100, 100, true, true);
+                userIcon.setImage(profileImage);
+
+                // Show success alert
+                showAlert("Success", "Profile photo uploaded and saved successfully!");
+
+            } catch (Exception e) {
+                // Show error alert
+                showAlert("Error", "An error occurred while uploading the profile photo: " + e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    public void handleEditProfilePhoto(ActionEvent actionEvent) {
+        // Reuse the handleProfilePhoto method for editing profile photo
+        handleProfilePhoto();
+    }
+
+    private String uploadToFirebaseStorage(File file) throws IOException {
+        // Get the default storage instance
+        Storage storage = StorageOptions.getDefaultInstance().getService();
+
+        // Define the bucket and the file path within the bucket
+        String bucketName = "your-firebase-storage-bucket-name.appspot.com";
+        String fileName = "profile_photos/" + Main.theUser.getUserEmail() + ".jpg";
+
+        // Read the file content into a byte array
+        byte[] fileContent = Files.readAllBytes(file.toPath());
+
+        // Upload the file to Firebase Storage
+        BlobInfo blobInfo = BlobInfo.newBuilder(bucketName, fileName)
+                .setContentType("image/jpeg")
+                .build();
+
+        try { storage.create(blobInfo, fileContent); // Use byte array instead of FileInputStream
+        System.out.println("File uploaded to Firebase Storage successfully!");
+            System.out.println("File uploaded to Firebase Storage successfully!");
+            return "https://storage.googleapis.com/" + bucketName + "/" + fileName; // Construct public URL
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void savePhotoToFirestore(String photoUrl) {
+        try {
+            // Create a photo document with the photo URL and timestamp
+            Map<String, Object> photoData = new HashMap<>();
+            photoData.put("url", photoUrl);
+            photoData.put("timestamp", System.currentTimeMillis());
+
+            // Save the photo to the user's "photos" collection in Firestore
+            Main.fstore.collection("Users")
+                    .document(Main.theUser.getUserEmail())
+                    .collection("photos")
+                    .add(photoData)
+                    .get(); // Wait for the Firestore operation to complete
+
+            System.out.println("Photo URL saved to Firestore successfully!");
+        } catch (Exception e) {
+            System.err.println("Error saving photo to Firestore: " + e.getMessage());
+            showAlert("Error", "Failed to save the photo to Firestore.");
+        }
+    }
+
+
+
+
+
     // This event is called to log the user out of the application and returns the user to the login screen
     @FXML
     private void logout(ActionEvent event) throws IOException {
@@ -161,7 +269,7 @@ public class DashboardController {
     }
 
     // Display alert dialogs
-    private void showAlert(String message) {
+    private void showAlert(String error, String message) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Click");
         alert.setHeaderText(null);
@@ -342,4 +450,5 @@ public class DashboardController {
 
     }
 
-    }
+
+}
