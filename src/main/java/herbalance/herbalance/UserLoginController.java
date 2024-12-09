@@ -53,7 +53,9 @@ public class UserLoginController {
 
             showAlert(Alert.AlertType.ERROR, "Please enter your email and password!");
 
-        } else if (signInUser() == true) {
+        }
+
+        else if (signInUser() == true) {
 
             showAlert(Alert.AlertType.CONFIRMATION, "Sign in successful!");
 
@@ -101,25 +103,20 @@ public class UserLoginController {
 
                     }
 
-                }
 
+                }
 
             }
 
 
-        }
-
-        catch (InterruptedException | ExecutionException e) {
-
-            e.printStackTrace();
-
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
             throw new RuntimeException(e);
         }
 
         return false;
     }
-
-
 
     // showAlert method to display alerts
     private void showAlert(Alert.AlertType alertType, String message) {

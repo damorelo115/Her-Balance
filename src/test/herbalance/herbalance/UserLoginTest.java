@@ -31,6 +31,7 @@ public class UserLoginTest {
         signInButton = new Button("Sign In");
 
         signInButton.setOnAction(event -> {
+
             try {
                 controller.signInUser();
             } catch (ExecutionException e) {
