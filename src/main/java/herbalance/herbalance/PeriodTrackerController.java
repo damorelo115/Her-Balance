@@ -1,4 +1,5 @@
 package herbalance.herbalance;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -14,6 +15,9 @@ public class PeriodTrackerController {
 
         @FXML
         private DatePicker previousCycleDatePicker;
+
+        @FXML
+        private TextField cycleLengthField;
 
         @FXML
         private TextField periodLengthField;
@@ -75,24 +79,33 @@ public class PeriodTrackerController {
 
         @FXML
         protected void predictCycle(ActionEvent event) {
+                if (cycleLengthField == null || periodLengthField == null || previousCycleDatePicker == null) {
+                        predictionText.setText("Please enter all required inputs.");
+                        return;
+                }
+
                 try {
                         validateInputs();
 
                         LocalDate lastPeriodStartDate = previousCycleDatePicker.getValue();
+                        int cycleLength = Integer.parseInt(cycleLengthField.getText());
                         int periodLength = Integer.parseInt(periodLengthField.getText());
 
                         if (tracker == null) {
-                                tracker = new PeriodTracker(lastPeriodStartDate, periodLength);
-                        } else {
-                                tracker.updateTracker(lastPeriodStartDate, periodLength);
+                                tracker = new PeriodTracker(lastPeriodStartDate, cycleLength);
                         }
+                        tracker.setPeriodLength(periodLength);
 
                         LocalDate nextStartDate = tracker.predictNextCycleStart();
                         LocalDate nextEndDate = tracker.predictNextCycleEnd();
+                        LocalDate ovulationDate = tracker.predictOvulation();
 
-                        predictionText.setText("Next Period Start: " + nextStartDate + "\nNext Period End: " + nextEndDate);
+                        predictionText.setText(String.format(
+                                "Predicted Next Period:\nStart Date: %s\nEnd Date: %s\nOvulation Date: %s",
+                                nextStartDate, nextEndDate, ovulationDate
+                        ));
                 } catch (NumberFormatException e) {
-                        predictionText.setText("Invalid input. Please enter numeric values.");
+                        predictionText.setText("Invalid input. Please enter numeric values for Cycle Length and Period Length.");
                 } catch (IllegalArgumentException e) {
                         predictionText.setText(e.getMessage());
                 }
@@ -102,12 +115,22 @@ public class PeriodTrackerController {
                 if (previousCycleDatePicker.getValue() == null) {
                         throw new IllegalArgumentException("Please select a previous cycle start date.");
                 }
+                if (cycleLengthField.getText().isEmpty()) {
+                        throw new IllegalArgumentException("Cycle Length is required.");
+                }
                 if (periodLengthField.getText().isEmpty()) {
                         throw new IllegalArgumentException("Period Length is required.");
                 }
-                int periodLength = Integer.parseInt(periodLengthField.getText());
-                if (periodLength <= 0) {
-                        throw new IllegalArgumentException("Period Length must be positive.");
+                try {
+                        int cycleLength = Integer.parseInt(cycleLengthField.getText());
+                        int periodLength = Integer.parseInt(periodLengthField.getText());
+                        if (cycleLength <= 0 || periodLength <= 0) {
+                                throw new IllegalArgumentException("Cycle Length and Period Length must be positive numbers.");
+                        }
+                } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException("Cycle Length and Period Length must be numeric values.");
                 }
         }
 }
+
+

@@ -8,7 +8,21 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class PeriodTracker {
+    private LocalDate lastPeriodStartDate; // Last known period start date
+    private int cycleLength; // Average cycle length in days
+    private int periodLength; // Period length in days
 
+    // Constructor
+    public PeriodTracker(LocalDate lastPeriodStartDate, int cycleLength) {
+        if (cycleLength <= 0) {
+            throw new IllegalArgumentException("Cycle length must be a positive number.");
+        }
+        this.lastPeriodStartDate = lastPeriodStartDate;
+        this.cycleLength = cycleLength;
+        this.periodLength = 5; // Default period length to 5 days
+    }
+
+    // Static method to load the Period Tracker UI
     public static void loadPeriodTrackerScene(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(PeriodTracker.class.getResource("PeriodTracker.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -17,24 +31,18 @@ public class PeriodTracker {
         stage.show();
     }
 
-    private LocalDate PreviousPeriodStartDate;
-    private int cycleLength;
-    private int periodLength;
-
-
-    public PeriodTracker(LocalDate PreviousPeriodStartDate, int cycleLength) {
-        this.PreviousPeriodStartDate = PreviousPeriodStartDate;
-        this.cycleLength = cycleLength;
-        this.periodLength = periodLength;
+    // Static factory method for creating a PeriodTracker instance
+    public static PeriodTracker createPeriodTracker(LocalDate lastPeriodStartDate, int cycleLength) {
+        return new PeriodTracker(lastPeriodStartDate, cycleLength);
     }
 
-
-    public LocalDate getPreviousPeriodStartDate() {
-        return PreviousPeriodStartDate;
+    // Getters and setters
+    public LocalDate getLastPeriodStartDate() {
+        return lastPeriodStartDate;
     }
 
-    public void setPreviousPeriodStartDate(LocalDate PreviousPeriodStartDate) {
-        this.PreviousPeriodStartDate = PreviousPeriodStartDate;
+    public void setLastPeriodStartDate(LocalDate lastPeriodStartDate) {
+        this.lastPeriodStartDate = lastPeriodStartDate;
     }
 
     public int getCycleLength() {
@@ -42,6 +50,9 @@ public class PeriodTracker {
     }
 
     public void setCycleLength(int cycleLength) {
+        if (cycleLength <= 0) {
+            throw new IllegalArgumentException("Cycle length must be positive.");
+        }
         this.cycleLength = cycleLength;
     }
 
@@ -50,32 +61,34 @@ public class PeriodTracker {
     }
 
     public void setPeriodLength(int periodLength) {
+        if (periodLength <= 0) {
+            throw new IllegalArgumentException("Period length must be positive.");
+        }
         this.periodLength = periodLength;
     }
 
-
+    // Predict the start date of the next cycle
     public LocalDate predictNextCycleStart() {
-        return PreviousPeriodStartDate.plusDays(cycleLength);
+        return lastPeriodStartDate.plusDays(cycleLength);
     }
 
-
+    // Predict the end date of the next cycle
     public LocalDate predictNextCycleEnd() {
-        return predictNextCycleStart().plusDays(periodLength);
+        return predictNextCycleStart().plusDays(periodLength - 1);
     }
 
-
-    public void updateTracker(LocalDate PreviousPeriodStartDate, int cycleLength) {
-        setPreviousPeriodStartDate(PreviousPeriodStartDate);
-        setCycleLength(cycleLength);
-        setPeriodLength(periodLength);
+    // Predict the ovulation date
+    public LocalDate predictOvulation() {
+        // Ovulation occurs approximately 14 days before the next cycle starts
+        return predictNextCycleStart().minusDays(14);
     }
 
-
+    // Generate a summary of period details
     public String getPeriodDetails() {
-        return "Last Period Start: " + PreviousPeriodStartDate +
-                "\nCycle Length: " + cycleLength + " days" +
-                "\nPeriod Length: " + periodLength + " days" +
-                "\nNext Period Start: " + predictNextCycleStart() +
-                "\nNext Period End: " + predictNextCycleEnd();
+        return String.format(
+                "Last Period Start: %s\nCycle Length: %d days\nPeriod Length: %d days\nNext Period Start: %s\nNext Period End: %s\nOvulation Date: %s",
+                lastPeriodStartDate, cycleLength, periodLength, predictNextCycleStart(), predictNextCycleEnd(), predictOvulation()
+        );
     }
 }
+

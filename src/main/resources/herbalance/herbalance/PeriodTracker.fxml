@@ -62,11 +62,13 @@
                         <Font name="Arial Black" size="18.0" />
                     </font>
                 </Label>
-                <DatePicker fx:id="previousCycleDatePicker" layoutX="200.0" layoutY="130.0" prefHeight="36.0" prefWidth="250.0" promptText="Select previous cycle start" />
-                <TextField fx:id="periodLengthField" layoutX="200.0" layoutY="200.0" prefHeight="36.0" prefWidth="250.0" promptText="Enter period length (days)" />
-                <Button fx:id="cyclebutton" layoutX="250.0" layoutY="260.0" onAction="#predictCycle" styleClass="predictcyclebutton" text="Predict Next Cycle" />
-                <Text fx:id="predictionText" layoutX="200.0" layoutY="320.0" text="Your next cycle prediction will appear here." wrappingWidth="250.0" />
+                <DatePicker fx:id="previousCycleDatePicker" layoutX="200.0" layoutY="100.0" prefHeight="36.0" prefWidth="250.0" promptText="Select previous cycle start" />
+                <TextField fx:id="cycleLengthField" layoutX="200.0" layoutY="160.0" prefHeight="36.0" prefWidth="250.0" promptText="Enter cycle length (days)" />
+                <TextField fx:id="periodLengthField" layoutX="200.0" layoutY="220.0" prefHeight="36.0" prefWidth="250.0" promptText="Enter period length (days)" />
+                <Button fx:id="cyclebutton" layoutX="250.0" layoutY="280.0" onAction="#predictCycle" styleClass="predictcyclebutton" text="Predict Next Cycle" />
+                <Text fx:id="predictionText" layoutX="200.0" layoutY="340.0" text="Your next cycle prediction will appear here." wrappingWidth="400.0" />
             </children>
         </Pane>
     </children>
 </AnchorPane>
+
