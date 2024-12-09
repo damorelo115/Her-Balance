@@ -9,7 +9,6 @@ public class BirthDateQuestion {
 
     public static void loadBirthDateQuestionScene(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BirthDateQuestion.class.getResource("BirthDateQuestion.fxml"));
-
         Scene scene = new Scene(fxmlLoader.load(), 690 , 471);
         stage.setTitle("Welcome to HerBalance");
         stage.setScene(scene);
