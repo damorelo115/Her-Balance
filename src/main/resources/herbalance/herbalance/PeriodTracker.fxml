@@ -46,6 +46,11 @@
                 <Button fx:id="workoutButton" layoutX="20.0" layoutY="345.0" mnemonicParsing="false" onAction="#workoutButtonClick" styleClass="fitnessbutton" text="Fitness" />
                 <Button fx:id="mealPlanButton" layoutX="11.0" layoutY="453.0" mnemonicParsing="false" onAction="#mealPlanButtonClick" styleClass="mealbutton" text="Meal Plans" />
                 <Button fx:id="logoutButton" layoutX="20.0" layoutY="551.0" mnemonicParsing="false" onAction="#logout" styleClass="logoutbutton" text="Log Out" />
+                <ImageView fitHeight="80.0" fitWidth="79.0" layoutX="19.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/HerBalance%20transparent.png" />
+                    </image>
+                </ImageView>
             </children>
         </Pane>
 
