@@ -47,9 +47,9 @@ public class UserRegistrationController {
     @FXML
     protected void onRegisterButtonClick() throws IOException {
 
-        if (userEmail.getText().isEmpty() || userPassword.getText().isEmpty()) {
+        if (userEmail.getText().isEmpty() || userPassword.getText().isEmpty() || firstnameField.getText().isEmpty()) {
 
-            showAlert(Alert.AlertType.ERROR, "Please enter your email and password!");
+            showAlert(Alert.AlertType.ERROR, "Please enter your email, password and first name!");
 
             userEmail.clear();
             userPassword.clear();
